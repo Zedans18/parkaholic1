@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FirebaseService } from '../services/firebase.service';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-locations',
@@ -17,8 +18,10 @@ export class LocationsPage implements OnInit {
     private router: Router,
     public firebaseAuth: AngularFireAuth,
     public fireservices: AngularFirestore,
-    public FirebaseService: FirebaseService
+    public FirebaseService: FirebaseService,
+    public menuController: MenuController
   ) {}
+
   first() {
     this.router.navigate(['/first']);
   }
