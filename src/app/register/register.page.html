@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <img src="assets/logo.png" class="img" style="width: 100px" />
+      <ion-card-subtitle></ion-card-subtitle>
+      <ion-card-title style="margin-left: 80px">Parkaholic</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item>
+        <ion-input
+          placeholder="Full Name"
+          class="form__input"
+          #nameSignup
+        ></ion-input>
+      </ion-item>
+      <br />
+      <ion-item>
+        <ion-input placeholder="Email" type="email" #emailSignup></ion-input>
+      </ion-item>
+      <br />
+      <ion-item>
+        <ion-input
+          placeholder="Password"
+          type="password"
+          #passwordSignup
+        ></ion-input>
+      </ion-item>
+      <br />
+      <ion-item>
+        <ion-input
+          placeholder="Date Of Birth"
+          type="Date"
+          #dobSignup
+        ></ion-input>
+      </ion-item>
+      <br />
+      <ion-item>
+        <ion-input
+          placeholder="Phone Number"
+          type="text"
+          #numberSignup
+        ></ion-input>
+      </ion-item>
+      <br />
+      <ion-item>
+        <ion-input
+          placeholder="Car Number"
+          type="text"
+          #carnumSignup
+        ></ion-input>
+      </ion-item>
+      <br />
+      <ion-button
+        (click)="
+      onSignup(
+        nameSignup.value,
+        emailSignup.value,
+        passwordSignup.value,
+        dobSignup.value,
+        numberSignup.value,
+        carnumSignup.value
+      )
+    "
+        expand="block"
+        ><b>Register</b></ion-button
+      >
+      <ion-button (click)="register()" expand="block" color="warning"
+        ><b>Alreay have an account ? Sign In Here</b></ion-button
+      >
+    </ion-card-content>
+  </ion-card>
+</ion-content>
