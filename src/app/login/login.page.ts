@@ -25,13 +25,12 @@ export class LoginPage implements OnInit {
   async onSignin(email: string, password: string) {
     await this.firebaseService.signin(email, password);
     if (this.firebaseService.isLoggedIn) {
-      alert('Welcome');
-      this.router.navigateByUrl('home');
-      this.isSignedIn = true;
+      this.showAlert2();
       return;
     }
     this.showAlert();
   }
+  //if missing information
   async showAlert() {
     const alert = await this.alertController.create({
       header: 'Alert',
@@ -42,13 +41,22 @@ export class LoginPage implements OnInit {
     const result = await alert.onDidDismiss();
     console.log(result);
   }
-  handleLogout() {
-    this.isSignedIn = false;
+  //if logged in
+  async showAlert2() {
+    const alert = await this.alertController.create({
+      header: 'Welcome',
+      subHeader: 'bitch',
+      buttons: ['OK'],
+    });
+    await alert.present();
+    const result = await alert.onDidDismiss();
+    this.router.navigateByUrl('home');
+    this.isSignedIn = true;
+    console.log(result);
+    return;
   }
+
   register() {
     this.router.navigateByUrl('register');
-  }
-  ionViewDidEnter() {
-    this.menuController.enable(false);
   }
 }
