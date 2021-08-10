@@ -5,25 +5,30 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <ion-card class="card">
     <ion-card-header>
       <img src="assets/logo.png" class="img" style="width: 100px" />
       <ion-card-subtitle></ion-card-subtitle>
-      <ion-card-title style="margin-left: 80px">Parkaholic</ion-card-title>
+      <ion-card-title style="text-align: center">Parkaholic</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
       <ion-item>
         <ion-input
           placeholder="Full Name"
-          class="form__input"
           #nameSignup
-          required
+          [(ngModel)]="name"
+          type="text"
         ></ion-input>
       </ion-item>
       <br />
       <ion-item>
-        <ion-input placeholder="Email" type="email" #emailSignup></ion-input>
+        <ion-input
+          placeholder="Email"
+          type="email"
+          #emailSignup
+          [(ngModel)]="email"
+        ></ion-input>
       </ion-item>
       <br />
       <ion-item>
@@ -32,7 +37,28 @@
           type="password"
           #passwordSignup
           required
+          [(ngModel)]="password"
         ></ion-input>
+      </ion-item>
+      <br />
+      <ion-item>
+        <ion-input
+          placeholder="Confirm Password"
+          type="password"
+          #passwordSignup
+          required
+          [(ngModel)]="confirmPassword"
+          (ionChange)="checkPassword()"
+        ></ion-input>
+        <ion-text *ngIf="password && !passwordMatch" color="danger"
+          ><ion-icon name="close-circle-outline" color="danger"></ion-icon
+        ></ion-text>
+        <ion-text *ngIf="password && passwordMatch" color="success"
+          ><ion-icon
+            name="checkmark-done-circle-outline"
+            color="success"
+          ></ion-icon
+        ></ion-text>
       </ion-item>
       <br />
       <ion-item>
@@ -41,6 +67,7 @@
           type="Date"
           #dobSignup
           required
+          [(ngModel)]="dateOfBirth"
         ></ion-input>
       </ion-item>
       <br />
@@ -50,6 +77,7 @@
           type="text"
           #numberSignup
           required
+          [(ngModel)]="phoneNumber"
         ></ion-input>
       </ion-item>
       <br />
@@ -59,24 +87,27 @@
           type="text"
           #carnumSignup
           required
+          [(ngModel)]="carNumber"
+        ></ion-input>
+      </ion-item>
+      <br />
+      <ion-item>
+        <ion-input
+          placeholder="Handicap Placard"
+          type="text"
+          required
+          [(ngModel)]="handiCap"
         ></ion-input>
       </ion-item>
       <br />
       <ion-button
-        (click)="
-      onSignup(
-        nameSignup.value,
-        emailSignup.value,
-        passwordSignup.value,
-        dobSignup.value,
-        numberSignup.value,
-        carnumSignup.value
-      )
-    "
+        (click)="register()"
+        [disabled]="!passwordMatch"
         expand="block"
+        color="primary"
         ><b>Register</b></ion-button
       >
-      <ion-button (click)="register()" expand="block" color="warning"
+      <ion-button expand="block" color="warning" (click)="signIn()"
         ><b>Alreay have an account ? Sign In Here</b></ion-button
       >
     </ion-card-content>

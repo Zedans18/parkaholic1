@@ -1,42 +1,48 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title class="center">Home Page</ion-title>
-    <ion-button slot="end" color="danger" class="logout" (click)="logout()">
+    <ion-button
+      slot="end"
+      color="danger"
+      class="logout"
+      (click)="logout()"
+      fill="clear"
+    >
       <ion-icon name="power"></ion-icon>
     </ion-button>
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-card>
+  <ion-card class="card">
     <img src="assets/logo.png" class="img" style="width: 100px" />
     <ion-card-header>
       <ion-card-title class="center">Parkaholic</ion-card-title>
     </ion-card-header>
 
-    <ion-card-content class="card">
+    <ion-card-content class="cardText">
       Welcome to our newly developed app. This app saves you so much time in
       searching for a parking spot in malls.<br /><br />
-      Click on the
-      <b>MENU <ion-icon name="arrow-forward"></ion-icon> Locations</b> so you
-      can reserve a spot immediatley.
+      Choose
+      <b>Locations </b> from the tabs below
+      <b> <ion-icon name="arrow-down"></ion-icon></b>
+      so you can reserve a spot immediatley.
     </ion-card-content>
   </ion-card>
 
   <ion-tabs>
-    <ion-tab-bar slot="bottom">
+    <ion-tab-bar slot="bottom" color="light" class="tabs">
       <ion-tab-button routerLink="/locations">
-        <ion-icon name="car"></ion-icon>
-        <ion-label>Locations</ion-label>
+        <ion-icon name="pin-outline" color="medium" class="shadow"></ion-icon>
+        <ion-label color="medium"><strong>Locations</strong></ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="bottom" routerLink="/Reservations">
-        <ion-icon name="pricetag"></ion-icon>
-        <ion-label>My Reservations</ion-label>
+      <ion-tab-button tab="bottom">
+        <ion-icon name="pricetags-outline" color="medium"></ion-icon>
+        <ion-label color="medium"><strong>My Reservations</strong></ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="bottom" routerLink="/About">
-        <ion-icon name="information-circle"></ion-icon>
-        <ion-label>About</ion-label>
+      <ion-tab-button tab="bottom">
+        <ion-icon name="information-circle-outline" color="medium"></ion-icon>
+        <ion-label color="medium"><strong>About</strong></ion-label>
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>

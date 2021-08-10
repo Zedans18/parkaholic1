@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Password Reset</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="card">
+    <ion-card-header>
+      <img
+        src="assets/logo.png"
+        class="img"
+        style="width: 100px"
+        margin-left="100px"
+      />
+    </ion-card-header>
+    <form #form="ngForm" (ngSubmit)="resetPassword(form)">
+      <div>
+        <ion-item>
+          <ion-input
+            name="email"
+            type="email"
+            placeholder="Enter Your Email:"
+            [(ngModel)]="email"
+          ></ion-input> </ion-item
+        ><br /><br />
+      </div>
+      <div style="text-align: center; margin: auto"></div>
+      <div class="text">
+        <ion-button
+          type="submit"
+          [disabled]="form.invalid"
+          color="danger"
+          fill="outline"
+          ><strong>Reset Now</strong></ion-button
+        >
+        <ion-button (click)="signIn()" fill="outline"
+          ><strong>Back To Login</strong></ion-button
+        >
+      </div>
+    </form>
+  </ion-card>
+</ion-content>
