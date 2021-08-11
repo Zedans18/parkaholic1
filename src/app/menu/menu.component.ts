@@ -13,13 +13,13 @@ export class MenuComponent implements OnInit {
   constructor(
     public firebaseAuth: AngularFireAuth,
     public fireservices: AngularFirestore,
-    public FirebaseService: FirebaseService,
+    public firebaseService: FirebaseService,
     private router: Router
   ) {}
 
   ngOnInit() {}
   logout() {
-    this.FirebaseService.firebaseAuth.signOut();
+    this.firebaseService.firebaseAuth.signOut();
     this.router.navigate(['/login']);
   }
 }
