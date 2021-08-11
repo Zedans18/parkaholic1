@@ -9,53 +9,53 @@ import {
   ToastController,
 } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  selector: 'app-reset',
+  templateUrl: './reset.page.html',
+  styleUrls: ['./reset.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class ResetPage implements OnInit {
   email: string;
-  password: string;
   constructor(
     private router: Router,
     public firebaseService: FirebaseService,
     public alertController: AlertController,
-    private loadingController: LoadingController,
     public menuController: MenuController,
-    public firebaseAuth: AngularFireAuth,
-    public fireservices: AngularFirestore,
-    private toaster: ToastController
+    private authService: AngularFireAuth,
+    public toaster: ToastController,
+    public loadingController: LoadingController
   ) {}
 
   ngOnInit() {}
-  register() {
-    this.router.navigateByUrl('register');
-  } //end of register
-  forgot() {
-    this.router.navigateByUrl('reset');
-  } //end of forgot
-  async login() {
-    if (this.email && this.password) {
+  async resetPassword() {
+    if (this.email) {
       const loading = await this.loadingController.create({
-        message: 'Logging in...',
+        message: 'Sending reset password link...',
         spinner: 'crescent',
         showBackdrop: true,
       });
       loading.present();
-      this.firebaseService
-        .login(this.email, this.password)
+
+      this.authService
+        .sendPasswordResetEmail(this.email)
         .then(() => {
           loading.dismiss();
+          this.toast(
+            'Email Sent Succesfully! Please Check Your Email',
+            'success'
+          );
+          this.router.navigateByUrl('login');
         })
-        .catch((error) => {
+        .catch(() => {
+          this.toast('Invalid Email', 'danger');
           loading.dismiss();
-          this.toast(error.message, 'danger');
         });
+    } else {
+      this.toast('Please enter your Email Addrress', 'danger');
+      this.loadingController.dismiss();
     }
-  } //end of login
+  } //end of reset password
   async toast(message, status) {
     const toast = await this.toaster.create({
       message: message,
@@ -64,5 +64,8 @@ export class LoginPage implements OnInit {
       duration: 2000,
     });
     toast.present();
-  } //end of toast
+  }
+  signIn() {
+    this.router.navigateByUrl('login');
+  }
 }

@@ -4,8 +4,14 @@ import { Local } from 'protractor/built/driverProviders';
 import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
 import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
 
-import { AlertController } from '@ionic/angular';
+import {
+  AlertController,
+  LoadingController,
+  ToastController,
+} from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -13,62 +19,91 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  isSignedIn = false;
-
+  name: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  dateOfBirth: string;
+  phoneNumber: string;
+  carNumber: string;
+  handiCap: string;
+  passwordMatch: boolean;
   constructor(
     public firebaseService: FirebaseService,
     private router: Router,
     public firestore: AngularFireDatabase,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private loadingController: LoadingController,
+    public firebaseAuth: AngularFireAuth,
+    public fireservices: AngularFirestore,
+    public toaster: ToastController
   ) {}
 
-  ngOnInit() {
-    if (localStorage.getItem('user') !== null) {
-      this.isSignedIn = true;
+  ngOnInit() {}
+  async register() {
+    if (this.name && this.email && this.password) {
+      const loading = await this.loadingController.create({
+        message: 'Loading..',
+        spinner: 'crescent',
+        showBackdrop: true,
+      });
+      loading.present();
+      this.firebaseAuth
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then((data) => {
+          this.fireservices.collection('users').doc(data.user.uid).set({
+            userId: data.user.uid,
+            Name: this.name,
+            Email: this.email,
+            'Date Of Birth': this.dateOfBirth,
+            'Phone Number': this.phoneNumber,
+            'Car Number': this.carNumber,
+            'Handicap Placard': this.handiCap,
+            createdAt: Date.now(),
+          });
+          data.user.sendEmailVerification();
+        })
+        .then(() => {
+          loading.dismiss();
+          this.toast('Registeration Success!', 'success');
+          this.router.navigateByUrl('login');
+        })
+        .catch((error) => {
+          loading.dismiss();
+          this.toast(error.message, 'danger');
+        });
     } else {
-      this.isSignedIn = false;
+      this.fillTheForm();
     }
   }
 
-  async onSignup(
-    name: string,
-    email: string,
-    password: string,
-    dob: string,
-    num: string,
-    carnum: string
-  ) {
-    await this.firebaseService.signup(email, password);
-    await this.firestore.database.app.firestore().collection('Users').add({
-      Name: name,
-      Email: email,
-      Password: password,
-      DateOfBirth: dob,
-      PhoneNumber: num,
-      CarNumber: carnum,
-    });
-    if (this.firebaseService.isLoggedIn) {
-      this.isSignedIn = true;
-      this.router.navigateByUrl('login');
-      return;
+  checkPassword() {
+    if (this.password === this.confirmPassword) {
+      this.passwordMatch = true;
+    } else {
+      this.passwordMatch = false;
     }
-    this.showAlert();
   }
-  async showAlert() {
+  async toast(message, status) {
+    const toast = await this.toaster.create({
+      message: message,
+      position: 'top',
+      color: status,
+      duration: 2000,
+    });
+    toast.present();
+  }
+  async fillTheForm() {
     const alert = await this.alertController.create({
-      header: 'Alert',
-      subHeader: 'Missing Information',
+      header: 'Error',
+      subHeader: 'Missing Information!',
       buttons: ['OK'],
     });
     await alert.present();
     const result = await alert.onDidDismiss();
     console.log(result);
   }
-  register() {
+  signIn() {
     this.router.navigateByUrl('login');
-  }
-
-  handleLogout() {
-    this.isSignedIn = false;
   }
 }

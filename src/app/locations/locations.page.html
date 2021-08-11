@@ -1,10 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Locations</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button
+        defaultHref="home"
+        text=""
+        slot="start"
+        icon="caret-back-outline"
+        color="dark"
+      ></ion-back-button>
     </ion-buttons>
-    <ion-button slot="end" color="danger" class="logout" (click)="logout()">
+    <ion-button
+      slot="end"
+      color="danger"
+      class="logout"
+      (click)="logout()"
+      fill="clear"
+    >
       <ion-icon name="power"></ion-icon>
     </ion-button>
   </ion-toolbar>
@@ -13,14 +24,8 @@
 <ion-content>
   <ion-item>
     <ion-label
-      ><ion-button color="warning" (click)="first()">
-        <img
-          src="https://myoferapp-staging.s3-eu-west-1.amazonaws.com/app/images/ofer_bambi_logo_new.png
-    "
-          width="30px"
-          he
-        />
-        <b>- Ofer Mall</b>
+      ><ion-button color="medium" (click)="first()">
+        <b>Ofer Mall</b>
       </ion-button></ion-label
     >
 
@@ -28,57 +33,42 @@
   </ion-item>
   <ion-item>
     <ion-label
-      ><ion-button color="warning">
-        <img
-          src="https://www.yesplanet.co.il/xmedia/img/10100/logo.svg
-"
-          width="80px" /></ion-button
-    ></ion-label>
+      ><ion-button color="medium"><b>Yes Planet</b> </ion-button></ion-label
+    >
     <ion-badge color="success">120 - Available Parks</ion-badge>
   </ion-item>
   <ion-item>
     <ion-label
-      ><ion-button color="warning">
-        <img
-          src="https://myoferapp-staging.s3-eu-west-1.amazonaws.com/app/images/ofer_bambi_logo_new.png
-"
-          width="30px"
-          he
-        />
-        <b> - Grand Mall </b>
+      ><ion-button color="medium">
+        <b>Grand Mall </b>
       </ion-button></ion-label
     >
     <ion-badge color="success">34 - Available Parks</ion-badge>
   </ion-item>
   <ion-item>
     <ion-label
-      ><ion-button color="warning">
-        <img
-          src="https://upload.wikimedia.org/wikipedia/he/7/76/BigLogo2.png
-"
-          width="35px"
-          he
-        /><b>- Big Kiryat Ata </b>
+      ><ion-button color="medium">
+        <b>Big Kiryat Ata </b>
       </ion-button></ion-label
     >
     <ion-badge color="success">80 - Available Parks</ion-badge>
   </ion-item>
 
   <ion-tabs>
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button routerLink="/home">
-        <ion-icon name="home"></ion-icon>
-        <ion-label>Home</ion-label>
+    <ion-tab-bar slot="bottom" color="light" class="tabs">
+      <ion-tab-button routerLink="/locations">
+        <ion-icon name="pin-outline" color="medium"></ion-icon>
+        <ion-label color="medium"><strong>Locations</strong></ion-label>
       </ion-tab-button>
 
-      <ion-tab-button routerLink="/reservations">
-        <ion-icon name="pricetag"></ion-icon>
-        <ion-label>My Reservations</ion-label>
+      <ion-tab-button tab="bottom">
+        <ion-icon name="pricetags-outline" color="medium"></ion-icon>
+        <ion-label color="medium"><strong>My Reservations</strong></ion-label>
       </ion-tab-button>
 
-      <ion-tab-button routerLink="/about">
-        <ion-icon name="information-circle"></ion-icon>
-        <ion-label>About</ion-label>
+      <ion-tab-button tab="bottom">
+        <ion-icon name="person-circle-outline" color="medium"></ion-icon>
+        <ion-label color="medium"><strong>My Account</strong></ion-label>
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>

@@ -1,10 +1,10 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Ofer Mall</ion-title>
+        <ion-title><img src="https://myoferapp-staging.s3-eu-west-1.amazonaws.com/app/images/ofer_bambi_logo_new.png" width="65px" /></ion-title>
         <ion-buttons slot="start">
-            <ion-back-button defaultHref="locations"></ion-back-button>
+            <ion-back-button defaultHref="locations" text="" icon="caret-back-outline" color="dark"></ion-back-button>
         </ion-buttons>
-        <ion-button slot="end" color="danger" class="logout" (click)="logout()">
+        <ion-button slot="end" color="danger" class="logout" (click)="logout()" fill="clear">
             <ion-icon name="power"></ion-icon>
         </ion-button>
     </ion-toolbar>
@@ -12,7 +12,7 @@
 
 <ion-router-outlet id="menu"></ion-router-outlet>
 <ion-content>
-    <ion-grid>
+    <<<<<<< HEAD <ion-grid>
         <ion-row class="row">
             <ion-col class="colD">
                 <img class="img" src="assets/chair1.png" width="30px" />
@@ -86,5 +86,84 @@
                 <ion-button color="danger " fill="clear " (click)="showAlert() "><b>B14</b></ion-button>
             </ion-col>
         </ion-row>
-    </ion-grid>
+        </ion-grid>
 </ion-content>
+=======
+<ion-grid>
+    <ion-row class="row">
+        <ion-col class="colD">
+            <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"><b>A1</b></ion-button>
+        </ion-col>
+        <ion-col class="street">|</ion-col>
+        <ion-col class="col2">
+            <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"><b>A8</b></ion-button>
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="row">
+        <ion-col class="colD">
+            <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"><b>A2</b></ion-button>
+        </ion-col>
+        <ion-col class="street">|</ion-col>
+        <ion-col class="col2">
+            <ion-button color="danger" fill="clear" (click)="showAlert()"><b>A9</b></ion-button>
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="row">
+        <ion-col class="col">
+            <ion-button color="danger" fill="clear" (click)="showAlert()"><b>A3</b></ion-button>
+        </ion-col>
+        <ion-col class="street">|</ion-col>
+        <ion-col class="col2">
+            <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"><b>A10</b></ion-button>
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="row">
+        <ion-col class="col">
+            <ion-button color="danger" fill="clear" (click)="showAlert()"><b>A4</b></ion-button>
+        </ion-col>
+        <ion-col class="street">|</ion-col>
+
+        <ion-col class="col2">
+            <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"><b>A11</b></ion-button>
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="row">
+        <ion-col class="col">
+            <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"><b>A5</b></ion-button>
+        </ion-col>
+        <ion-col class="street">|</ion-col>
+        <ion-col class="col2">
+            <ion-button color="danger" fill="clear" (click)="showAlert()"><b>A12</b></ion-button>
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="row">
+        <ion-col class="col">
+            <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"><b>A6</b></ion-button>
+        </ion-col>
+        <ion-col class="street">|</ion-col>
+        <ion-col class="col2">
+            <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"><b>A13</b></ion-button>
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="row">
+        <ion-col class="col">
+            <ion-button color="danger" fill="clear" (click)="showAlert()"><b>A7</b></ion-button>
+        </ion-col>
+        <ion-col class="street">|</ion-col>
+        <ion-col class="col2">
+            <ion-button color="danger" fill="clear" (click)="showAlert()"><b>A14</b></ion-button>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+
+<ion-button color="medium" class="forward">Park B
+    <ion-icon name="caret-forward-circle-outline"></ion-icon>
+</ion-button>
+</ion-content>
+>>>>>>> 6bf902126e9d67c96b06f1f2750e5aef677990b9

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -15,11 +15,37 @@ export class HomePage {
     public fireservices: AngularFirestore,
     public firebaseService: FirebaseService,
     private router: Router,
-    public menuController: MenuController
+    public menuController: MenuController,
+    public alertController: AlertController
   ) {}
 
-  logout() {
-    this.firebaseService.firebaseAuth.signOut();
-    this.router.navigate(['/login']);
+  async logout() {
+    const alert = await this.alertController.create({
+      header: 'Log Out',
+      subHeader: 'Are you sure you want to log out?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Reservation Canceled');
+          },
+        },
+        {
+          text: 'Yes',
+          role: 'confirm',
+          cssClass: 'danger',
+
+          handler: () => {
+            console.log('Logged Out');
+            this.router.navigateByUrl('login');
+          },
+        },
+      ],
+    });
+    await alert.present();
+    const result = await alert.onDidDismiss();
+    console.log(result);
   }
 }

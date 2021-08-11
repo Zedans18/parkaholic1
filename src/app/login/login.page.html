@@ -1,48 +1,66 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Login</ion-title>
+    <ion-title class="ion-text-center">Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <ion-card class="card">
     <ion-card-header>
-      <img src="assets/logo.png" class="img" style="width: 100px" />
-      <ion-card-subtitle></ion-card-subtitle>
-      <ion-card-title style="margin-left: 70px">Parkaholic</ion-card-title>
+      <img
+        src="assets/logo.png"
+        class="img"
+        style="width: 100px"
+        margin-left="100px"
+      />
+      <ion-card-title class="ion-text-center">Parkaholic</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
       <ion-item>
-        <ion-label>Email</ion-label>
+        <ion-label class="ion-text-center"><b>Email</b></ion-label>
         <ion-input
           placeholder="Enter your Email"
-          type="email"
-          class="form__input"
-          #email
-          ngModel
-          required
-          email
+          type="text"
+          [(ngModel)]="email"
         ></ion-input>
       </ion-item>
       <br />
       <ion-item>
-        <ion-label>Password</ion-label>
+        <ion-label class="ion-text-center"><b>Password</b></ion-label>
         <ion-input
           placeholder="Enter your Password"
-          type="Password"
-          #password
-          required
-          password
+          type="password"
+          [(ngModel)]="password"
         ></ion-input>
       </ion-item>
       <br />
-      <ion-button (click)="onSignin(email.value,password.value)" expand="block"
+
+      <ion-button
+        (click)="login()"
+        expand="block"
+        class="ion-text-center"
+        [disabled]="!password"
         ><b>Login</b></ion-button
       >
-      <ion-button (click)="register()" expand="block" color="warning"
-        ><b>Don't have an account ? Sign Up Here</b></ion-button
-      >
+
+      <div class="text">
+        <ion-button (click)="forgot()" fill="outline"
+          ><strong>Forgot Password ?</strong></ion-button
+        >
+        <br />
+        <ion-card>
+          <ion-text>
+            <br />
+            <b>Don't Have an Account?</b><br /><br /><ion-button
+              (click)="register()"
+              color="warning"
+              ><strong>Register Now!</strong></ion-button
+            >
+            <br /><br />
+          </ion-text>
+        </ion-card>
+      </div>
     </ion-card-content>
   </ion-card>
 </ion-content>
