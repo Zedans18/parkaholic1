@@ -19,8 +19,11 @@ export class LoginPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (localStorage.getItem('user') !== null) this.isSignedIn = true;
-    else this.isSignedIn = false;
+    if (localStorage.getItem('user') !== null) {
+      this.isSignedIn = true;
+    } else {
+      this.isSignedIn = false;
+    }
   }
   async onSignin(email: string, password: string) {
     await this.firebaseService.signin(email, password);

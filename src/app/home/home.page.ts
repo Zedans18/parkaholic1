@@ -13,13 +13,13 @@ export class HomePage {
   constructor(
     public firebaseAuth: AngularFireAuth,
     public fireservices: AngularFirestore,
-    public FirebaseService: FirebaseService,
+    public firebaseService: FirebaseService,
     private router: Router,
     public menuController: MenuController
   ) {}
 
   logout() {
-    this.FirebaseService.firebaseAuth.signOut();
+    this.firebaseService.firebaseAuth.signOut();
     this.router.navigate(['/login']);
   }
 }

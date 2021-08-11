@@ -13,9 +13,6 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import environment from '../environments/environment';
 import { FirebaseService } from './services/firebase.service';
-
-import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -32,7 +29,6 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     FirebaseService,
-    LocalNotifications,
   ],
   bootstrap: [AppComponent],
 })

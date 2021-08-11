@@ -1,116 +1,90 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Ofer Mall</ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="locations"></ion-back-button>
-    </ion-buttons>
-    <ion-button slot="end" color="danger" class="logout" (click)="logout()">
-      <ion-icon name="power"></ion-icon>
-    </ion-button>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Ofer Mall</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="locations"></ion-back-button>
+        </ion-buttons>
+        <ion-button slot="end" color="danger" class="logout" (click)="logout()">
+            <ion-icon name="power"></ion-icon>
+        </ion-button>
+    </ion-toolbar>
 </ion-header>
 
 <ion-router-outlet id="menu"></ion-router-outlet>
 <ion-content>
-  <ion-grid>
-    <ion-row class="row">
-      <ion-col class="colD">
-        <img class="img" src="assets/chair1.png" width="30px" />
-        <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"
-          ><b>B1</b></ion-button
-        >
-      </ion-col>
-      <ion-col> </ion-col>
-      <ion-col class="col2">
-        <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"
-          ><b>B8</b></ion-button
-        >
-      </ion-col>
-    </ion-row>
+    <ion-grid>
+        <ion-row class="row">
+            <ion-col class="colD">
+                <img class="img" src="assets/chair1.png" width="30px" />
+                <ion-button color="success" fill="clear" (click)="presentAlertConfirm()">
+                    <b slot="end" class="right">B1</b>
+                </ion-button>
+            </ion-col>
+            <ion-col> </ion-col>
+            <ion-col class=" col2 ">
+                <ion-button color="success " fill="clear " (click)="presentAlertConfirm() "><b>B8</b></ion-button>
+            </ion-col>
+        </ion-row>
 
-    <ion-row class="row">
-      <ion-col class="col">
-        <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"
-          ><b>B2</b></ion-button
-        >
-      </ion-col>
-      <ion-col> </ion-col>
-      <ion-col class="col2">
-        <ion-button color="danger" fill="clear" (click)="showAlert()"
-          ><b>B9</b></ion-button
-        >
-      </ion-col>
-    </ion-row>
+        <ion-row class="row ">
+            <ion-col class="col ">
+                <ion-button color="success " fill="clear " (click)="presentAlertConfirm() "><b>B2</b></ion-button>
+            </ion-col>
+            <ion-col> </ion-col>
+            <ion-col class="col2 ">
+                <ion-button color="danger " fill="clear " (click)="showAlert() "><b>B9</b></ion-button>
+            </ion-col>
+        </ion-row>
 
-    <ion-row class="row">
-      <ion-col class="col">
-        <ion-button color="danger" fill="clear" (click)="showAlert()"
-          ><b>B3</b></ion-button
-        >
-      </ion-col>
-      <ion-col></ion-col>
-      <ion-col class="col2">
-        <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"
-          ><b>B10</b></ion-button
-        >
-      </ion-col>
-    </ion-row>
+        <ion-row class="row ">
+            <ion-col class="col ">
+                <ion-button color="danger " fill="clear " (click)="showAlert() "><b>B3</b></ion-button>
+            </ion-col>
+            <ion-col></ion-col>
+            <ion-col class="col2 ">
+                <ion-button color="success " fill="clear " (click)="presentAlertConfirm() "><b>B10</b></ion-button>
+            </ion-col>
+        </ion-row>
 
-    <ion-row class="row">
-      <ion-col class="col">
-        <ion-button color="danger" fill="clear" (click)="showAlert()"
-          ><b>B4</b></ion-button
-        >
-      </ion-col>
-      <ion-col></ion-col>
+        <ion-row class="row ">
+            <ion-col class="col ">
+                <ion-button color="danger " fill="clear " (click)="showAlert() "><b>B4</b></ion-button>
+            </ion-col>
+            <ion-col></ion-col>
 
-      <ion-col class="col2">
-        <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"
-          ><b>B11</b></ion-button
-        >
-      </ion-col>
-    </ion-row>
+            <ion-col class="col2 ">
+                <ion-button color="success " fill="clear " (click)="presentAlertConfirm() "><b>B11</b></ion-button>
+            </ion-col>
+        </ion-row>
 
-    <ion-row class="row">
-      <ion-col class="col">
-        <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"
-          ><b>B5</b></ion-button
-        >
-      </ion-col>
-      <ion-col> </ion-col>
-      <ion-col class="col2">
-        <ion-button color="danger" fill="clear" (click)="showAlert()"
-          ><b>B12</b></ion-button
-        >
-      </ion-col>
-    </ion-row>
+        <ion-row class="row ">
+            <ion-col class="col ">
+                <ion-button color="success " fill="clear " (click)="presentAlertConfirm() "><b>B5</b></ion-button>
+            </ion-col>
+            <ion-col> </ion-col>
+            <ion-col class="col2 ">
+                <ion-button color="danger " fill="clear " (click)="showAlert() "><b>B12</b></ion-button>
+            </ion-col>
+        </ion-row>
 
-    <ion-row class="row">
-      <ion-col class="col">
-        <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"
-          ><b>B6</b></ion-button
-        >
-      </ion-col>
-      <ion-col> </ion-col>
-      <ion-col class="col2">
-        <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"
-          ><b>B13</b></ion-button
-        >
-      </ion-col>
-    </ion-row>
+        <ion-row class="row ">
+            <ion-col class="col ">
+                <ion-button color="success " fill="clear " (click)="presentAlertConfirm() "><b>B6</b></ion-button>
+            </ion-col>
+            <ion-col> </ion-col>
+            <ion-col class="col2 ">
+                <ion-button color="success " fill="clear " (click)="presentAlertConfirm() "><b>B13</b></ion-button>
+            </ion-col>
+        </ion-row>
 
-    <ion-row class="row">
-      <ion-col class="col">
-        <ion-button color="danger" fill="clear" (click)="showAlert()"
-          ><b>B7</b></ion-button
-        >
-      </ion-col>
-      <ion-col> </ion-col>
-      <ion-col class="col2">
-        <ion-button color="danger" fill="clear" (click)="showAlert()"
-          ><b>B14</b></ion-button
-        >
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+        <ion-row class="row ">
+            <ion-col class="col ">
+                <ion-button color="danger " fill="clear " (click)="showAlert() "><b>B7</b></ion-button>
+            </ion-col>
+            <ion-col> </ion-col>
+            <ion-col class="col2 ">
+                <ion-button color="danger " fill="clear " (click)="showAlert() "><b>B14</b></ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

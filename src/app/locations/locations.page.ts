@@ -18,7 +18,7 @@ export class LocationsPage implements OnInit {
     private router: Router,
     public firebaseAuth: AngularFireAuth,
     public fireservices: AngularFirestore,
-    public FirebaseService: FirebaseService,
+    public firebaseService: FirebaseService,
     public menuController: MenuController
   ) {}
 
@@ -27,7 +27,7 @@ export class LocationsPage implements OnInit {
   }
   ngOnInit() {}
   logout() {
-    this.FirebaseService.firebaseAuth.signOut();
+    this.firebaseService.firebaseAuth.signOut();
     this.router.navigate(['/login']);
   }
 }

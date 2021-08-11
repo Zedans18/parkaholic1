@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { Local } from 'protractor/built/driverProviders';
 import { FirebaseService } from '../services/firebase.service';
@@ -22,8 +23,11 @@ export class RegisterPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (localStorage.getItem('user') !== null) this.isSignedIn = true;
-    else this.isSignedIn = false;
+    if (localStorage.getItem('user') !== null) {
+      this.isSignedIn = true;
+    } else {
+      this.isSignedIn = false;
+    }
   }
 
   async onSignup(
@@ -31,7 +35,7 @@ export class RegisterPage implements OnInit {
     email: string,
     password: string,
     dob: string,
-    number: string,
+    num: string,
     carnum: string
   ) {
     await this.firebaseService.signup(email, password);
@@ -40,7 +44,7 @@ export class RegisterPage implements OnInit {
       Email: email,
       Password: password,
       DateOfBirth: dob,
-      PhoneNumber: number,
+      PhoneNumber: num,
       CarNumber: carnum,
     });
     if (this.firebaseService.isLoggedIn) {
