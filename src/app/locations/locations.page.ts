@@ -6,7 +6,11 @@ import { Store } from '@ngrx/store';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FirebaseService } from '../services/firebase.service';
-import { AlertController, MenuController, ToastController } from '@ionic/angular';
+import {
+  AlertController,
+  MenuController,
+  ToastController,
+} from '@ionic/angular';
 
 @Component({
   selector: 'app-locations',
@@ -18,60 +22,22 @@ export class LocationsPage implements OnInit {
     private router: Router,
     public firebaseAuth: AngularFireAuth,
     public fireservices: AngularFirestore,
-<<<<<<< HEAD
     public firebaseService: FirebaseService,
-    public menuController: MenuController
-=======
-    public FirebaseService: FirebaseService,
     public menuController: MenuController,
-    public alertController: AlertController,
-    public toaster: ToastController,
->>>>>>> e668ff6c47b0641339c0e665632ce9bad4b19de6
+    public toaster: ToastController
   ) {}
 
   first() {
     this.router.navigate(['/first']);
   }
   ngOnInit() {}
-<<<<<<< HEAD
   logout() {
     this.firebaseService.firebaseAuth.signOut();
     this.router.navigate(['/login']);
-=======
-  async logout() {
-    const alert = await this.alertController.create({
-      header: 'Log Out',
-      subHeader: 'Are you sure you want to log out?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Reservation Canceled');
-          },
-        },
-        {
-          text: 'Yes',
-          role: 'confirm',
-          cssClass: 'danger',
-
-          handler: () => {
-            this.toast('Logged Out!', 'danger');
-            this.firebaseAuth.signOut();
-            this.router.navigateByUrl('login');
-          },
-        },
-      ],
-    });
-    await alert.present();
-    const result = await alert.onDidDismiss();
-    console.log(result);
->>>>>>> e668ff6c47b0641339c0e665632ce9bad4b19de6
   }
-  async toast(message, status) {
+  async toast(msg, status) {
     const toast = await this.toaster.create({
-      message: message,
+      message: msg,
       position: 'top',
       color: status,
       duration: 2000,

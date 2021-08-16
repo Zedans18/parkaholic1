@@ -26,10 +26,10 @@ export class RegisterPage implements OnInit {
   dateOfBirth: string;
   phoneNumber: string;
   carNumber: string;
-  disabilityCard: string;
+  disabilityCard = '';
   passwordMatch: boolean;
 
-  public toggleDisability:boolean=false;
+  public toggleDisability = false;
 
   constructor(
     public firebaseService: FirebaseService,
@@ -69,7 +69,10 @@ export class RegisterPage implements OnInit {
         })
         .then(() => {
           loading.dismiss();
-          this.toast('Verfication Email Sent! Please Check Your Email.', 'success');
+          this.toast(
+            'Verfication Email Sent! Please Check Your Email.',
+            'success'
+          );
           this.router.navigateByUrl('login');
         })
         .catch((error) => {
@@ -81,21 +84,16 @@ export class RegisterPage implements OnInit {
     }
   }
 
-<<<<<<< HEAD
   checkPassword() {
     if (this.password === this.confirmPassword) {
-=======
-  checkPassword() { //check if the passwords match
-    if (this.password == this.confirmPassword) {
->>>>>>> e668ff6c47b0641339c0e665632ce9bad4b19de6
       this.passwordMatch = true;
     } else {
       this.passwordMatch = false;
     }
   }
-  async toast(message, status) {
+  async toast(msg, status) {
     const toast = await this.toaster.create({
-      //message:message,
+      message: msg,
       position: 'top',
       color: status,
       duration: 2000,

@@ -11,17 +11,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./myaccount.page.scss'],
 })
 export class MyaccountPage implements OnInit {
-
   constructor(
     public alertController: AlertController,
-    public toaster:ToastController,
-    public firebaseAuth:AngularFireAuth,
+    public toaster: ToastController,
+    public firebaseAuth: AngularFireAuth,
     public router: Router,
-    public FirebaseService: FirebaseService,
-    ) {}
+    public firebaseService: FirebaseService
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
   async logout() {
     const alert = await this.alertController.create({
       header: 'Log Out',
@@ -52,14 +50,13 @@ export class MyaccountPage implements OnInit {
     const result = await alert.onDidDismiss();
     console.log(result);
   }
-  async toast(message, status) {
+  async toast(msg, status) {
     const toast = await this.toaster.create({
-      message: message,
+      message: msg,
       position: 'top',
       color: status,
       duration: 2000,
     });
     toast.present();
   } //end of toast
-
 }

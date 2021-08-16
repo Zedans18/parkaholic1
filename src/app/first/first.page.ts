@@ -14,15 +14,15 @@ export class FirstPage implements OnInit {
   enableBackdropDismiss = false;
   showBackdrop = false;
   shouldPropagate = false;
+  id: number;
 
   constructor(
     public alertController: AlertController,
     public firebaseAuth: AngularFireAuth,
     public fireservices: AngularFirestore,
-    public FirebaseService: FirebaseService,
+    public firebaseService: FirebaseService,
     private router: Router
   ) {}
-  id: number;
 
   ngOnInit() {}
 
@@ -66,7 +66,7 @@ export class FirstPage implements OnInit {
     await alert2.present();
   }
   logout() {
-    this.FirebaseService.firebaseAuth.signOut();
+    this.firebaseService.firebaseAuth.signOut();
     this.router.navigate(['/login']);
   }
 }

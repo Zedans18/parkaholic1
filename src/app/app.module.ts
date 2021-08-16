@@ -19,17 +19,13 @@ import environment from '../environments/environment';
 
 //services
 import { FirebaseService } from './services/firebase.service';
-<<<<<<< HEAD
-=======
 
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 //guards
 import { AuthGuard } from './guards/auth.guard';
-import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard'; 
+import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 
-
->>>>>>> e668ff6c47b0641339c0e665632ce9bad4b19de6
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -43,16 +39,13 @@ import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
     AngularFireDatabaseModule,
     AngularFireStorageModule,
     AngularFirestoreModule,
-    AngularFireAuthGuardModule
+    AngularFireAuthGuardModule,
   ],
   providers: [
     FirebaseService,
-<<<<<<< HEAD
-=======
     AuthGuard,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     LocalNotifications,
->>>>>>> e668ff6c47b0641339c0e665632ce9bad4b19de6
   ],
   bootstrap: [AppComponent],
 })
