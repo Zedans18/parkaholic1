@@ -25,10 +25,10 @@ export class RegisterPage implements OnInit {
   dateOfBirth: string;
   phoneNumber: string;
   carNumber: string;
-  disabilityCard: string;
+  disabilityCard = '';
   passwordMatch: boolean;
 
-  public toggleDisability:boolean=false;
+  public toggleDisability: boolean = false;
 
   constructor(
     public firebaseService: FirebaseService,
@@ -68,7 +68,10 @@ export class RegisterPage implements OnInit {
         })
         .then(() => {
           loading.dismiss();
-          this.toast('Verfication Email Sent! Please Check Your Email.', 'success');
+          this.toast(
+            'Verfication Email Sent! Please Check Your Email.',
+            'success'
+          );
           this.router.navigateByUrl('login');
         })
         .catch((error) => {
@@ -80,7 +83,7 @@ export class RegisterPage implements OnInit {
     }
   }
 
-  checkPassword() { //check if the passwords match
+  checkPassword() {
     if (this.password == this.confirmPassword) {
       this.passwordMatch = true;
     } else {

@@ -56,9 +56,9 @@ export class ResetPage implements OnInit {
       this.loadingController.dismiss();
     }
   } //end of reset password
-  async toast(message, status) {
+  async toast(msg, status) {
     const toast = await this.toaster.create({
-      message: message,
+      message: msg,
       position: 'top',
       color: status,
       duration: 2000,
