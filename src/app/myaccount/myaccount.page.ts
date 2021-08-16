@@ -1,28 +1,27 @@
-import { Component } from '@angular/core';
-import { AlertController, MenuController, ToastController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { AlertController, ToastController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FirebaseService } from '../services/firebase.service';
-import { AuthGuard } from '../guards/auth.guard';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: 'app-myaccount',
+  templateUrl: './myaccount.page.html',
+  styleUrls: ['./myaccount.page.scss'],
 })
-export class HomePage {
-  constructor(
-    public firebaseAuth: AngularFireAuth,
-    public fireservices: AngularFirestore,
-    public FirebaseService: FirebaseService,
-    private router: Router,
-    public menuController: MenuController,
-    public alertController: AlertController,
-    public toaster: ToastController,
-    public auth: AuthGuard
-  ) {}
+export class MyaccountPage implements OnInit {
 
+  constructor(
+    public alertController: AlertController,
+    public toaster:ToastController,
+    public firebaseAuth:AngularFireAuth,
+    public router: Router,
+    public FirebaseService: FirebaseService,
+    ) {}
+
+  ngOnInit() {
+  }
   async logout() {
     const alert = await this.alertController.create({
       header: 'Log Out',
@@ -62,4 +61,5 @@ export class HomePage {
     });
     toast.present();
   } //end of toast
+
 }
