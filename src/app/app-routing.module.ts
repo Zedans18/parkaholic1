@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
+  {
+    path: 'home',
+    loadChildren: () =>
+      import('./home/home.module').then((m) => m.HomePageModule),
+      canActivate:[AuthGuard],
+  },
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full',
   },
-  {
-    path: 'home',
-    loadChildren: () =>
-      import('./home/home.module').then((m) => m.HomePageModule),
-  },
-
+  
   {
     path: 'login',
     loadChildren: () =>
@@ -24,18 +26,32 @@ const routes: Routes = [
       import('./register/register.module').then((m) => m.RegisterPageModule),
   },
   {
-    path: 'locations',
+    path: 'locations',  
     loadChildren: () =>
       import('./locations/locations.module').then((m) => m.LocationsPageModule),
+      canActivate:[AuthGuard],
   },
   {
     path: 'first',
     loadChildren: () =>
       import('./first/first.module').then((m) => m.FirstPageModule),
+      canActivate:[AuthGuard],
   },
   {
     path: 'reset',
-    loadChildren: () => import('./reset/reset.module').then( m => m.ResetPageModule)
+    loadChildren: () =>
+      import('./reset/reset.module').then((m) => m.ResetPageModule),
+  },
+  {
+    path: 'myaccount',
+    loadChildren: () => 
+    import('./myaccount/myaccount.module').then((m) => m.MyaccountPageModule),
+    canActivate:[AuthGuard],
+  },
+  {
+    path: '**',
+    loadChildren: () =>
+      import('./home/home.module').then((m) => m.HomePageModule),
   },
 ];
 

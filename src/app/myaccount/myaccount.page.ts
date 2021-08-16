@@ -1,43 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireList } from '@angular/fire/database';
-import { Observable } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { AlertController, ToastController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FirebaseService } from '../services/firebase.service';
-import { AlertController, MenuController, ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-locations',
-  templateUrl: './locations.page.html',
-  styleUrls: ['./locations.page.scss'],
+  selector: 'app-myaccount',
+  templateUrl: './myaccount.page.html',
+  styleUrls: ['./myaccount.page.scss'],
 })
-export class LocationsPage implements OnInit {
-  constructor(
-    private router: Router,
-    public firebaseAuth: AngularFireAuth,
-    public fireservices: AngularFirestore,
-<<<<<<< HEAD
-    public firebaseService: FirebaseService,
-    public menuController: MenuController
-=======
-    public FirebaseService: FirebaseService,
-    public menuController: MenuController,
-    public alertController: AlertController,
-    public toaster: ToastController,
->>>>>>> e668ff6c47b0641339c0e665632ce9bad4b19de6
-  ) {}
+export class MyaccountPage implements OnInit {
 
-  first() {
-    this.router.navigate(['/first']);
+  constructor(
+    public alertController: AlertController,
+    public toaster:ToastController,
+    public firebaseAuth:AngularFireAuth,
+    public router: Router,
+    public FirebaseService: FirebaseService,
+    ) {}
+
+  ngOnInit() {
   }
-  ngOnInit() {}
-<<<<<<< HEAD
-  logout() {
-    this.firebaseService.firebaseAuth.signOut();
-    this.router.navigate(['/login']);
-=======
   async logout() {
     const alert = await this.alertController.create({
       header: 'Log Out',
@@ -67,7 +51,6 @@ export class LocationsPage implements OnInit {
     await alert.present();
     const result = await alert.onDidDismiss();
     console.log(result);
->>>>>>> e668ff6c47b0641339c0e665632ce9bad4b19de6
   }
   async toast(message, status) {
     const toast = await this.toaster.create({
@@ -78,4 +61,5 @@ export class LocationsPage implements OnInit {
     });
     toast.present();
   } //end of toast
+
 }

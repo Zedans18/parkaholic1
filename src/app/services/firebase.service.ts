@@ -8,17 +8,15 @@ import {
   ToastController,
 } from '@ionic/angular';
 import { Spinner } from '@ionic/cli-framework';
-import 'firebase/auth';
 import { User } from 'ionic';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-//test
+
 @Injectable()
 export class FirebaseService {
   user$: Observable<User>;
   user: User;
 
-  isLoggedIn = false;
   constructor(
     public firebaseAuth: AngularFireAuth,
     public fireservices: AngularFirestore,
@@ -28,9 +26,11 @@ export class FirebaseService {
     public router: Router
   ) {
     this.user$ = this.firebaseAuth.authState.pipe(
-      switchMap((user) => {
-        if (user) {
-          this.fireservices.doc(`users/${user.uid}`).valueChanges();
+      switchMap(user=> 
+      {
+        if(user) 
+        {
+          return this.fireservices.doc(`users/${user.uid}`).valueChanges();
         } else {
           return of(null);
         }

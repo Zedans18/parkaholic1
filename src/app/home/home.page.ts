@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import { AlertController, MenuController } from '@ionic/angular';
+import { AlertController, MenuController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FirebaseService } from '../services/firebase.service';
+import { AuthGuard } from '../guards/auth.guard';
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -16,7 +18,9 @@ export class HomePage {
     public firebaseService: FirebaseService,
     private router: Router,
     public menuController: MenuController,
-    public alertController: AlertController
+    public alertController: AlertController,
+    public toaster: ToastController,
+    public auth: AuthGuard
   ) {}
 
   async logout() {
@@ -38,7 +42,8 @@ export class HomePage {
           cssClass: 'danger',
 
           handler: () => {
-            console.log('Logged Out');
+            this.toast('Logged Out!', 'danger');
+            this.firebaseAuth.signOut();
             this.router.navigateByUrl('login');
           },
         },
@@ -48,4 +53,13 @@ export class HomePage {
     const result = await alert.onDidDismiss();
     console.log(result);
   }
+  async toast(message, status) {
+    const toast = await this.toaster.create({
+      message: message,
+      position: 'top',
+      color: status,
+      duration: 2000,
+    });
+    toast.present();
+  } //end of toast
 }

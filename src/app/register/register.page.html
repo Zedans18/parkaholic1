@@ -1,15 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Register</ion-title>
+    <ion-title>Parkaholic</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-card class="card">
     <ion-card-header>
-      <img src="assets/logo.png" class="img" style="width: 100px" />
+      <img src="assets/logoo.png" class="img" style="width: 100px" />
       <ion-card-subtitle></ion-card-subtitle>
-      <ion-card-title style="text-align: center">Parkaholic</ion-card-title>
+      <ion-card-title style="text-align: center">Register</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
@@ -74,31 +74,42 @@
       <ion-item>
         <ion-input
           placeholder="Phone Number"
-          type="text"
+          type="tel"
           #numberSignup
           required
           [(ngModel)]="phoneNumber"
+          maxlength="10"
+          
         ></ion-input>
       </ion-item>
       <br />
       <ion-item>
         <ion-input
           placeholder="Car Number"
-          type="text"
+          type="tel"
           #carnumSignup
           required
           [(ngModel)]="carNumber"
+          maxlength="8"
         ></ion-input>
       </ion-item>
       <br />
+      <ion-toggle [(ngModel)]="toggleDisability"></ion-toggle>
+      <br /><br />
+      <ion-text color="success" *ngIf="!toggleDisability"><ion-icon name="arrow-up-outline"></ion-icon><b> Toggle this if you have a Disability Card</b></ion-text>
+      <ion-text color="danger" *ngIf="toggleDisability"><b>Please fill this ONLY if you have a Disability Card</b></ion-text>
+      <br /><br />
       <ion-item>
         <ion-input
-          placeholder="Handicap Placard"
-          type="text"
+        *ngIf="toggleDisability"
+          placeholder="Disability Card Number"
+          type="tel"
+          maxlength="9"
           required
-          [(ngModel)]="handiCap"
+          [(ngModel)]="disabilityCard"
         ></ion-input>
       </ion-item>
+
       <br />
       <ion-button
         (click)="register()"
