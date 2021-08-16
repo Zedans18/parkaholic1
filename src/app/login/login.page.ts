@@ -31,7 +31,7 @@ export class LoginPage implements OnInit {
   ) {}
 
   ngOnInit() {}
-  
+
   register() {
     this.router.navigateByUrl('register');
   } //end of register
@@ -57,8 +57,13 @@ export class LoginPage implements OnInit {
         });
     }
   } //end of login
-  async toast(message, status) {
-    const toast = await this.toaster.create();
+  async toast(msg, status) {
+    const toast = await this.toaster.create({
+      message: msg,
+      position: 'top',
+      color: status,
+      duration: 2000,
+    });
     toast.present();
   } //end of toast
 }
