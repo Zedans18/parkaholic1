@@ -57,12 +57,7 @@ export class LoginPage implements OnInit {
     }
   } //end of login
   async toast(message, status) {
-    const toast = await this.toaster.create({
-      message: message,
-      position: 'top',
-      color: status,
-      duration: 2000,
-    });
+    const toast = await this.toaster.create();
     toast.present();
   } //end of toast
 }

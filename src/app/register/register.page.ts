@@ -86,7 +86,7 @@ export class RegisterPage implements OnInit {
   }
   async toast(message, status) {
     const toast = await this.toaster.create({
-      message: message,
+      //message:message,
       position: 'top',
       color: status,
       duration: 2000,
