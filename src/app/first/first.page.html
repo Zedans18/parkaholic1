@@ -15,154 +15,80 @@
     <ion-grid>
         <ion-row class="row">
             <ion-col class="colD">
-                <img class="img" src="assets/chair1.png" width="30px" />
-                <ion-button color="success" fill="clear" (click)="presentAlertConfirm()">
-                    <b slot="end" class="right">B1</b>
+                <ion-button [color]="parkA.a1Color" fill="clear" (click)="presentAlertConfirm('A1')"><img src="assets/chair1.png" class="img" /><b>A1</b></ion-button>
+            </ion-col>
+            <ion-col class="street">|</ion-col>
+            <ion-col class="col2">
+                <ion-button [color]="parkA.a8Color" fill="clear" (click)="presentAlertConfirm()"><b>A8</b></ion-button>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="row">
+            <ion-col class="colD">
+                <ion-button [color]="parkA.a2Color" fill="clear" (click)="presentAlertConfirm()"><img src="assets/chair1.png" class="img" /><b>A2</b></ion-button>
+            </ion-col>
+            <ion-col class="street">|</ion-col>
+            <ion-col class="col2">
+                <ion-button [color]="parkA.a9Color" fill="clear" (click)="showAlert()"><b>A9</b></ion-button>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="row">
+            <ion-col class="col">
+                <ion-button [color]="parkA.a3Color" fill="clear" (click)="showAlert()"><b>A3</b></ion-button>
+            </ion-col>
+            <ion-col class="street">|</ion-col>
+            <ion-col class="col2">
+                <ion-button [color]="parkA.a10Color" fill="clear" (click)="presentAlertConfirm()"><b>A10</b>
                 </ion-button>
             </ion-col>
-            <ion-col> </ion-col>
-            <ion-col class=" col2 ">
-                <ion-button color="success " fill="clear " (click)="presentAlertConfirm() "><b>B8</b></ion-button>
+        </ion-row>
+
+        <ion-row class="row">
+            <ion-col class="col">
+                <ion-button [color]="parkA.a4Color" fill="clear" (click)="showAlert()"><b>A4</b></ion-button>
+            </ion-col>
+            <ion-col class="street">|</ion-col>
+
+            <ion-col class="col2">
+                <ion-button [color]="parkA.a11Color" fill="clear" (click)="presentAlertConfirm()"><b>A11</b>
+                </ion-button>
             </ion-col>
         </ion-row>
 
-        <ion-row class="row ">
-            <ion-col class="col ">
-                <ion-button color="success " fill="clear " (click)="presentAlertConfirm() "><b>B2</b></ion-button>
+        <ion-row class="row">
+            <ion-col class="col">
+                <ion-button [color]="parkA.a5Color" fill="clear" (click)="presentAlertConfirm()"><b>A5</b></ion-button>
             </ion-col>
-            <ion-col> </ion-col>
-            <ion-col class="col2 ">
-                <ion-button color="danger " fill="clear " (click)="showAlert() "><b>B9</b></ion-button>
-            </ion-col>
-        </ion-row>
-
-        <ion-row class="row ">
-            <ion-col class="col ">
-                <ion-button color="danger " fill="clear " (click)="showAlert() "><b>B3</b></ion-button>
-            </ion-col>
-            <ion-col></ion-col>
-            <ion-col class="col2 ">
-                <ion-button color="success " fill="clear " (click)="presentAlertConfirm() "><b>B10</b></ion-button>
+            <ion-col class="street">|</ion-col>
+            <ion-col class="col2">
+                <ion-button [color]="parkA.a12Color" fill="clear" (click)="showAlert()"><b>A12</b></ion-button>
             </ion-col>
         </ion-row>
 
-        <ion-row class="row ">
-            <ion-col class="col ">
-                <ion-button color="danger " fill="clear " (click)="showAlert() "><b>B4</b></ion-button>
+        <ion-row class="row">
+            <ion-col class="col">
+                <ion-button [color]="parkA.a6Color" fill="clear" (click)="presentAlertConfirm()"><b>A6</b></ion-button>
             </ion-col>
-            <ion-col></ion-col>
-
-            <ion-col class="col2 ">
-                <ion-button color="success " fill="clear " (click)="presentAlertConfirm() "><b>B11</b></ion-button>
-            </ion-col>
-        </ion-row>
-
-        <ion-row class="row ">
-            <ion-col class="col ">
-                <ion-button color="success " fill="clear " (click)="presentAlertConfirm() "><b>B5</b></ion-button>
-            </ion-col>
-            <ion-col> </ion-col>
-            <ion-col class="col2 ">
-                <ion-button color="danger " fill="clear " (click)="showAlert() "><b>B12</b></ion-button>
+            <ion-col class="street">|</ion-col>
+            <ion-col class="col2">
+                <ion-button [color]="parkA.a13Color" fill="clear" (click)="presentAlertConfirm()"><b>A13</b>
+                </ion-button>
             </ion-col>
         </ion-row>
 
-        <ion-row class="row ">
-            <ion-col class="col ">
-                <ion-button color="success " fill="clear " (click)="presentAlertConfirm() "><b>B6</b></ion-button>
+        <ion-row class="row">
+            <ion-col class="col">
+                <ion-button [color]="parkA.a7Color" fill="clear" (click)="showAlert()"><b>A7</b></ion-button>
             </ion-col>
-            <ion-col> </ion-col>
-            <ion-col class="col2 ">
-                <ion-button color="success " fill="clear " (click)="presentAlertConfirm() "><b>B13</b></ion-button>
-            </ion-col>
-        </ion-row>
-
-        <ion-row class="row ">
-            <ion-col class="col ">
-                <ion-button color="danger " fill="clear " (click)="showAlert() "><b>B7</b></ion-button>
-            </ion-col>
-            <ion-col> </ion-col>
-            <ion-col class="col2 ">
-                <ion-button color="danger " fill="clear " (click)="showAlert() "><b>B14</b></ion-button>
+            <ion-col class="street">|</ion-col>
+            <ion-col class="col2">
+                <ion-button [color]="parkA.a14Color" fill="clear" (click)="showAlert()"><b>A14</b></ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>
-</ion-content>
 
-<ion-grid>
-    <ion-row class="row">
-        <ion-col class="colD">
-            <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"><b>A1</b></ion-button>
-        </ion-col>
-        <ion-col class="street">|</ion-col>
-        <ion-col class="col2">
-            <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"><b>A8</b></ion-button>
-        </ion-col>
-    </ion-row>
-
-    <ion-row class="row">
-        <ion-col class="colD">
-            <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"><b>A2</b></ion-button>
-        </ion-col>
-        <ion-col class="street">|</ion-col>
-        <ion-col class="col2">
-            <ion-button color="danger" fill="clear" (click)="showAlert()"><b>A9</b></ion-button>
-        </ion-col>
-    </ion-row>
-
-    <ion-row class="row">
-        <ion-col class="col">
-            <ion-button color="danger" fill="clear" (click)="showAlert()"><b>A3</b></ion-button>
-        </ion-col>
-        <ion-col class="street">|</ion-col>
-        <ion-col class="col2">
-            <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"><b>A10</b></ion-button>
-        </ion-col>
-    </ion-row>
-
-    <ion-row class="row">
-        <ion-col class="col">
-            <ion-button color="danger" fill="clear" (click)="showAlert()"><b>A4</b></ion-button>
-        </ion-col>
-        <ion-col class="street">|</ion-col>
-
-        <ion-col class="col2">
-            <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"><b>A11</b></ion-button>
-        </ion-col>
-    </ion-row>
-
-    <ion-row class="row">
-        <ion-col class="col">
-            <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"><b>A5</b></ion-button>
-        </ion-col>
-        <ion-col class="street">|</ion-col>
-        <ion-col class="col2">
-            <ion-button color="danger" fill="clear" (click)="showAlert()"><b>A12</b></ion-button>
-        </ion-col>
-    </ion-row>
-
-    <ion-row class="row">
-        <ion-col class="col">
-            <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"><b>A6</b></ion-button>
-        </ion-col>
-        <ion-col class="street">|</ion-col>
-        <ion-col class="col2">
-            <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"><b>A13</b></ion-button>
-        </ion-col>
-    </ion-row>
-
-    <ion-row class="row">
-        <ion-col class="col">
-            <ion-button color="danger" fill="clear" (click)="showAlert()"><b>A7</b></ion-button>
-        </ion-col>
-        <ion-col class="street">|</ion-col>
-        <ion-col class="col2">
-            <ion-button color="danger" fill="clear" (click)="showAlert()"><b>A14</b></ion-button>
-        </ion-col>
-    </ion-row>
-</ion-grid>
-
-<ion-button color="medium" class="forward">Park B
-    <ion-icon name="caret-forward-circle-outline"></ion-icon>
-</ion-button>
+    <ion-button color="medium" class="forward">Park B
+        <ion-icon name="caret-forward-circle-outline"></ion-icon>
+    </ion-button>
 </ion-content>
