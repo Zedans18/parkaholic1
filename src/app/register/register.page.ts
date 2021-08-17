@@ -42,6 +42,7 @@ export class RegisterPage implements OnInit {
   ) {}
 
   ngOnInit() {}
+
   async register() {
     if (this.name && this.email && this.password) {
       const loading = await this.loadingController.create({
@@ -62,10 +63,16 @@ export class RegisterPage implements OnInit {
             'Phone Number': this.phoneNumber,
             'Car Number': this.carNumber,
             'Disability Card': this.disabilityCard,
+
             createdAt: Date.now(),
           });
+          localStorage.setItem(
+            'currentUser',
+            JSON.stringify({ name: this.name })
+          );
           data.user.sendEmailVerification();
         })
+
         .then(() => {
           loading.dismiss();
           this.toast(

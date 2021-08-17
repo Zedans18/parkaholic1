@@ -23,5 +23,23 @@
 </ion-header>
 
 <ion-content>
+  <ion-text>{{username }} </ion-text>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom" color="light" class="tabs">
+      <ion-tab-button routerLink="/locations">
+        <ion-icon name="pin-outline" color="medium" class="shadow"></ion-icon>
+        <ion-label color="medium"><strong>Locations</strong></ion-label>
+      </ion-tab-button>
 
+      <ion-tab-button routerLink="/lol">
+        <ion-icon name="pricetags-outline" color="medium"></ion-icon>
+        <ion-label color="medium"><strong>My Reservations</strong></ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button routerLink="/myaccount">
+        <ion-icon name="person-circle-outline" color="medium"></ion-icon>
+        <ion-label color="medium"><strong>My Account</strong></ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-content>

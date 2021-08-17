@@ -11,17 +11,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./myaccount.page.scss'],
 })
 export class MyaccountPage implements OnInit {
-
   constructor(
     public alertController: AlertController,
-    public toaster:ToastController,
-    public firebaseAuth:AngularFireAuth,
+    public toaster: ToastController,
+    public firebaseAuth: AngularFireAuth,
     public router: Router,
-    public FirebaseService: FirebaseService,
-    ) {}
+    public FirebaseService: FirebaseService
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
+  username = JSON.parse(localStorage.getItem('currentUser'));
+
   async logout() {
     const alert = await this.alertController.create({
       header: 'Log Out',
@@ -61,5 +61,4 @@ export class MyaccountPage implements OnInit {
     });
     toast.present();
   } //end of toast
-
 }

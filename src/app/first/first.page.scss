@@ -5,6 +5,7 @@
   padding: 10px;
   text-align: right;
 }
+
 .col2 {
   background-color: #959595;
   border: 5px white dashed;
@@ -12,11 +13,13 @@
   padding: 10px;
   text-align: left;
 }
+
 .row {
   background-color: #959595;
   padding: 10px;
   border: hidden;
 }
+
 .colD {
   background-color: #3f2bff;
   border: 5px white dashed;
@@ -24,6 +27,7 @@
   padding: 10px;
   text-align: right;
 }
+
 .street {
   font-size: 50px;
   text-align: center;
@@ -32,4 +36,9 @@
 
 .forward {
   padding-left: 260px;
+}
+
+.img {
+  width: 80px;
+  height: 40px;
 }

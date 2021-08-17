@@ -30,8 +30,12 @@
   <ion-grid>
     <ion-row class="row">
       <ion-col class="colD">
-        <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"
-          ><b>A1</b></ion-button
+        <ion-button
+          color="success"
+          fill="clear"
+          (click)="presentAlertConfirm()"
+        >
+          <img src="assets/chair1.png" class="img" /><b>A1</b></ion-button
         >
       </ion-col>
       <ion-col class="street">|</ion-col>
@@ -45,7 +49,7 @@
     <ion-row class="row">
       <ion-col class="colD">
         <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"
-          ><b>A2</b></ion-button
+          ><img src="assets/chair1.png" class="img" /><b>A2</b></ion-button
         >
       </ion-col>
       <ion-col class="street">|</ion-col>
@@ -129,6 +133,7 @@
   </ion-grid>
 
   <ion-button color="medium" class="forward"
-    >Park B<ion-icon name="caret-forward-circle-outline"></ion-icon
-  ></ion-button>
+    >Park B
+    <ion-icon name="caret-forward-circle-outline"></ion-icon>
+  </ion-button>
 </ion-content>
