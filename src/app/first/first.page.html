@@ -8,7 +8,7 @@
     <ion-buttons slot="start">
       <ion-back-button
         defaultHref="locations"
-        text=""
+        text="""
         icon="caret-back-outline"
         color="dark"
       ></ion-back-button>
@@ -29,110 +29,50 @@
 <ion-content>
   <ion-grid>
     <ion-row class="row">
-      <ion-col class="colD">
+      <ion-col class="colD1">
         <ion-button
-          color="success"
+          [color]="parkA.a1Color"
           fill="clear"
           (click)="presentAlertConfirm()"
-        >
-          <img src="assets/chair1.png" class="img" /><b>A1</b></ion-button
-        >
-      </ion-col>
-      <ion-col class="street">|</ion-col>
-      <ion-col class="col2">
-        <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"
-          ><b>A8</b></ion-button
-        >
-      </ion-col>
-    </ion-row>
-
-    <ion-row class="row">
-      <ion-col class="colD">
-        <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"
-          ><img src="assets/chair1.png" class="img" /><b>A2</b></ion-button
+          ><img src="assets/chair1.png" class="img" /><b>D1</b></ion-button
         >
       </ion-col>
       <ion-col class="street">|</ion-col>
-      <ion-col class="col2">
-        <ion-button color="danger" fill="clear" (click)="showAlert()"
-          ><b>A9</b></ion-button
+      <ion-col class="colD2">
+        <ion-button
+          [color]=" parkA.a1Color"
+          fill="clear"
+          (click)="presentAlertConfirm()"
+          ><img src="assets/chair1.png" class="img" /><b>D2</b></ion-button
         >
       </ion-col>
     </ion-row>
-
-    <ion-row class="row">
-      <ion-col class="col">
-        <ion-button color="danger" fill="clear" (click)="showAlert()"
-          ><b>A3</b></ion-button
-        >
-      </ion-col>
-      <ion-col class="street">|</ion-col>
-      <ion-col class="col2">
-        <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"
-          ><b>A10</b></ion-button
-        >
-      </ion-col>
-    </ion-row>
-
-    <ion-row class="row">
-      <ion-col class="col">
-        <ion-button color="danger" fill="clear" (click)="showAlert()"
-          ><b>A4</b></ion-button
-        >
-      </ion-col>
-      <ion-col class="street">|</ion-col>
-
-      <ion-col class="col2">
-        <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"
-          ><b>A11</b></ion-button
-        >
-      </ion-col>
-    </ion-row>
-
-    <ion-row class="row">
-      <ion-col class="col">
-        <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"
-          ><b>A5</b></ion-button
-        >
-      </ion-col>
-      <ion-col class="street">|</ion-col>
-      <ion-col class="col2">
-        <ion-button color="danger" fill="clear" (click)="showAlert()"
-          ><b>A12</b></ion-button
-        >
-      </ion-col>
-    </ion-row>
-
-    <ion-row class="row">
-      <ion-col class="col">
-        <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"
-          ><b>A6</b></ion-button
-        >
-      </ion-col>
-      <ion-col class="street">|</ion-col>
-      <ion-col class="col2">
-        <ion-button color="success" fill="clear" (click)="presentAlertConfirm()"
-          ><b>A13</b></ion-button
-        >
-      </ion-col>
-    </ion-row>
-
-    <ion-row class="row">
-      <ion-col class="col">
-        <ion-button color="danger" fill="clear" (click)="showAlert()"
-          ><b>A7</b></ion-button
-        >
-      </ion-col>
-      <ion-col class="street">|</ion-col>
-      <ion-col class="col2">
-        <ion-button color="danger" fill="clear" (click)="showAlert()"
-          ><b>A14</b></ion-button
-        >
-      </ion-col>
-    </ion-row>
+    <div *ngFor="let parkL of LeftData | async; index as i">
+      <div *ngFor="let parkR of RightData | async; index as j">
+        <ion-row class="row" *ngIf="i==j">
+          <ion-col class="col">
+            <ion-button
+              [color]=" parkL.Color"
+              fill="clear"
+              (click)="presentAlertConfirm(parkL)"
+              ><b>{{parkL.ParkName}}</b></ion-button
+            >
+          </ion-col>
+          <ion-col class="street">|</ion-col>
+          <ion-col class="col2">
+            <ion-button
+              [color]="parkR.Color"
+              fill="clear"
+              (click)="presentAlertConfirm(parkR)"
+              ><b>{{parkR.ParkName}}</b></ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
   </ion-grid>
 
-  <ion-button color="medium" class="forward"
+  <ion-button color="medium " class="forward"
     >Park B
     <ion-icon name="caret-forward-circle-outline"></ion-icon>
   </ion-button>

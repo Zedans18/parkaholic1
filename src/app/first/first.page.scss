@@ -11,21 +11,29 @@
   border: 5px white dashed;
   border-right: hidden;
   padding: 10px;
-  text-align: left;
 }
 
 .row {
   background-color: #959595;
+  border: solid 2px #ddd;
   padding: 10px;
   border: hidden;
 }
 
-.colD {
-  background-color: #3f2bff;
-  border: 5px white dashed;
+.colD1 {
+  border: 5px #ddd dashed;
   border-left: hidden;
+  background-color: #3f2bff;
   padding: 10px;
   text-align: right;
+}
+
+.colD2 {
+  border: 5px #ddd dashed;
+  background-color: #3f2bff;
+  border-right: hidden;
+  padding: 10px;
+  text-align: left;
 }
 
 .street {

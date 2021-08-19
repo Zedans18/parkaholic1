@@ -7,14 +7,14 @@ const routes: Routes = [
     path: 'home',
     loadChildren: () =>
       import('./home/home.module').then((m) => m.HomePageModule),
-      canActivate:[AuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full',
   },
-  
+
   {
     path: 'login',
     loadChildren: () =>
@@ -26,16 +26,16 @@ const routes: Routes = [
       import('./register/register.module').then((m) => m.RegisterPageModule),
   },
   {
-    path: 'locations',  
+    path: 'locations',
     loadChildren: () =>
       import('./locations/locations.module').then((m) => m.LocationsPageModule),
-      canActivate:[AuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'first',
     loadChildren: () =>
       import('./first/first.module').then((m) => m.FirstPageModule),
-      canActivate:[AuthGuard],
+    canActivate: [AuthGuard],
   },
   {
     path: 'reset',
@@ -44,9 +44,9 @@ const routes: Routes = [
   },
   {
     path: 'myaccount',
-    loadChildren: () => 
-    import('./myaccount/myaccount.module').then((m) => m.MyaccountPageModule),
-    canActivate:[AuthGuard],
+    loadChildren: () =>
+      import('./myaccount/myaccount.module').then((m) => m.MyaccountPageModule),
+    canActivate: [AuthGuard],
   },
   {
     path: '**',

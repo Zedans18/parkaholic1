@@ -26,11 +26,9 @@ export class FirebaseService {
     public router: Router
   ) {
     this.user$ = this.firebaseAuth.authState.pipe(
-      switchMap(user=> 
-      {
-        if(user) 
-        {
-          return this.fireservices.doc(`users/${user.uid}`).valueChanges();
+      switchMap((user) => {
+        if (user) {
+          return this.fireservices.doc(`users/${user.email}`).valueChanges();
         } else {
           return of(null);
         }
@@ -43,6 +41,7 @@ export class FirebaseService {
       .then((data) => {
         if (data.user.emailVerified) {
           this.toast('Succesfully Logged In', 'success');
+          console.log('lol');
           this.router.navigateByUrl('home');
         } else {
           this.toast('Verify Your Email', 'danger');

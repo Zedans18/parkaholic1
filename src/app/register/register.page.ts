@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
 import { Local } from 'protractor/built/driverProviders';
 import { FirebaseService } from '../services/firebase.service';
@@ -28,7 +29,7 @@ export class RegisterPage implements OnInit {
   disabilityCard = '';
   passwordMatch: boolean;
 
-  public toggleDisability: boolean = false;
+  public toggleDisability = false;
 
   constructor(
     public firebaseService: FirebaseService,
@@ -54,7 +55,7 @@ export class RegisterPage implements OnInit {
       this.firebaseAuth
         .createUserWithEmailAndPassword(this.email, this.password)
         .then((data) => {
-          this.fireservices.collection('users').doc(data.user.uid).set({
+          this.fireservices.collection('users').doc(data.user.email).set({
             userId: data.user.uid,
             Name: this.name,
             Email: this.email,
@@ -63,7 +64,7 @@ export class RegisterPage implements OnInit {
             'Phone Number': this.phoneNumber,
             'Car Number': this.carNumber,
             'Disability Card': this.disabilityCard,
-
+            isParked: false,
             createdAt: Date.now(),
           });
           localStorage.setItem(
@@ -91,15 +92,15 @@ export class RegisterPage implements OnInit {
   }
 
   checkPassword() {
-    if (this.password == this.confirmPassword) {
+    if (this.password === this.confirmPassword) {
       this.passwordMatch = true;
     } else {
       this.passwordMatch = false;
     }
   }
-  async toast(message, status) {
+  async toast(msg, status) {
     const toast = await this.toaster.create({
-      message: message,
+      message: msg,
       position: 'top',
       color: status,
       duration: 2000,

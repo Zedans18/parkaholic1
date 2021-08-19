@@ -23,17 +23,22 @@
 </ion-header>
 
 <ion-content>
-  <ion-text>{{username }} </ion-text>
+  <div *ngFor="let info of Mine | async">
+    <ion-text>{{info.Name}}</ion-text>
+    <br />
+    <ion-text>{{info.Email}}</ion-text>
+    <br />
+  </div>
   <ion-tabs>
     <ion-tab-bar slot="bottom" color="light" class="tabs">
-      <ion-tab-button routerLink="/locations">
-        <ion-icon name="pin-outline" color="medium" class="shadow"></ion-icon>
-        <ion-label color="medium"><strong>Locations</strong></ion-label>
+      <ion-tab-button routerLink="/home">
+        <ion-icon name="home-outline" color="medium"></ion-icon>
+        <ion-label color="medium"><strong>Home Page</strong></ion-label>
       </ion-tab-button>
 
-      <ion-tab-button routerLink="/lol">
-        <ion-icon name="pricetags-outline" color="medium"></ion-icon>
-        <ion-label color="medium"><strong>My Reservations</strong></ion-label>
+      <ion-tab-button routerLink="/locations">
+        <ion-icon name="pin-outline" color="medium"></ion-icon>
+        <ion-label color="medium"><strong>Locations</strong></ion-label>
       </ion-tab-button>
 
       <ion-tab-button routerLink="/myaccount">

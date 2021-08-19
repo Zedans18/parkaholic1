@@ -15,11 +15,13 @@
   text-align: center;
 }
 
-ion-tab-bar {
+ion-tab-bar,
+ion-tab-bar:hover {
   border-top: black;
   border-left: white;
   border-bottom: white;
   border-right: white;
   border-style: solid;
   border-width: 2px;
+  --ion-tabbar-text-color-active: yellow;
 }

@@ -24,7 +24,7 @@
 <ion-content>
   <ion-item>
     <ion-label>
-      <ion-button color="medium" (click)="first()">
+      <ion-button color="danger" (click)="first()">
         <b>Ofer Mall</b>
       </ion-button>
     </ion-label>
@@ -33,13 +33,13 @@
   </ion-item>
   <ion-item>
     <ion-label>
-      <ion-button color="medium"><b>Yes Planet</b> </ion-button>
+      <ion-button color="tertiary"><b>Yes Planet</b> </ion-button>
     </ion-label>
     <ion-badge color="success">120 - Available Parks</ion-badge>
   </ion-item>
   <ion-item>
     <ion-label>
-      <ion-button color="medium">
+      <ion-button color="warning">
         <b>Grand Mall </b>
       </ion-button>
     </ion-label>
@@ -47,7 +47,7 @@
   </ion-item>
   <ion-item>
     <ion-label>
-      <ion-button color="medium">
+      <ion-button color="secondary">
         <b>Big Kiryat Ata </b>
       </ion-button>
     </ion-label>
@@ -56,14 +56,14 @@
 
   <ion-tabs>
     <ion-tab-bar slot="bottom" color="light" class="tabs">
+      <ion-tab-button routerLink="/home">
+        <ion-icon name="home-outline" color="medium"></ion-icon>
+        <ion-label color="medium"><strong>Home Page</strong></ion-label>
+      </ion-tab-button>
+
       <ion-tab-button routerLink="/locations">
         <ion-icon name="pin-outline" color="medium"></ion-icon>
         <ion-label color="medium"><strong>Locations</strong></ion-label>
-      </ion-tab-button>
-
-      <ion-tab-button routerLink="/lol">
-        <ion-icon name="pricetags-outline" color="medium"></ion-icon>
-        <ion-label color="medium"><strong>My Reservations</strong></ion-label>
       </ion-tab-button>
 
       <ion-tab-button routerLink="/myaccount">

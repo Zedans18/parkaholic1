@@ -4,6 +4,8 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { loggedIn } from '@angular/fire/auth-guard';
 
 @Component({
   selector: 'app-myaccount',
@@ -11,16 +13,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./myaccount.page.scss'],
 })
 export class MyaccountPage implements OnInit {
+  public Mine: Observable<any>;
   constructor(
     public alertController: AlertController,
     public toaster: ToastController,
     public firebaseAuth: AngularFireAuth,
     public router: Router,
-    public FirebaseService: FirebaseService
+    public FirebaseService: FirebaseService,
+    public fireStore: AngularFirestore
   ) {}
 
-  ngOnInit() {}
-  username = JSON.parse(localStorage.getItem('currentUser'));
+  ngOnInit() {
+    this.Mine = this.fireStore.collection('users').valueChanges();
+  }
 
   async logout() {
     const alert = await this.alertController.create({
