@@ -58,9 +58,9 @@ export class FirebaseService {
       this.router.navigateByUrl('login');
     });
   }
-  async toast(message, status) {
+  async toast(msg, status) {
     const toast = await this.toaster.create({
-      message: message,
+      message: msg,
       position: 'top',
       color: status,
       duration: 2000,

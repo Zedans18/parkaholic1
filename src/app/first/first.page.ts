@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { LocalNotifications } from '@ionic-native/local-notifications';
+import { parseLazyRoute } from '@angular/compiler/src/aot/lazy_routes';
 
 @Component({
   selector: 'app-first',
@@ -16,16 +17,9 @@ import { LocalNotifications } from '@ionic-native/local-notifications';
   styleUrls: ['./first.page.scss'],
 })
 export class FirstPage implements OnInit {
-  name: string;
-  email: string;
-  password: string;
-  dateOfBirth: string;
-  phoneNumber: string;
-  carNumber: string;
-  disabilityCard = '';
   public LeftData: Observable<any>;
   public RightData: Observable<any>;
-  public UsersData: Observable<any>;
+  public currentDoc: Observable<any>;
   enableBackdropDismiss = false;
   showBackdrop = false;
   shouldPropagate = false;
@@ -85,15 +79,6 @@ export class FirstPage implements OnInit {
       .doc('Right')
       .collection('RightPark')
       .valueChanges(); //Right Park Data
-    let currentUserEmail;
-    this.firebaseAuth.user.subscribe((user) => {
-      currentUserEmail = user.email;
-      console.log(currentUserEmail);
-    });
-    this.UsersData = this.fireservices
-      .collection('users')
-      .doc(currentUserEmail)
-      .valueChanges();
   }
   async showAlert() {
     const alert = await this.alertController.create({
@@ -107,7 +92,8 @@ export class FirstPage implements OnInit {
     console.log(result);
   }
   async presentAlertConfirm(park) {
-    if (park.Status === 'Pending') {
+    //Reserve a spot on CONFIRMATION
+    if (park.Status === 'Pending' || park.Status === 'Taken') {
       const alertPending = await this.alertController.create({
         cssClass: 'my-custom-class',
         header: 'Sorry',
@@ -133,6 +119,7 @@ export class FirstPage implements OnInit {
           cssClass: 'secondary',
           handler: () => {
             console.log('Reservation Canceled');
+            return;
           },
         },
         {
@@ -145,100 +132,66 @@ export class FirstPage implements OnInit {
             this.firebaseAuth.user.subscribe((user) => {
               currentUserEmail = user.email;
               console.log(currentUserEmail);
-            });
-            this.fireservices
-              .collection('users')
-              .doc(currentUserEmail)
-              .valueChanges()
-              .subscribe(() => {
-                this.fireservices
-                  .collection('users')
-                  .doc(currentUserEmail)
-                  .valueChanges()
-                  .subscribe((data) => {
-                    let currentDoc: any;
-                    currentDoc = data;
-                    console.log(data);
-                    if (currentDoc.isParked === true) {
-                      this.toast(
-                        'Sorry! You already reserved another park',
-                        'danger'
-                      );
+              this.fireservices
+                .collection('users')
+                .doc(currentUserEmail)
+                .get()
+                .subscribe((data) => {
+                  let currentDoc: any;
+                  currentDoc = data.data();
+                  if (currentDoc.isParked === true) {
+                    return;
+                  } else {
+                    if (park.ID <= 9 || park.Email === '') {
+                      this.fireservices
+                        .collection('OferPark')
+                        .doc('Left')
+                        .collection('LeftPark')
+                        .doc(park.ParkName)
+                        .update({
+                          Status: 'Pending',
+                          Color: 'warning',
+                          Email: currentUserEmail,
+                        });
+                      this.fireservices
+                        .collection('users')
+                        .doc(currentUserEmail)
+                        .update({
+                          isParked: true,
+                        });
+                    } else if (park.ID >= 10 || park.Email === '') {
+                      this.fireservices
+                        .collection('OferPark')
+                        .doc('Right')
+                        .collection('RightPark')
+                        .doc(park.ParkName)
+                        .update({
+                          Status: 'Pending',
+                          Color: 'warning',
+                          Email: currentUserEmail,
+                        });
+                      this.fireservices
+                        .collection('users')
+                        .doc(currentUserEmail)
+                        .update({
+                          isParked: true,
+                        });
                       return;
-                    } else {
-                      if (park.ID <= 9) {
-                        this.fireservices
-                          .collection('OferPark')
-                          .doc('Left')
-                          .collection('LeftPark')
-                          .doc(park.ParkName)
-                          .set({
-                            ID: park.ID,
-                            ParkName: park.ParkName,
-                            Status: 'Pending',
-                            Color: 'warning',
-                            Email: currentUserEmail,
-                          });
-                        this.fireservices
-                          .collection('users')
-                          .doc(currentUserEmail)
-                          .set({
-                            Name: this.name,
-                            Email: this.email,
-                            Password: this.password,
-                            'Date Of Birth': this.dateOfBirth,
-                            'Phone Number': this.phoneNumber,
-                            'Car Number': this.carNumber,
-                            'Disability Card': this.disabilityCard,
-                            isParked: true,
-                            createdAt: Date.now(),
-                          });
-                        console.log('lol');
-                        localStorage.setItem(
-                          'currentUser',
-                          JSON.stringify({ Name: this.name })
-                        );
-                      } else {
-                        this.fireservices
-                          .collection('OferPark')
-                          .doc('Right')
-                          .collection('RightPark')
-                          .doc(park.ParkName)
-                          .set({
-                            ID: park.ID,
-                            ParkName: park.ParkName,
-                            Status: 'Pending',
-                            Color: 'warning',
-                            Email: currentUserEmail,
-                          });
-                        this.fireservices
-                          .collection('users')
-                          .doc(currentUserEmail)
-                          .set({
-                            Name: this.name,
-                            Email: this.email,
-                            Password: this.password,
-                            'Date Of Birth': this.dateOfBirth,
-                            'Phone Number': this.phoneNumber,
-                            'Car Number': this.carNumber,
-                            'Disability Card': this.disabilityCard,
-                            isParked: true,
-                            createdAt: Date.now(),
-                          });
-                        localStorage.setItem(
-                          'currentUser',
-                          JSON.stringify({ Name: this.name })
-                        );
-                      }
+                    } else if (park.Email != '') {
+                      return;
                     }
-                  });
-              });
+                    return;
+                  }
+                });
+            });
+            return;
           },
         },
       ],
     });
     await alert2.present();
   }
+
   async logout() {
     const alert = await this.alertController.create({
       header: 'Log Out',
@@ -278,8 +231,4 @@ export class FirstPage implements OnInit {
     });
     toast.present();
   } //end of toast
-}
-export class spot {
-  ID: number;
-  disablity: boolean = false;
 }

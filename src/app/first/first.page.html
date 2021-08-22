@@ -8,7 +8,7 @@
     <ion-buttons slot="start">
       <ion-back-button
         defaultHref="locations"
-        text="""
+        text=""
         icon="caret-back-outline"
         color="dark"
       ></ion-back-button>
@@ -52,7 +52,7 @@
         <ion-row class="row" *ngIf="i==j">
           <ion-col class="col">
             <ion-button
-              [color]=" parkL.Color"
+              [color]="parkL.Color"
               fill="clear"
               (click)="presentAlertConfirm(parkL)"
               ><b>{{parkL.ParkName}}</b></ion-button
