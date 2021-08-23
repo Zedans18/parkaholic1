@@ -62,13 +62,14 @@
       </ion-item>
       <br />
       <ion-item>
-        <ion-input
+        <ion-datetime
+          value="1990-02-19"
           placeholder="Date Of Birth"
-          type="Date"
-          #dobSignup
-          required
+          display-timezone="Asia/Jerusalem"
           [(ngModel)]="dateOfBirth"
-        ></ion-input>
+          min="1920"
+          max="2003"
+        ></ion-datetime>
       </ion-item>
       <br />
       <ion-item>
@@ -79,7 +80,6 @@
           required
           [(ngModel)]="phoneNumber"
           maxlength="10"
-          
         ></ion-input>
       </ion-item>
       <br />
@@ -96,12 +96,17 @@
       <br />
       <ion-toggle [(ngModel)]="toggleDisability"></ion-toggle>
       <br /><br />
-      <ion-text color="success" *ngIf="!toggleDisability"><ion-icon name="arrow-up-outline"></ion-icon><b> Toggle this if you have a Disability Card</b></ion-text>
-      <ion-text color="danger" *ngIf="toggleDisability"><b>Please fill this ONLY if you have a Disability Card</b></ion-text>
+      <ion-text color="success" *ngIf="!toggleDisability"
+        ><ion-icon name="arrow-up-outline"></ion-icon
+        ><b> Toggle this if you have a Disability Card</b></ion-text
+      >
+      <ion-text color="danger" *ngIf="toggleDisability"
+        ><b>Please fill this ONLY if you have a Disability Card</b></ion-text
+      >
       <br /><br />
       <ion-item>
         <ion-input
-        *ngIf="toggleDisability"
+          *ngIf="toggleDisability"
           placeholder="Disability Card Number"
           type="tel"
           maxlength="9"

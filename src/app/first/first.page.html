@@ -28,28 +28,36 @@
 <ion-router-outlet id="menu"></ion-router-outlet>
 <ion-content>
   <ion-grid>
-    <ion-row class="row">
-      <ion-col class="colD1">
-        <ion-button
-          [color]="parkA.a1Color"
-          fill="clear"
-          (click)="presentAlertConfirm()"
-          ><img src="assets/chair1.png" class="img" /><b>D1</b></ion-button
-        >
-      </ion-col>
-      <ion-col class="street">|</ion-col>
-      <ion-col class="colD2">
-        <ion-button
-          [color]=" parkA.a1Color"
-          fill="clear"
-          (click)="presentAlertConfirm()"
-          ><img src="assets/chair1.png" class="img" /><b>D2</b></ion-button
-        >
-      </ion-col>
-    </ion-row>
+    <div *ngFor="let parkD1 of LeftData | async; index as i">
+      <div *ngFor="let parkD2 of RightData | async; index as j">
+        <ion-row class="row" *ngIf="i==9 && j==9">
+          <ion-col class="colD1">
+            <ion-button
+              [color]="parkD1.Color"
+              fill="clear"
+              (click)="presentAlertConfirmDisability(parkD1)"
+              ><img src="assets/chair1.png" class="img" /><b
+                >{{parkD1.ParkName}}</b
+              ></ion-button
+            >
+          </ion-col>
+          <ion-col class="street">|</ion-col>
+          <ion-col class="colD2">
+            <ion-button
+              [color]=" parkD2.Color"
+              fill="clear"
+              (click)="presentAlertConfirmDisability(parkD2)"
+              ><img src="assets/chair1.png" class="img" /><b
+                >{{parkD2.ParkName}}</b
+              ></ion-button
+            >
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
     <div *ngFor="let parkL of LeftData | async; index as i">
       <div *ngFor="let parkR of RightData | async; index as j">
-        <ion-row class="row" *ngIf="i==j">
+        <ion-row class="row" *ngIf="i==j && i!=9 && j!=9">
           <ion-col class="col">
             <ion-button
               [color]="parkL.Color"
