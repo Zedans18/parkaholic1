@@ -23,12 +23,6 @@
 </ion-header>
 
 <ion-content>
-  <div *ngFor="let info of Mine | async">
-    <ion-text>{{info.Name}}</ion-text>
-    <br />
-    <ion-text>{{info.Email}}</ion-text>
-    <br />
-  </div>
   <ion-tabs>
     <ion-tab-bar slot="bottom" color="light" class="tabs">
       <ion-tab-button routerLink="/home">
@@ -47,4 +41,11 @@
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
+  <ion-button
+    color="danger"
+    style="padding-left: 150px"
+    (click)="cancelReservation()"
+  >
+    Cancel
+  </ion-button>
 </ion-content>
