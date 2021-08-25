@@ -4,12 +4,13 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
-import { unzip } from 'zlib';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
-import { LocalNotifications } from '@ionic-native/local-notifications';
-import { parseLazyRoute } from '@angular/compiler/src/aot/lazy_routes';
+import {
+  ELocalNotificationTriggerUnit,
+  LocalNotifications,
+} from '@ionic-native/local-notifications/ngx';
+import { FCM } from '@ionic-native/fcm/ngx';
 
 @Component({
   selector: 'app-first',
@@ -34,8 +35,23 @@ export class FirstPage implements OnInit {
     public firebaseService: FirebaseService,
     public firebaseDatabase: AngularFireDatabase,
     private router: Router,
-    public toaster: ToastController
-  ) {}
+    public toaster: ToastController,
+    public localNotification: LocalNotifications,
+    public platform: Platform,
+    public fcm: FCM
+  ) {
+    this.platform.ready().then(() => {
+      this.localNotification.on('click').subscribe((res) => {
+        let msg = res.data ? res.data.mydata : '';
+        this.showAlert(res.title, res.text, msg);
+      });
+
+      this.localNotification.on('trigger').subscribe((res) => {
+        let msg = res.data ? res.data.mydata : '';
+        this.showAlert(res.title, res.text, msg);
+      });
+    });
+  }
 
   ngOnInit() {
     this.LeftData = this.fireservices
@@ -48,6 +64,18 @@ export class FirstPage implements OnInit {
       .doc('Right')
       .collection('RightPark')
       .valueChanges(); //Right Park Data
+  }
+  scheduleNotification() {
+    this.localNotification.schedule({
+      id: 1,
+      title: 'Attention',
+      text: 'sup bro',
+      data: { page: 'my hidden message this is' },
+      trigger: { in: 5, unit: ELocalNotificationTriggerUnit.SECOND },
+    });
+    this.fcm.getToken().then((token) => {
+      console.log(token);
+    });
   }
   async presentAlertConfirmDisability(park) {
     //Reserve a spot on CONFIRMATION
@@ -322,4 +350,14 @@ export class FirstPage implements OnInit {
     });
     toast.present();
   } //end of toast
+  showAlert(header, sub, msg) {
+    this.alertController
+      .create({
+        header: header,
+        subHeader: sub,
+        message: msg,
+        buttons: ['OK'],
+      })
+      .then((alert) => alert.present());
+  }
 }

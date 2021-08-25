@@ -6,6 +6,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 //firebase
 import { AngularFireModule } from '@angular/fire';
@@ -24,6 +25,9 @@ import { FirebaseService } from './services/firebase.service';
 import { AuthGuard } from './guards/auth.guard';
 import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
 
+//FCM
+import { FCM } from '@ionic-native/fcm/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -40,8 +44,10 @@ import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
     AngularFireAuthGuardModule,
   ],
   providers: [
+    FCM,
     FirebaseService,
     AuthGuard,
+    LocalNotifications,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
   ],
   bootstrap: [AppComponent],
