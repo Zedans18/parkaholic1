@@ -1,87 +1,50 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title
-      ><img
-        src="https://myoferapp-staging.s3-eu-west-1.amazonaws.com/app/images/ofer_bambi_logo_new.png"
-        width="65px"
-    /></ion-title>
-    <ion-buttons slot="start">
-      <ion-back-button
-        defaultHref="locations"
-        text=""
-        icon="caret-back-outline"
-        color="dark"
-      ></ion-back-button>
-    </ion-buttons>
-    <ion-button
-      slot="end"
-      color="danger"
-      class="logout"
-      (click)="logout()"
-      fill="clear"
-    >
-      <ion-icon name="power"></ion-icon>
-    </ion-button>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title><img src="https://myoferapp-staging.s3-eu-west-1.amazonaws.com/app/images/ofer_bambi_logo_new.png" width="65px" /></ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="locations" text="" icon="caret-back-outline" color="dark"></ion-back-button>
+        </ion-buttons>
+        <ion-button slot="end" color="danger" class="logout" (click)="logout()" fill="clear">
+            <ion-icon name="power"></ion-icon>
+        </ion-button>
+    </ion-toolbar>
 </ion-header>
 
 <ion-router-outlet id="menu"></ion-router-outlet>
 <ion-content>
-  <ion-grid>
-    <div *ngFor="let parkD1 of LeftData | async; index as i">
-      <div *ngFor="let parkD2 of RightData | async; index as j">
-        <ion-row class="row" *ngIf="i==9 && j==9">
-          <ion-col class="colD1">
-            <ion-button
-              [color]="parkD1.Color"
-              fill="clear"
-              (click)="presentAlertConfirmDisability(parkD1)"
-              ><img src="assets/chair1.png" class="img" /><b
-                >{{parkD1.ParkName}}</b
-              ></ion-button
-            >
-          </ion-col>
-          <ion-col class="street">|</ion-col>
-          <ion-col class="colD2">
-            <ion-button
-              [color]=" parkD2.Color"
-              fill="clear"
-              (click)="presentAlertConfirmDisability(parkD2)"
-              ><img src="assets/chair1.png" class="img" /><b
-                >{{parkD2.ParkName}}</b
-              ></ion-button
-            >
-          </ion-col>
-        </ion-row>
-      </div>
-    </div>
-    <div *ngFor="let parkL of LeftData | async; index as i">
-      <div *ngFor="let parkR of RightData | async; index as j">
-        <ion-row class="row" *ngIf="i==j && i!=9 && j!=9">
-          <ion-col class="col">
-            <ion-button
-              [color]="parkL.Color"
-              fill="clear"
-              (click)="presentAlertConfirm(parkL)"
-              ><b>{{parkL.ParkName}}</b></ion-button
-            >
-          </ion-col>
-          <ion-col class="street">|</ion-col>
-          <ion-col class="col2">
-            <ion-button
-              [color]="parkR.Color"
-              fill="clear"
-              (click)="presentAlertConfirm(parkR)"
-              ><b>{{parkR.ParkName}}</b></ion-button
-            >
-          </ion-col>
-        </ion-row>
-      </div>
-    </div>
-  </ion-grid>
+    <ion-grid>
+        <div *ngFor="let parkD1 of LeftData | async; index as i">
+            <div *ngFor="let parkD2 of RightData | async; index as j">
+                <ion-row class="row" *ngIf="i===9 && j===9">
+                    <ion-col class="colD1">
+                        <ion-button [color]="parkD1.Color" fill="clear" (click)="presentAlertConfirmDisability(parkD1)">
+                            <img src="assets/chair1.png" class="img" /><b>{{parkD1.ParkName}}</b></ion-button>
+                    </ion-col>
+                    <ion-col class="street">|</ion-col>
+                    <ion-col class="colD2">
+                        <ion-button [color]=" parkD2.Color" fill="clear" (click)="presentAlertConfirmDisability(parkD2)"><img src="assets/chair1.png" class="img" /><b>{{parkD2.ParkName}}</b></ion-button>
+                    </ion-col>
+                </ion-row>
+            </div>
+        </div>
+        <div *ngFor="let parkL of LeftData | async; index as i">
+            <div *ngFor="let parkR of RightData | async; index as j">
+                <ion-row class="row" *ngIf="i===j && i!==9 && j!==9">
+                    <ion-col class="col">
+                        <ion-button [color]="parkL.Color" fill="clear" (click)="presentAlertConfirm(parkL)">
+                            <b>{{parkL.ParkName}}</b></ion-button>
+                    </ion-col>
+                    <ion-col class="street">|</ion-col>
+                    <ion-col class="col2">
+                        <ion-button [color]="parkR.Color" fill="clear" (click)="presentAlertConfirm(parkR)">
+                            <b>{{parkR.ParkName}}</b></ion-button>
+                    </ion-col>
+                </ion-row>
+            </div>
+        </div>
+    </ion-grid>
 
-  <ion-button color="medium " class="forward"
-    >Park B
-    <ion-icon name="caret-forward-circle-outline"></ion-icon>
-  </ion-button>
+    <ion-button color="medium " class="forward">Park B
+        <ion-icon name="caret-forward-circle-outline"></ion-icon>
+    </ion-button>
 </ion-content>
