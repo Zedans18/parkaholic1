@@ -5,11 +5,13 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
 import { unzip } from 'zlib';
-import { Observable } from 'rxjs';
+import { interval, Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { parseLazyRoute } from '@angular/compiler/src/aot/lazy_routes';
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+import * as functions from 'firebase-functions';
 
 @Component({
   selector: 'app-first',
@@ -28,7 +30,7 @@ export class FirstPage implements OnInit {
   parkA = {
     a1Color: 'success',
   };
-
+  obvs = interval(1000);
   constructor(
     public alertController: AlertController,
     public firebaseAuth: AngularFireAuth,
@@ -36,7 +38,8 @@ export class FirstPage implements OnInit {
     public firebaseService: FirebaseService,
     public firebaseDatabase: AngularFireDatabase,
     private router: Router,
-    public toaster: ToastController
+    public toaster: ToastController,
+    private backgroundMode: BackgroundMode
   ) {}
 
   ngOnInit() {
@@ -231,7 +234,8 @@ export class FirstPage implements OnInit {
                     await alertPending.present();
                     return;
                   } else {
-                    if (park.ID <= 9 || park.Email === '') {
+                    console.log(park.ID);
+                    if (park.ID <= 9 && park.Email === '') {
                       console.log('hi');
                       this.fireservices
                         .collection('OferPark')
@@ -239,7 +243,7 @@ export class FirstPage implements OnInit {
                         .collection('LeftPark')
                         .doc(park.ParkName)
                         .update({
-                          Status:'Pending',
+                          Status: 'Pending',
                           Color: 'warning',
                           Email: currentUserEmail,
                         });
@@ -251,7 +255,30 @@ export class FirstPage implements OnInit {
                           ParkName: park.ParkName,
                           Side: 'Left',
                         });
-                    } else if (park.ID >= 10 || park.Email === '') {
+                      this.obvs.subscribe((time) => {
+                        console.log(time);
+                        if (time === 30) {
+                          this.fireservices
+                            .collection('OferPark')
+                            .doc('Left')
+                            .collection('LeftPark')
+                            .doc(park.ParkName)
+                            .update({
+                              Status: 'Avaiable',
+                              Color: 'success',
+                              Email: '',
+                            });
+                          this.fireservices
+                            .collection('users')
+                            .doc(currentUserEmail)
+                            .update({
+                              isParked: false,
+                              ParkName: '',
+                              Side: '',
+                            });
+                        }
+                      });
+                    } else if (park.ID >= 10 && park.Email === '') {
                       this.fireservices
                         .collection('OferPark')
                         .doc('Right')
@@ -270,7 +297,29 @@ export class FirstPage implements OnInit {
                           ParkName: park.ParkName,
                           Side: 'Right',
                         });
-                      return;
+                      this.obvs.subscribe((time) => {
+                        console.log(time);
+                        if (time === 30) {
+                          this.fireservices
+                            .collection('OferPark')
+                            .doc('Right')
+                            .collection('RightPark')
+                            .doc(park.ParkName)
+                            .update({
+                              Status: 'Available',
+                              Color: 'success',
+                              Email: '',
+                            });
+                          this.fireservices
+                            .collection('users')
+                            .doc(currentUserEmail)
+                            .update({
+                              isParked: false,
+                              ParkName: '',
+                              Side: '',
+                            });
+                        }
+                      });
                     } else if (park.Email != '') {
                       return;
                     }

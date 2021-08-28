@@ -71,7 +71,7 @@ export class MyaccountPage implements OnInit {
                   let currentDoc: any;
                   currentDoc = data.data();
                   console.log(currentDoc);
-                  if (currentDoc.Pos === 'Left') {
+                  if (currentDoc.Side === 'Left') {
                     this.fireservices
                       .collection('OferPark')
                       .doc('Left')
