@@ -28,7 +28,7 @@ export class ResetPage implements OnInit {
   ) {}
 
   ngOnInit() {}
-  async resetPassword() {
+  async resetPassword(form) {
     if (this.email) {
       const loading = await this.loadingController.create({
         message: 'Sending reset password link...',

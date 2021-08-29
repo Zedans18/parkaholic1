@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "289087409246",
+    "firebase_url": "https://parkaholic-34e9d-default-rtdb.firebaseio.com",
+    "project_id": "parkaholic-34e9d",
+    "storage_bucket": "parkaholic-34e9d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:289087409246:android:c61cc53918abbe3ef338cf",
+        "android_client_info": {
+          "package_name": "com.rz.parkaholic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "289087409246-906i8sjnpmofrlk6undu5rfpniiooa5o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvU3GHQJ_un9we3BFZSu_4jEYZl2h-n7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "289087409246-906i8sjnpmofrlk6undu5rfpniiooa5o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -15,10 +15,9 @@
     <ion-grid>
         <div *ngFor="let parkD1 of LeftData | async; index as i">
             <div *ngFor="let parkD2 of RightData | async; index as j">
-                <ion-row class="row" *ngIf="i===9 && j===9">
+                <ion-row class="row" *ngIf="i==9 && j==9">
                     <ion-col class="colD1">
-                        <ion-button [color]="parkD1.Color" fill="clear" (click)="presentAlertConfirmDisability(parkD1)">
-                            <img src="assets/chair1.png" class="img" /><b>{{parkD1.ParkName}}</b></ion-button>
+                        <ion-button [color]="parkD1.Color" fill="clear" (click)="presentAlertConfirmDisability(parkD1)"><img src="assets/chair1.png" class="img" /><b>{{parkD1.ParkName}}</b></ion-button>
                     </ion-col>
                     <ion-col class="street">|</ion-col>
                     <ion-col class="colD2">
@@ -29,7 +28,7 @@
         </div>
         <div *ngFor="let parkL of LeftData | async; index as i">
             <div *ngFor="let parkR of RightData | async; index as j">
-                <ion-row class="row" *ngIf="i===j && i!==9 && j!==9">
+                <ion-row class="row" *ngIf="i==j && i!=9 && j!=9">
                     <ion-col class="col">
                         <ion-button [color]="parkL.Color" fill="clear" (click)="presentAlertConfirm(parkL)">
                             <b>{{parkL.ParkName}}</b></ion-button>
@@ -43,6 +42,7 @@
             </div>
         </div>
     </ion-grid>
+    <ion-button expand="block" (click)="scheduleNotification()">Notiiiii</ion-button>
 
     <ion-button color="medium " class="forward">Park B
         <ion-icon name="caret-forward-circle-outline"></ion-icon>
