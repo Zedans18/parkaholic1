@@ -71,41 +71,6 @@ export class RegisterPage implements OnInit {
   ) {}
 
   ngOnInit() {}
-  async showPicker() {
-    let options: PickerOptions = {
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-        },
-        {
-          text: 'Confirm',
-          handler: (value: any) => {
-            console.log(value);
-          },
-        },
-      ],
-      columns: [
-        {
-          name: 'Phone Number Start',
-          options: this.getColumnOptions(),
-        },
-      ],
-    };
-
-    let picker = await this.pickerController.create(options);
-
-    picker.present();
-  }
-
-  getColumnOptions() {
-    let options = [];
-    this.startNumber.forEach((x) => {
-      options.push({ text: x, value: x });
-      this.btnVal = x;
-    });
-    return options;
-  }
 
   async register() {
     if (this.name && this.email && this.password) {

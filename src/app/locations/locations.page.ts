@@ -24,16 +24,43 @@ export class LocationsPage implements OnInit {
     public fireservices: AngularFirestore,
     public firebaseService: FirebaseService,
     public menuController: MenuController,
-    public toaster: ToastController
+    public toaster: ToastController,
+    public alertController: AlertController
   ) {}
 
   first() {
     this.router.navigate(['/first']);
   }
   ngOnInit() {}
-  logout() {
-    this.firebaseService.firebaseAuth.signOut();
-    this.router.navigate(['/login']);
+  async logout() {
+    const alert = await this.alertController.create({
+      header: 'Log Out',
+      subHeader: 'Are you sure you want to log out?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Reservation Canceled');
+          },
+        },
+        {
+          text: 'Yes',
+          role: 'confirm',
+          cssClass: 'danger',
+
+          handler: () => {
+            this.toast('Logged Out!', 'danger');
+            this.firebaseAuth.signOut();
+            this.router.navigateByUrl('login');
+          },
+        },
+      ],
+    });
+    await alert.present();
+    const result = await alert.onDidDismiss();
+    console.log(result);
   }
   async toast(msg, status) {
     const toast = await this.toaster.create({
