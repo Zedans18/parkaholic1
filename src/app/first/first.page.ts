@@ -16,7 +16,9 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./first.page.scss'],
 })
 export class FirstPage implements OnInit {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   public LeftData: Observable<any>;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   public RightData: Observable<any>;
   public ok: any;
   public LeftTime: any;
@@ -224,6 +226,7 @@ export class FirstPage implements OnInit {
                 .get()
                 .subscribe(async (data) => {
                   let currentDoc: any;
+                  // eslint-disable-next-line prefer-const
                   currentDoc = data.data();
                   if (
                     currentDoc.isParked === true ||
@@ -243,7 +246,7 @@ export class FirstPage implements OnInit {
                     await alertPending.present();
                     return;
                   } else {
-                    if (park.ID == 21) {
+                    if (park.ID === 21) {
                       this.fireservices
                         .collection('OferPark')
                         .doc('Left')
@@ -261,7 +264,7 @@ export class FirstPage implements OnInit {
                         .update({
                           isParked: true,
                         });
-                    } else if (park.ID == 22) {
+                    } else if (park.ID === 22) {
                       this.fireservices
                         .collection('OferPark')
                         .doc('Right')
@@ -280,7 +283,7 @@ export class FirstPage implements OnInit {
                           isParked: true,
                         });
                       return;
-                    } else if (park.Email != '') {
+                    } else if (park.Email !== '') {
                       return;
                     }
                     return;

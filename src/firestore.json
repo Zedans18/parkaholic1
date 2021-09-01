@@ -1,0 +1,150 @@
+[{
+    "OferPark": {
+        "Right": {
+            "RightPark": [{
+                    "Email": "",
+                    "ParkName": "A10",
+                    "ID": 10,
+                    "Color": "success",
+                    "Status": "Available"
+                },
+                {
+                    "Email": "",
+                    "ID": 11,
+                    "Status": "Available",
+                    "Color": "success",
+                    "ParkName": "A11"
+                },
+                {
+                    "Color": "success",
+                    "Email": "",
+                    "ParkName": "A12",
+                    "Status": "Available",
+                    "ID": 12
+                },
+                {
+                    "Color": "success",
+                    "ID": 13,
+                    "Status": "Available",
+                    "ParkName": "A13",
+                    "Email": ""
+                },
+                {
+                    "Color": "success",
+                    "Email": "",
+                    "Status": "Available",
+                    "ParkName": "A14",
+                    "ID": 14
+                },
+                {
+                    "Color": "success",
+                    "Email": "",
+                    "Status": "Available",
+                    "ID": 15,
+                    "ParkName": "A15"
+                },
+                {
+                    "Status": "Available",
+                    "ID": 16,
+                    "Color": "success",
+                    "Email": "",
+                    "ParkName": "A16"
+                },
+                {
+                    "Status": "Available",
+                    "ParkName": "A17",
+                    "ID": 17,
+                    "Color": "success",
+                    "Email": ""
+                },
+                {
+                    "Status": "Available",
+                    "ParkName": "A18",
+                    "Email": "",
+                    "Color": "success",
+                    "ID": 18
+                },
+                {
+                    "Color": "success",
+                    "Status": "Available",
+                    "Email": "",
+                    "ID": "22",
+                    "ParkName": "D2"
+                }
+            ]
+        },
+        "Left": {
+            "LeftPark": [{
+                    "Status": "Available",
+                    "ID": 1,
+                    "Email": "",
+                    "Color": "success",
+                    "ParkName": "A1"
+                },
+                {
+                    "Status": "Available",
+                    "Email": "",
+                    "ParkName": "A2",
+                    "Color": "success",
+                    "ID": 2
+                },
+                {
+                    "Email": "",
+                    "ParkName": "A3",
+                    "Status": "Available",
+                    "Color": "success",
+                    "ID": 3
+                },
+                {
+                    "Status": "Available",
+                    "Color": "success",
+                    "ParkName": "A4",
+                    "ID": 4,
+                    "Email": ""
+                },
+                {
+                    "ParkName": "A5",
+                    "ID": 5,
+                    "Email": "",
+                    "Color": "success",
+                    "Status": "Available"
+                },
+                {
+                    "Email": "",
+                    "ID": 6,
+                    "Color": "success",
+                    "Status": "Available",
+                    "ParkName": "A6"
+                },
+                {
+                    "Status": "Available",
+                    "Color": "success",
+                    "Email": "",
+                    "ID": 7,
+                    "ParkName": "A7"
+                },
+                {
+                    "Color": "success",
+                    "Status": "Available",
+                    "ID": 8,
+                    "ParkName": "A8",
+                    "Email": ""
+                },
+                {
+                    "ParkName": "A9",
+                    "Color": "success",
+                    "Email": "",
+                    "Status": "Available",
+                    "ID": 9
+                },
+                {
+                    "ID": "21",
+                    "Status": "Available",
+                    "ParkName": "D1",
+                    "Email": "",
+                    "Color": "success"
+                }
+            ]
+        }
+    }
+}]
