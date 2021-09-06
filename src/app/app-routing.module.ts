@@ -52,7 +52,11 @@ const routes: Routes = [
     path: '**',
     loadChildren: () =>
       import('./home/home.module').then((m) => m.HomePageModule),
+  },  {
+    path: 'second',
+    loadChildren: () => import('./second/second.module').then( m => m.SecondPageModule)
   },
+
 ];
 
 @NgModule({

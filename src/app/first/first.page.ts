@@ -89,7 +89,7 @@ export class FirstPage implements OnInit {
     });
 
     this.firebaseAuth.user.subscribe((user) => {
-      //This function checks if the user's park has been take nbu someone else.
+      //This function checks if the user's park has been taken by someone else.
       //Then it changes the park's info.
       currentUserEmail = user.email;
       console.log(currentUserEmail);
