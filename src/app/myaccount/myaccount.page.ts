@@ -30,15 +30,16 @@ export class MyaccountPage implements OnInit {
   ) {}
   public LeftData: Observable<any>;
   public RightData: Observable<any>;
-  public ok: any;
-  public ok2: any;
+  public cancelLeft: any;
+  public cancelRight: any;
 
   ngOnInit() {
+    //A function that works once whenever the user opens the page
     this.LeftData = this.fireservices
       .collection('OferPark')
       .doc('Left')
       .collection('LeftPark')
-      .valueChanges(); //Left Park Data
+      .valueChanges(); //All Left Park Data
     this.RightData = this.fireservices
       .collection('OferPark')
       .doc('Right')
@@ -46,6 +47,7 @@ export class MyaccountPage implements OnInit {
       .valueChanges(); //Right Park Data
   }
   async cancelReservation() {
+    //A function is called when the user wants to cancel his reservation. It updates all the info about the specific park that he canceled.
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Park Cancelation',
@@ -69,7 +71,7 @@ export class MyaccountPage implements OnInit {
             this.firebaseAuth.user.subscribe((user) => {
               currentUserEmail = user.email;
               console.log(currentUserEmail);
-              this.ok = this.fireservices
+              this.cancelLeft = this.fireservices
                 .collection('OferPark')
                 .doc('Left')
                 .collection('LeftPark')
@@ -101,7 +103,7 @@ export class MyaccountPage implements OnInit {
                   });
                   return;
                 });
-              this.ok2 = this.fireservices
+              this.cancelRight = this.fireservices
                 .collection('OferPark')
                 .doc('Right')
                 .collection('RightPark')
@@ -149,6 +151,7 @@ export class MyaccountPage implements OnInit {
   }
 
   async logout() {
+    //A function that been called when the user wants to logout from the application
     const alert = await this.alertController.create({
       header: 'Log Out',
       subHeader: 'Are you sure you want to log out?',
@@ -179,6 +182,7 @@ export class MyaccountPage implements OnInit {
     console.log(result);
   }
   async toast(msg, status) {
+    //Calling this function when we need to show a user a message.
     const toast = await this.toaster.create({
       message: msg,
       position: 'top',
@@ -186,5 +190,5 @@ export class MyaccountPage implements OnInit {
       duration: 2000,
     });
     toast.present();
-  } //end of toast
+  }
 }

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FirebaseService } from '../services/firebase.service';
 import {
   AlertController,
   LoadingController,
-  MenuController,
   ToastController,
 } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -21,7 +19,6 @@ export class ResetPage implements OnInit {
     private router: Router,
     public firebaseService: FirebaseService,
     public alertController: AlertController,
-    public menuController: MenuController,
     private authService: AngularFireAuth,
     public toaster: ToastController,
     public loadingController: LoadingController
@@ -29,6 +26,8 @@ export class ResetPage implements OnInit {
 
   ngOnInit() {}
   async resetPassword(form) {
+    //A function that sends an email with a link to the user that wants to reset his password.
+    //It shows a message if the email is not in the database or if it is an invalid email.
     if (this.email) {
       const loading = await this.loadingController.create({
         message: 'Sending reset password link...',
@@ -55,8 +54,9 @@ export class ResetPage implements OnInit {
       this.toast('Please enter your Email Addrress', 'danger');
       this.loadingController.dismiss();
     }
-  } //end of reset password
+  }
   async toast(msg, status) {
+    //Calling this function when we need to show a user a message.
     const toast = await this.toaster.create({
       message: msg,
       position: 'top',
@@ -66,6 +66,7 @@ export class ResetPage implements OnInit {
     toast.present();
   }
   signIn() {
+    //Routing to the login page.
     this.router.navigateByUrl('login');
   }
 }

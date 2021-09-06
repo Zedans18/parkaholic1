@@ -13,19 +13,17 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireAuthModule } from '@angular/fire/auth';//env
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+//environment
 import environment from '../environments/environment';
 
-//services
+//service
 import { FirebaseService } from './services/firebase.service';
 
 //guards
 import { AuthGuard } from './guards/auth.guard';
 import { AngularFireAuthGuardModule } from '@angular/fire/auth-guard';
-import { BackgroundMode } from '@ionic-native/background-mode/ngx';
-
-//FCM
-import { FCM } from '@ionic-native/fcm/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,9 +41,7 @@ import { FCM } from '@ionic-native/fcm/ngx';
     AngularFireAuthGuardModule,
   ],
   providers: [
-    FCM,
     FirebaseService,
-    BackgroundMode,
     AuthGuard,
     LocalNotifications,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { AlertController, MenuController, ToastController } from '@ionic/angular';
+import {
+  AlertController,
+  MenuController,
+  ToastController,
+} from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -24,7 +28,9 @@ export class HomePage {
   ) {}
 
   async logout() {
+    //A function that been called when the user wants to logout from the application
     const alert = await this.alertController.create({
+      //when the function is called, an alert is created
       header: 'Log Out',
       subHeader: 'Are you sure you want to log out?',
       buttons: [
@@ -32,9 +38,6 @@ export class HomePage {
           text: 'Cancel',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: () => {
-            console.log('Reservation Canceled');
-          },
         },
         {
           text: 'Yes',
@@ -42,6 +45,7 @@ export class HomePage {
           cssClass: 'danger',
 
           handler: () => {
+            //Logged out of Firebase and routes to the Login page
             this.toast('Logged Out!', 'danger');
             this.firebaseAuth.signOut();
             this.router.navigateByUrl('login');
@@ -54,6 +58,7 @@ export class HomePage {
     console.log(result);
   }
   async toast(msg, status) {
+    //Calling this function when we need to show a user a message.
     const toast = await this.toaster.create({
       message: msg,
       position: 'top',
@@ -61,5 +66,5 @@ export class HomePage {
       duration: 2000,
     });
     toast.present();
-  } //end of toast
+  }
 }

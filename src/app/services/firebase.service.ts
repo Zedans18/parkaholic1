@@ -2,12 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import {
-  AlertController,
-  LoadingController,
-  ToastController,
-} from '@ionic/angular';
-import { Spinner } from '@ionic/cli-framework';
+import { ToastController } from '@ionic/angular';
 import { User } from 'ionic';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -20,8 +15,7 @@ export class FirebaseService {
   constructor(
     public firebaseAuth: AngularFireAuth,
     public fireservices: AngularFirestore,
-    private alertController: AlertController,
-    private loadingController: LoadingController,
+
     private toaster: ToastController,
     public router: Router
   ) {
@@ -34,31 +28,33 @@ export class FirebaseService {
         }
       })
     );
-  } //end of constructor
+  }
   async login(email, password) {
+    //A function that checks if the email and password are found in Firebase.
+    //and also checks if the email has been verified by the user. The user must verify his email before logging to the app.
     this.firebaseAuth
       .signInWithEmailAndPassword(email, password)
       .then((data) => {
         if (data.user.emailVerified) {
           this.toast('Succesfully Logged In', 'success');
-          console.log('lol');
           this.router.navigateByUrl('home');
         } else {
           this.toast('Verify Your Email', 'danger');
         }
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         this.toast('Invalid Email or Password', 'danger');
         this.logout();
       });
   }
   logout() {
+    //A function that logs out the user from Firebase Authentication
     this.firebaseAuth.signOut().then(() => {
       this.router.navigateByUrl('login');
     });
   }
   async toast(msg, status) {
+    //Calling this function when we need to show a user a message.
     const toast = await this.toaster.create({
       message: msg,
       position: 'top',
