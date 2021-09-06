@@ -14,6 +14,7 @@
 
     <ion-card-content>
       <ion-item>
+        <ion-icon name="person-outline"></ion-icon>
         <ion-input
           placeholder="Full Name"
           #nameSignup
@@ -23,6 +24,7 @@
       </ion-item>
       <br />
       <ion-item>
+        <ion-icon name="mail-outline"></ion-icon>
         <ion-input
           placeholder="Email"
           type="email"
@@ -32,6 +34,7 @@
       </ion-item>
       <br />
       <ion-item>
+        <ion-icon name="lock-closed-outline"></ion-icon>
         <ion-input
           placeholder="Password"
           type="password"
@@ -42,6 +45,7 @@
       </ion-item>
       <br />
       <ion-item>
+        <ion-icon name="lock-open-outline"></ion-icon>
         <ion-input
           placeholder="Confirm Password"
           type="password"
@@ -62,6 +66,7 @@
       </ion-item>
       <br />
       <ion-item>
+        <ion-icon name="calendar-outline"></ion-icon>
         <ion-datetime
           value="1990-02-19"
           placeholder="Date Of Birth"
@@ -73,6 +78,7 @@
       </ion-item>
       <br />
       <ion-item>
+        <ion-icon name="call-outline"></ion-icon>
         <ion-input
           placeholder="Phone Number"
           type="tel"
@@ -84,6 +90,7 @@
       </ion-item>
       <br />
       <ion-item>
+        <ion-icon name="car-outline"></ion-icon>
         <ion-input
           placeholder="Car Number"
           type="tel"
@@ -104,9 +111,10 @@
         ><b>Please fill this ONLY if you have a Disability Card</b></ion-text
       >
       <br /><br />
-      <ion-item>
+
+      <ion-item *ngIf="toggleDisability">
+        <ion-icon name="card-outline"></ion-icon>
         <ion-input
-          *ngIf="toggleDisability"
           placeholder="Disability Card Number"
           type="tel"
           maxlength="9"

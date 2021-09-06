@@ -1,4 +1,4 @@
-import { Component, Injectable, Input, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { AlertController, Platform, ToastController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 import { Observable, timer } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { interval } from 'rxjs';
-import { waitForAsync } from '@angular/core/testing';
 import { DOCUMENT } from '@angular/common';
 
 @Component({
@@ -16,15 +15,9 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./first.page.scss'],
 })
 export class FirstPage implements OnInit {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   public LeftData: Observable<any>;
-  // eslint-disable-next-line @typescript-eslint/naming-convention
   public RightData: Observable<any>;
-  public ok: any;
-  public LeftTime: any;
-  enableBackdropDismiss = false;
-  showBackdrop = false;
-  shouldPropagate = false;
+
   obvs = interval(1000);
   checkTime = interval(1000);
   parkTime = interval(1000);
@@ -52,20 +45,12 @@ export class FirstPage implements OnInit {
       .doc('Right')
       .collection('RightPark')
       .valueChanges(); //Right Park Data
-    this.ok = this.fireservices
-      .collection('OferPark')
-      .doc('Left')
-      .collection('LeftPark')
-      .valueChanges()
-      .subscribe((data) => {
-        data.forEach((value) => {
-          console.log(value.Status);
-        });
-      });
     this.TimeNow.getMinutes();
     console.log(this.TimeNow.getMinutes());
     let currentUserEmail;
     this.firebaseAuth.user.subscribe((user) => {
+      //A function that checks if there is a park that has been reserved for more than 10 minutes.
+      //Then that parking spot is getting canceled automatically
       currentUserEmail = user.email;
       console.log(currentUserEmail);
       this.fireservices
@@ -102,7 +87,10 @@ export class FirstPage implements OnInit {
           });
         });
     });
+
     this.firebaseAuth.user.subscribe((user) => {
+      //This function checks if the user's park has been take nbu someone else.
+      //Then it changes the park's info.
       currentUserEmail = user.email;
       console.log(currentUserEmail);
       this.fireservices
@@ -143,6 +131,8 @@ export class FirstPage implements OnInit {
                 });
 
               this.checkTime.subscribe(async (time) => {
+                //If someone who doesn't own the app parked in the user's spot.
+                //The app automatically reserve for the user the first empty spot.
                 if (time === 5) {
                   this.fireservices
                     .collection('OferPark')
@@ -226,7 +216,6 @@ export class FirstPage implements OnInit {
                 .get()
                 .subscribe(async (data) => {
                   let currentDoc: any;
-                  // eslint-disable-next-line prefer-const
                   currentDoc = data.data();
                   if (
                     currentDoc.isParked === true ||
@@ -299,7 +288,7 @@ export class FirstPage implements OnInit {
   }
 
   async presentAlertConfirm(park) {
-    //Reserve a spot on CONFIRMATION
+    //Reserve a spot on CONFIRMATION. User can reserve the spot only if it is an available park.
     if (
       park.Status === 'Pending' ||
       park.Status === 'Reserved' ||
@@ -338,6 +327,8 @@ export class FirstPage implements OnInit {
           role: 'confirm',
           cssClass: 'primary',
           handler: () => {
+            //Called if the user reserved the spot. It checks whether its available or not and gives a message.
+            //Updates the data of the park and the user if he confirmed the parking spot.
             console.log('Reservation Confirmed');
             let currentUserEmail;
             this.firebaseAuth.user.subscribe((user) => {
@@ -391,93 +382,6 @@ export class FirstPage implements OnInit {
                           this._document.defaultView.location.reload();
                         }
                       });
-                      /* this.obvs.subscribe(async (time) => {
-                        if (time === 10) {
-                          const timeAlert = await this.alertController.create({
-                            cssClass: 'my-custom-class',
-                            header: 'Sorry!',
-                            message: 'You lost your spot due to overtime',
-                            buttons: [
-                              {
-                                text: 'OK',
-                                role: 'cancel',
-                                cssClass: 'secondary',
-                              },
-                              {
-                                text: 'Yes',
-                                role: 'confirm',
-                                cssClass: 'primary',
-                                handler: () => {
-                                  this.toast(
-                                    'We will till you shortly where to park. Please Be patient',
-                                    'success'
-                                  );
-                                  let spot: any;
-                                  let newPark: any;
-                                  this.fireservices
-                                    .collection('OferPark')
-                                    .doc('Left')
-                                    .collection('LeftPark')
-                                    .valueChanges()
-                                    .subscribe((data) => {
-                                      data.forEach((value) => {
-                                        console.log(value);
-                                        if (value.Status === 'Available') {
-                                          spot = value.ID;
-                                          console.log(spot);
-                                          newPark = value.ParkName;
-                                          console.log(newPark);
-                                          return;
-                                        }
-                                      });
-                                    });
-
-                                  this.checkTime.subscribe(async (time) => {
-                                    if (time === 5) {
-                                      const offer =
-                                        await this.alertController.create({
-                                          cssClass: 'my-custom-class',
-                                          header: 'Park in spot number:',
-                                          message: spot,
-                                          buttons: [
-                                            {
-                                              text: 'OK',
-                                              role: 'cancel',
-                                              cssClass: 'primary',
-                                            },
-                                          ],
-                                        });
-                                      await offer.present();
-                                    }
-                                  });
-           
-                                },
-                              },
-                            ],
-                          });
-                          await timeAlert.present();
-                          this.fireservices
-                            .collection('OferPark')
-                            .doc('Left')
-                            .collection('LeftPark')
-                            .doc(park.ParkName)
-                            .update({
-                              Status: 'Available',
-                              Color: 'success',
-                              Email: '',
-                              Time: '',
-                            });
-
-                          this.fireservices
-                            .collection('users')
-                            .doc(currentUserEmail)
-                            .update({
-                              isParked: false,
-                              ParkName: '',
-                              Side: '',
-                            });
-                        }
-                      });*/
                     } else if (park.ID >= 10 && park.Email === '') {
                       this.fireservices
                         .collection('OferPark')
@@ -488,7 +392,7 @@ export class FirstPage implements OnInit {
                           Status: 'Pending',
                           Color: 'warning',
                           Email: currentUserEmail,
-                          Time: new Date().toTimeString().slice(0, 8),
+                          Time: new Date().getMinutes(),
                         });
                       this.fireservices
                         .collection('users')
@@ -498,69 +402,9 @@ export class FirstPage implements OnInit {
                           ParkName: park.ParkName,
                           Side: 'Right',
                         });
-                      this.obvs.subscribe(async (time) => {
-                        if (time === 5) {
-                          const timeAlert = await this.alertController.create({
-                            cssClass: 'my-custom-class',
-                            header: 'You Lost Your Spot!',
-                            message: 'Do you want another park?',
-                            buttons: [
-                              {
-                                text: 'No',
-                                role: 'cancel',
-                                cssClass: 'secondary',
-                              },
-                              {
-                                text: 'Yes',
-                                role: 'confirm',
-                                cssClass: 'primary',
-                                handler: () => {
-                                  this.toast('Please Be patient...', 'success');
-                                  park.ID = park.ID + 1;
-                                  this.checkTime.subscribe(async (time) => {
-                                    if (time === 5) {
-                                      const offer =
-                                        await this.alertController.create({
-                                          cssClass: 'my-custom-class',
-                                          header: 'Park in spot number:',
-                                          message: park.ID,
-                                          buttons: [
-                                            {
-                                              text: 'OK',
-                                              role: 'cancel',
-                                              cssClass: 'primary',
-                                            },
-                                          ],
-                                        });
-                                      await offer.present();
-                                    }
-                                  });
-
-                                  this.fireservices
-                                    .collection('OferPark')
-                                    .doc('Right')
-                                    .collection('RightPark')
-                                    .doc(park.ParkName)
-                                    .update({
-                                      Status: 'Available',
-                                      Color: 'success',
-                                      Email: '',
-                                      Time: '',
-                                    });
-
-                                  this.fireservices
-                                    .collection('users')
-                                    .doc(currentUserEmail)
-                                    .update({
-                                      isParked: false,
-                                      ParkName: '',
-                                      Side: '',
-                                    });
-                                },
-                              },
-                            ],
-                          });
-                          await timeAlert.present();
+                      this.parkTime.subscribe((time) => {
+                        if (time == 1) {
+                          this._document.defaultView.location.reload();
                         }
                       });
                     } else if (park.Email != '') {
@@ -580,7 +424,9 @@ export class FirstPage implements OnInit {
   }
 
   async logout() {
+    //A function that been called when the user wants to logout from the application
     const alert = await this.alertController.create({
+      //when the function is called, an alert is created
       header: 'Log Out',
       subHeader: 'Are you sure you want to log out?',
       buttons: [
@@ -598,6 +444,7 @@ export class FirstPage implements OnInit {
           cssClass: 'danger',
 
           handler: () => {
+            //Logged out of Firebase and routes to the Login page
             this.toast('Logged Out!', 'danger');
             this.firebaseAuth.signOut();
             this.router.navigateByUrl('login');
@@ -610,6 +457,7 @@ export class FirstPage implements OnInit {
     console.log(result);
   }
   async toast(msg, status) {
+    //Calling this function when we need to show a user a message.
     const toast = await this.toaster.create({
       message: msg,
       position: 'top',
@@ -617,16 +465,5 @@ export class FirstPage implements OnInit {
       duration: 2000,
     });
     toast.present();
-  } //end of toast
-
-  showAlert(header, sub, msg) {
-    this.alertController
-      .create({
-        header: header,
-        subHeader: sub,
-        message: msg,
-        buttons: ['OK'],
-      })
-      .then((alert) => alert.present());
   }
 }

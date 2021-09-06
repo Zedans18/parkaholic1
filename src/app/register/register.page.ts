@@ -1,43 +1,15 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { Component, OnInit } from '@angular/core';
-import { Local } from 'protractor/built/driverProviders';
 import { FirebaseService } from '../services/firebase.service';
 import { Router } from '@angular/router';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { PickerController } from '@ionic/angular';
-import { PickerOptions } from '@ionic/core';
 
 import {
   AlertController,
   LoadingController,
   ToastController,
 } from '@ionic/angular';
-
-export interface PickerColumn {
-  name: string;
-  align?: string;
-  selectedIndex?: number;
-  prevSelected?: number;
-  prefix?: string;
-  suffix?: string;
-  options: PickerColumnOption[];
-  cssClass?: string | string[];
-  columnWidth?: string;
-  prefixWidth?: string;
-  suffixWidth?: string;
-  optionsWidth?: string;
-  refresh?: () => void;
-}
-export interface PickerColumnOption {
-  text?: string;
-  value?: any;
-  disabled?: boolean;
-  duration?: number;
-  transform?: string;
-  selected?: boolean;
-}
 
 @Component({
   selector: 'app-register',
@@ -55,8 +27,6 @@ export class RegisterPage implements OnInit {
   disabilityCard = '';
   passwordMatch: boolean;
   public toggleDisability = false;
-  startNumber: string[] = ['050', '052', '053', '054', '055', '057', '058'];
-  btnVal = '05';
 
   constructor(
     public firebaseService: FirebaseService,
@@ -66,18 +36,19 @@ export class RegisterPage implements OnInit {
     private loadingController: LoadingController,
     public firebaseAuth: AngularFireAuth,
     public fireservices: AngularFirestore,
-    public toaster: ToastController,
-    public pickerController: PickerController
+    public toaster: ToastController
   ) {}
 
   ngOnInit() {}
 
   async register() {
+    //Checking the inputs of the user, if there is any error a toast will pop up. Otherwise you will successfully been registered
     if (this.name && this.email && this.password) {
       const loading = await this.loadingController.create({
         message: 'Loading..',
         spinner: 'crescent',
         showBackdrop: true,
+        duration: 2000,
       });
       loading.present();
       this.firebaseAuth
@@ -99,10 +70,11 @@ export class RegisterPage implements OnInit {
             'currentUser',
             JSON.stringify({ name: this.name })
           );
-          data.user.sendEmailVerification();
+          data.user.sendEmailVerification(); //Firebase function that sends the user a verfication email.
         })
 
         .then(() => {
+          //A function that tells you if you entered all the inputs
           loading.dismiss();
           this.toast(
             'Verfication Email Sent! Please Check Your Email.',
@@ -110,9 +82,10 @@ export class RegisterPage implements OnInit {
           );
           this.router.navigateByUrl('login');
         })
-        .catch((error) => {
+        .catch(() => {
+          //A function that throws an error if there is a wrong or missing input
           loading.dismiss();
-          this.toast(error.message, 'danger');
+          this.toast('Missing or Invalid Data Entered', 'danger');
         });
     } else {
       this.fillTheForm();
@@ -120,6 +93,7 @@ export class RegisterPage implements OnInit {
   }
 
   checkPassword() {
+    //Checking if the Confirm password matches the password you entered first
     if (this.password === this.confirmPassword) {
       this.passwordMatch = true;
     } else {
@@ -127,6 +101,7 @@ export class RegisterPage implements OnInit {
     }
   }
   async toast(msg, status) {
+    //Calling this function when we need to show a user a message.
     const toast = await this.toaster.create({
       message: msg,
       position: 'top',
@@ -136,6 +111,7 @@ export class RegisterPage implements OnInit {
     toast.present();
   }
   async fillTheForm() {
+    //A function that will alert the user if he didn't fill the register form.
     const alert = await this.alertController.create({
       header: 'Error',
       subHeader: 'Missing Information!',
@@ -146,6 +122,7 @@ export class RegisterPage implements OnInit {
     console.log(result);
   }
   signIn() {
+    //Routing to the login page.
     this.router.navigateByUrl('login');
   }
 }

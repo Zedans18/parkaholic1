@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Password Reset</ion-title>
+    <ion-title>Parkaholic</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,15 +8,18 @@
   <ion-card class="card">
     <ion-card-header>
       <img
-        src="assets/logo.png"
+        src="assets/logoo.png"
         class="img"
         style="width: 100px"
         margin-left="100px"
       />
+      <ion-card-title class="ion-text-center">Reset Password</ion-card-title>
     </ion-card-header>
+
     <form #form="ngForm" (ngSubmit)="resetPassword(form)">
       <div>
         <ion-item>
+          <ion-icon name="mail-outline"></ion-icon>
           <ion-input
             name="email"
             type="email"

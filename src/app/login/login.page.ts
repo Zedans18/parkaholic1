@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FirebaseService } from '../services/firebase.service';
 import {
   AlertController,
   LoadingController,
-  MenuController,
   ToastController,
 } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -24,7 +22,6 @@ export class LoginPage implements OnInit {
     public firebaseService: FirebaseService,
     public alertController: AlertController,
     private loadingController: LoadingController,
-    public menuController: MenuController,
     public firebaseAuth: AngularFireAuth,
     public fireservices: AngularFirestore,
     private toaster: ToastController
@@ -33,12 +30,15 @@ export class LoginPage implements OnInit {
   ngOnInit() {}
 
   register() {
+    //Routing to Register page
     this.router.navigateByUrl('register');
-  } //end of register
+  }
   forgot() {
+    //Routing to Reset Password page
     this.router.navigateByUrl('reset');
-  } //end of forgot
+  }
   async login() {
+    //A function that checks if the email and password matches in the database. If so, it takes us to the Home page
     if (this.email && this.password) {
       const loading = await this.loadingController.create({
         message: 'Logging in...',
@@ -56,8 +56,9 @@ export class LoginPage implements OnInit {
           this.toast(error.message, 'danger');
         });
     }
-  } //end of login
+  }
   async toast(msg, status) {
+    //Calling this function when we need to show a user a message.
     const toast = await this.toaster.create({
       message: msg,
       position: 'top',
@@ -65,5 +66,5 @@ export class LoginPage implements OnInit {
       duration: 2000,
     });
     toast.present();
-  } //end of toast
+  }
 }
