@@ -1,0 +1,52 @@
+.col {
+  background-color: #959595;
+  border: 5px white dashed;
+  border-left: hidden;
+  padding: 10px;
+  text-align: right;
+}
+
+.col2 {
+  background-color: #959595;
+  border: 5px white dashed;
+  border-right: hidden;
+  padding: 10px;
+}
+
+.row {
+  background-color: #959595;
+  border: solid 2px #ddd;
+  padding: 10px;
+  border: hidden;
+}
+
+.colD1 {
+  border: 5px #ddd dashed;
+  border-left: hidden;
+  background-color: #3f2bff;
+  padding: 10px;
+  text-align: right;
+}
+
+.colD2 {
+  border: 5px #ddd dashed;
+  background-color: #3f2bff;
+  border-right: hidden;
+  padding: 10px;
+  text-align: left;
+}
+
+.street {
+  font-size: 50px;
+  text-align: center;
+  color: white;
+}
+
+.forward {
+  padding-left: 260px;
+}
+
+.img {
+  width: 80px;
+  height: 40px;
+}

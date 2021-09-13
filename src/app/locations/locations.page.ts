@@ -24,6 +24,10 @@ export class LocationsPage implements OnInit {
     //Routing to a parking lot
     this.router.navigate(['/first']);
   }
+  second() {
+    //Routing to a parking lot
+    this.router.navigate(['/second']);
+  }
   ngOnInit() {}
   async logout() {
     //A function that been called when the user wants to logout from the application

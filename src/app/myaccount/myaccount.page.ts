@@ -25,26 +25,35 @@ export class MyaccountPage implements OnInit {
     public router: Router,
     public FirebaseService: FirebaseService,
     public fireStore: AngularFirestore,
-    public fireservices: AngularFirestore,
     @Inject(DOCUMENT) public _document: Document
   ) {}
   public LeftData: Observable<any>;
   public RightData: Observable<any>;
   public cancelLeft: any;
   public cancelRight: any;
+  public UserData: Observable<any>;
 
   ngOnInit() {
     //A function that works once whenever the user opens the page
-    this.LeftData = this.fireservices
+    this.LeftData = this.fireStore
       .collection('OferPark')
       .doc('Left')
       .collection('LeftPark')
       .valueChanges(); //All Left Park Data
-    this.RightData = this.fireservices
+    this.RightData = this.fireStore
       .collection('OferPark')
       .doc('Right')
       .collection('RightPark')
       .valueChanges(); //Right Park Data
+    let currentUserEmail;
+    this.firebaseAuth.user.subscribe((user) => {
+      currentUserEmail = user.email;
+      console.log(currentUserEmail);
+    });
+    this.UserData = this.fireStore
+      .collection('users')
+      .doc(currentUserEmail)
+      .valueChanges();
   }
   async cancelReservation() {
     //A function is called when the user wants to cancel his reservation. It updates all the info about the specific park that he canceled.
@@ -71,7 +80,7 @@ export class MyaccountPage implements OnInit {
             this.firebaseAuth.user.subscribe((user) => {
               currentUserEmail = user.email;
               console.log(currentUserEmail);
-              this.cancelLeft = this.fireservices
+              this.cancelLeft = this.fireStore
                 .collection('OferPark')
                 .doc('Left')
                 .collection('LeftPark')
@@ -80,7 +89,7 @@ export class MyaccountPage implements OnInit {
                   data.forEach((value) => {
                     console.log(value.Status);
                     if (value.Email === currentUserEmail) {
-                      this.fireservices
+                      this.fireStore
                         .collection('OferPark')
                         .doc('Left')
                         .collection('LeftPark')
@@ -91,7 +100,8 @@ export class MyaccountPage implements OnInit {
                           Email: '',
                           Time: '',
                         });
-                      this.fireservices
+
+                      this.fireStore
                         .collection('users')
                         .doc(currentUserEmail)
                         .update({
@@ -103,7 +113,7 @@ export class MyaccountPage implements OnInit {
                   });
                   return;
                 });
-              this.cancelRight = this.fireservices
+              this.cancelRight = this.fireStore
                 .collection('OferPark')
                 .doc('Right')
                 .collection('RightPark')
@@ -112,7 +122,7 @@ export class MyaccountPage implements OnInit {
                   data.forEach((value) => {
                     console.log(value.Status);
                     if (value.Email === currentUserEmail) {
-                      this.fireservices
+                      this.fireStore
                         .collection('OferPark')
                         .doc('Right')
                         .collection('RightPark')
@@ -123,7 +133,7 @@ export class MyaccountPage implements OnInit {
                           Email: '',
                           Time: '',
                         });
-                      this.fireservices
+                      this.fireStore
                         .collection('users')
                         .doc(currentUserEmail)
                         .update({

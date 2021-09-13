@@ -108,7 +108,7 @@ export class ParkService {
         });
     });
   }
-  async presentAlertConfirmDisability(park) {
+  async OferParkDisabilityReservation(park) {
     //Reserve a spot on CONFIRMATION ONLY for users with Disability Card
     if (park.Status === 'Pending' || park.Status === 'Reserved') {
       const alertPending = await this.alertController.create({
@@ -226,7 +226,7 @@ export class ParkService {
     await alert2.present();
   }
 
-  async presentAlertConfirm(park) {
+  async OferParkReservation(park) {
     //Reserve a spot on CONFIRMATION. User can reserve the spot only if it is an available park.
     if (
       park.Status === 'Pending' ||
@@ -309,6 +309,17 @@ export class ParkService {
                           Time: new Date().getMinutes(),
                         });
                       this.fireservices
+                        .collection('YesPark')
+                        .doc('Left')
+                        .collection('LeftPark')
+                        .doc(park.ParkName)
+                        .update({
+                          Status: 'Pending',
+                          Color: 'warning',
+                          Email: currentUserEmail,
+                          Time: new Date().getMinutes(),
+                        });
+                      this.fireservices
                         .collection('users')
                         .doc(currentUserEmail)
                         .update({
@@ -324,6 +335,269 @@ export class ParkService {
                     } else if (park.ID >= 10 && park.Email === '') {
                       this.fireservices
                         .collection('OferPark')
+                        .doc('Right')
+                        .collection('RightPark')
+                        .doc(park.ParkName)
+                        .update({
+                          Status: 'Pending',
+                          Color: 'warning',
+                          Email: currentUserEmail,
+                          Time: new Date().getMinutes(),
+                        });
+                      this.fireservices
+                        .collection('users')
+                        .doc(currentUserEmail)
+                        .update({
+                          isParked: true,
+                          ParkName: park.ParkName,
+                          Side: 'Right',
+                        });
+                      this.parkTime.subscribe((time) => {
+                        if (time == 1) {
+                          this._document.defaultView.location.reload();
+                        }
+                      });
+                    } else if (park.Email != '') {
+                      return;
+                    }
+                    return;
+                  }
+                });
+            });
+            return;
+          },
+        },
+      ],
+    });
+
+    await alert2.present();
+  }
+  async YesParkDisabilityReservation(park) {
+    //Reserve a spot on CONFIRMATION ONLY for users with Disability Card
+    if (park.Status === 'Pending' || park.Status === 'Reserved') {
+      const alertPending = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: 'Sorry',
+        message: 'This park has been taken',
+        buttons: [
+          {
+            text: 'Dismiss',
+            role: 'cancel',
+          },
+        ],
+      });
+      await alertPending.present();
+      return;
+    }
+    const alert2 = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Park Reservation',
+      message: 'Confirm Your Reservation',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Reservation Canceled');
+            return;
+          },
+        },
+        {
+          text: 'Confirm',
+          role: 'confirm',
+          cssClass: 'primary',
+          handler: () => {
+            console.log('Reservation Confirmed');
+            let currentUserEmail;
+            this.firebaseAuth.user.subscribe((user) => {
+              currentUserEmail = user.email;
+              console.log(currentUserEmail);
+              this.fireservices
+                .collection('users')
+                .doc(currentUserEmail)
+                .get()
+                .subscribe(async (data) => {
+                  let currentDoc: any;
+                  currentDoc = data.data();
+                  if (
+                    currentDoc.isParked === true ||
+                    currentDoc.DisabilityCard === ''
+                  ) {
+                    const alertPending = await this.alertController.create({
+                      cssClass: 'my-custom-class',
+                      header: 'Sorry',
+                      message: 'You can not reserve this park',
+                      buttons: [
+                        {
+                          text: 'Dismiss',
+                          role: 'cancel',
+                        },
+                      ],
+                    });
+                    await alertPending.present();
+                    return;
+                  } else {
+                    if (park.ID === 21) {
+                      this.fireservices
+                        .collection('YesPark')
+                        .doc('Left')
+                        .collection('LeftPark')
+                        .doc(park.ParkName)
+                        .update({
+                          Status: 'Pending',
+                          Color: 'warning',
+                          Email: currentUserEmail,
+                          Time: new Date().toTimeString().slice(0, 8),
+                        });
+                      this.fireservices
+                        .collection('users')
+                        .doc(currentUserEmail)
+                        .update({
+                          isParked: true,
+                        });
+                    } else if (park.ID === 22) {
+                      this.fireservices
+                        .collection('YesPark')
+                        .doc('Right')
+                        .collection('RightPark')
+                        .doc(park.ParkName)
+                        .update({
+                          Status: 'Pending',
+                          Color: 'warning',
+                          Email: currentUserEmail,
+                          Time: new Date().toTimeString().slice(0, 8),
+                        });
+                      this.fireservices
+                        .collection('users')
+                        .doc(currentUserEmail)
+                        .update({
+                          isParked: true,
+                        });
+                      return;
+                    } else if (park.Email !== '') {
+                      return;
+                    }
+                    return;
+                  }
+                });
+            });
+            return;
+          },
+        },
+      ],
+    });
+    await alert2.present();
+  }
+  async YesParkReservation(park) {
+    //Reserve a spot on CONFIRMATION. User can reserve the spot only if it is an available park.
+    if (
+      park.Status === 'Pending' ||
+      park.Status === 'Reserved' ||
+      park.Status === 'Taken'
+    ) {
+      const alertPending = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: 'Sorry',
+        message: 'This park has been taken',
+        buttons: [
+          {
+            text: 'Dismiss',
+            role: 'cancel',
+          },
+        ],
+      });
+      await alertPending.present();
+      return;
+    }
+    const alert2 = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Park Reservation',
+      message: 'Confirm Your Reservation',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Reservation Canceled');
+            return;
+          },
+        },
+        {
+          text: 'Confirm',
+          role: 'confirm',
+          cssClass: 'primary',
+          handler: () => {
+            //Called if the user reserved the spot. It checks whether its available or not and gives a message.
+            //Updates the data of the park and the user if he confirmed the parking spot.
+            console.log('Reservation Confirmed');
+            let currentUserEmail;
+            this.firebaseAuth.user.subscribe((user) => {
+              currentUserEmail = user.email;
+              console.log(currentUserEmail);
+              this.fireservices
+                .collection('users')
+                .doc(currentUserEmail)
+                .get()
+                .subscribe(async (data) => {
+                  let currentDoc: any;
+                  currentDoc = data.data();
+                  if (currentDoc.isParked === true) {
+                    const alertPending = await this.alertController.create({
+                      cssClass: 'my-custom-class',
+                      header: 'Sorry',
+                      message: 'You can not reserve another park',
+                      buttons: [
+                        {
+                          text: 'Dismiss',
+                          role: 'cancel',
+                          cssClass: 'primary',
+                        },
+                      ],
+                    });
+                    await alertPending.present();
+                    return;
+                  } else {
+                    if (park.ID <= 9 && park.Email === '') {
+                      this.fireservices
+                        .collection('YesPark')
+                        .doc('Left')
+                        .collection('LeftPark')
+                        .doc(park.ParkName)
+                        .update({
+                          Status: 'Pending',
+                          Color: 'warning',
+                          Email: currentUserEmail,
+                          Time: new Date().getMinutes(),
+                        });
+                      this.fireservices
+                        .collection('YesPark')
+                        .doc('Left')
+                        .collection('LeftPark')
+                        .doc(park.ParkName)
+                        .update({
+                          Status: 'Pending',
+                          Color: 'warning',
+                          Email: currentUserEmail,
+                          Time: new Date().getMinutes(),
+                        });
+                      this.fireservices
+                        .collection('users')
+                        .doc(currentUserEmail)
+                        .update({
+                          isParked: true,
+                          ParkName: park.ParkName,
+                          Side: 'Left',
+                        });
+                      this.parkTime.subscribe((time) => {
+                        if (time == 1) {
+                          this._document.defaultView.location.reload();
+                        }
+                      });
+                    } else if (park.ID >= 10 && park.Email === '') {
+                      this.fireservices
+                        .collection('YesPark')
                         .doc('Right')
                         .collection('RightPark')
                         .doc(park.ParkName)

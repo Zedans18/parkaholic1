@@ -89,10 +89,10 @@ export class FirstPage implements OnInit {
     this.parkService.checkPark();
   }
   async presentAlertConfirmDisability(park) {
-    this.parkService.presentAlertConfirmDisability(park);
+    this.parkService.OferParkDisabilityReservation(park);
   }
   async presentAlertConfirm(park) {
-    this.parkService.presentAlertConfirm(park);
+    this.parkService.OferParkReservation(park);
   }
 
   async logout() {
