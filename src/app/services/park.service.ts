@@ -489,6 +489,56 @@ export class ParkService {
     });
     await alert2.present();
   }
+  async fullPark(collectionLeft, collectionRight) {
+    let flag = 0;
+    collectionLeft
+      .doc('Left')
+      .collection('LeftPark')
+      .get()
+      .subscribe((stam) => {
+        stam.docChanges().forEach((doc) => {
+          if (doc.doc.data().Status === 'Available') {
+            flag = 1;
+            return;
+          }
+        });
+      });
+    if (flag === 1) {
+      console.log('yoo');
+      return;
+    }
+    flag = 0;
+    collectionRight
+      .doc('Right')
+      .collection('RightPark')
+      .get()
+      .subscribe((stam) => {
+        stam.docChanges().forEach((doc) => {
+          console.log(doc.doc.data());
+          if (doc.doc.data().Status === 'Available') {
+            flag = 1;
+            return;
+          }
+        });
+      });
+    if (flag === 1) {
+      console.log('yoo');
+      return;
+    }
+    const alertPending = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Sorry',
+      message: 'this park is FULL move to the next one!',
+      buttons: [
+        {
+          text: 'Dismiss',
+          role: 'cancel',
+        },
+      ],
+    });
+    await alertPending.present();
+    return;
+  }
   async YesParkReservation(park) {
     //Reserve a spot on CONFIRMATION. User can reserve the spot only if it is an available park.
     if (

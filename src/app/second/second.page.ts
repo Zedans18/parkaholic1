@@ -41,6 +41,9 @@ export class SecondPage implements OnInit {
       .doc('Right')
       .collection('RightPark')
       .valueChanges(); //Right Park Data
+    const leftCollection = this.fireStore.collection('YesPark');
+    const rightCollection = this.fireStore.collection('YesPark');
+    this.parkService.fullPark(leftCollection, rightCollection);
   }
   async presentAlertConfirmDisability(park) {
     this.parkService.YesParkDisabilityReservation(park);
