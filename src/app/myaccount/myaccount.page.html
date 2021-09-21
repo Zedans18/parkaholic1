@@ -44,16 +44,48 @@
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
+  <ion-item>
+    <ion-icon name="person-circle-outline" style="font-size: 100px"></ion-icon>
+    <ion-label style="font-size: 24px">{{UserName}}</ion-label>
+  </ion-item>
+
   <ion-card>
     <ion-item>
-      <ion-label>{{UserData.Name}}</ion-label>
+      <ion-label color="tertiary"><b>Email:</b> {{Email}}</ion-label>
     </ion-item>
+    <ion-item>
+      <ion-label color="tertiary"
+        ><b>Date Of Birth:</b> {{DateOfBirth}}</ion-label
+      >
+    </ion-item>
+    <ion-item>
+      <ion-label color="tertiary"
+        ><b>Phone Number:</b> {{PhoneNumber}}</ion-label
+      >
+    </ion-item>
+    <ion-item>
+      <ion-label color="tertiary"><b>Car Number:</b> {{CarNumber}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label color="tertiary"
+        ><b>Disability Card Number:</b> {{DisabilityCard}}</ion-label
+      >
+    </ion-item>
+    <br />
+    <div>
+      &nbsp; &nbsp;&nbsp;
+      <ion-label class="cancel" color="danger"
+        ><b>Cancel My Reservation:</b></ion-label
+      >
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <ion-button
+        size="small"
+        [disabled]="!toggleCancel"
+        color="danger"
+        (click)="cancelReservation()"
+      >
+        Cancel
+      </ion-button>
+    </div>
   </ion-card>
-  <ion-button
-    color="danger"
-    style="padding-left: 150px"
-    (click)="cancelReservation()"
-  >
-    Cancel
-  </ion-button>
 </ion-content>

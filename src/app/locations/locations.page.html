@@ -1,5 +1,6 @@
 <ion-header>
   <ion-toolbar>
+    <ion-title>Parking Locations</ion-title>
     <ion-buttons slot="start">
       <ion-back-button
         defaultHref="home"
@@ -22,39 +23,63 @@
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label>
-      <ion-button color="danger" (click)="first()">
-        <b>Ofer Mall</b>
-      </ion-button>
-    </ion-label>
+  <div class="card">
+    <img src="assets/logoo.png" class="img" style="width: 100px" />
+    <ion-button expand="block" color="medium"
+      ><b><i>O f e r&nbsp; M a l l - P a r k s</i></b></ion-button
+    >
 
-    <ion-badge color="success">99 - Available Parks</ion-badge>
-  </ion-item>
-  <ion-item>
-    <ion-label>
-      <ion-button color="tertiary" (click)="second()"
-        ><b>Yes Planet</b>
-      </ion-button>
-    </ion-label>
-    <ion-badge color="success">120 - Available Parks</ion-badge>
-  </ion-item>
-  <ion-item>
-    <ion-label>
-      <ion-button color="warning">
-        <b>Grand Mall </b>
-      </ion-button>
-    </ion-label>
-    <ion-badge color="success">34 - Available Parks</ion-badge>
-  </ion-item>
-  <ion-item>
-    <ion-label>
-      <ion-button color="secondary">
-        <b>Big Kiryat Ata </b>
-      </ion-button>
-    </ion-label>
-    <ion-badge color="success">80 - Available Parks</ion-badge>
-  </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-button color="secondary" (click)="first()">
+          <b>Ofer Mall - Park A</b>
+        </ion-button>
+      </ion-label>
+
+      <ion-badge color="success">{{countOfer}} - Available Parks</ion-badge>
+    </ion-item>
+    <ion-button expand="block" color="medium"
+      ><b><i>Y e s&nbsp; P l a n e t - P a r k s</i></b></ion-button
+    >
+    <ion-item>
+      <ion-label>
+        <ion-button color="secondary" (click)="second()"
+          ><b>Yes Planet - Park A</b>
+        </ion-button>
+      </ion-label>
+      <ion-badge color="success">{{countYes}} - Available Parks</ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <ion-button color="secondary" (click)="secondB()"
+          ><b>Yes Planet - Park B</b>
+        </ion-button>
+      </ion-label>
+      <ion-badge color="success">{{countYesB}} - Available Parks</ion-badge>
+    </ion-item>
+    <ion-button expand="block" color="medium"
+      ><b><i>G r a n d&nbsp; M a l l - P a r k s</i></b></ion-button
+    >
+    <ion-item>
+      <ion-label>
+        <ion-button color="secondary">
+          <b>Grand Mall </b>
+        </ion-button>
+      </ion-label>
+      <ion-badge color="success">34 - Available Parks</ion-badge>
+    </ion-item>
+    <ion-button expand="block" color="medium"
+      ><b><i>B i g &nbsp;K i r y a t&nbsp; A t a - P a r k s</i></b></ion-button
+    >
+    <ion-item>
+      <ion-label>
+        <ion-button color="secondary">
+          <b>Big Kiryat Ata </b>
+        </ion-button>
+      </ion-label>
+      <ion-badge color="success">80 - Available Parks</ion-badge>
+    </ion-item>
+  </div>
 
   <ion-tabs>
     <ion-tab-bar slot="bottom" color="light" class="tabs">

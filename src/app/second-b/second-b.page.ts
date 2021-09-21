@@ -8,21 +8,23 @@ import { Observable, timer } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { DOCUMENT } from '@angular/common';
 import { ParkService } from '../services/park.service';
+
 @Component({
-  selector: 'app-second',
-  templateUrl: './second.page.html',
-  styleUrls: ['./second.page.scss'],
+  selector: 'app-second-b',
+  templateUrl: './second-b.page.html',
+  styleUrls: ['./second-b.page.scss'],
 })
-export class SecondPage implements OnInit {
+export class SecondBPage implements OnInit {
   public LeftData: Observable<any>;
   public RightData: Observable<any>;
+
   constructor(
+    public router: Router,
     public alertController: AlertController,
     public firebaseAuth: AngularFireAuth,
     public fireStore: AngularFirestore,
     public firebaseService: FirebaseService,
     public firebaseDatabase: AngularFireDatabase,
-    private router: Router,
     public toaster: ToastController,
     public platform: Platform,
     @Inject(DOCUMENT) public _document: Document,
@@ -30,23 +32,23 @@ export class SecondPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    const Collection = this.fireStore.collection('YesParkB');
+    this.parkService.fullPark(Collection);
     this.LeftData = this.fireStore
-      .collection('YesPark')
+      .collection('YesParkB')
       .doc('Left')
       .collection('LeftPark')
       .valueChanges(); //Left Park Data
     this.RightData = this.fireStore
-      .collection('YesPark')
+      .collection('YesParkB')
       .doc('Right')
       .collection('RightPark')
       .valueChanges(); //Right Park Data
-    const Collection = this.fireStore.collection('YesPark');
-    this.parkService.fullPark(Collection);
   }
   async presentAlertConfirmDisabilityLeft(park) {
     this.parkService.DisabilityParkReservation(
       this.fireStore
-        .collection('YesPark')
+        .collection('YesParkB')
         .doc('Left')
         .collection('LeftPark')
         .doc(park.ParkName)
@@ -55,7 +57,7 @@ export class SecondPage implements OnInit {
   async presentAlertConfirmDisabilityRight(park) {
     this.parkService.DisabilityParkReservation(
       this.fireStore
-        .collection('YesPark')
+        .collection('YesParkB')
         .doc('Right')
         .collection('RightPark')
         .doc(park.ParkName)
@@ -64,7 +66,7 @@ export class SecondPage implements OnInit {
   async presentAlertConfirmLeft(park) {
     this.parkService.ParkReservation(
       this.fireStore
-        .collection('YesPark')
+        .collection('YesParkB')
         .doc('Left')
         .collection('LeftPark')
         .doc(park.ParkName)
@@ -73,7 +75,7 @@ export class SecondPage implements OnInit {
   async presentAlertConfirmRight(park) {
     this.parkService.ParkReservation(
       this.fireStore
-        .collection('YesPark')
+        .collection('YesParkB')
         .doc('Right')
         .collection('RightPark')
         .doc(park.ParkName)
@@ -115,7 +117,7 @@ export class SecondPage implements OnInit {
   async toast(msg, status) {
     this.firebaseService.toast(msg, status);
   }
-  parkB() {
-    this.router.navigate(['/second-b']);
+  parkA() {
+    this.router.navigate(['/second']);
   }
 }

@@ -24,6 +24,11 @@
     </ion-button>
   </ion-toolbar>
 </ion-header>
+<ion-header
+  ><ion-toolbar
+    ><ion-label class="header" color="danger"><b>- Park A -</b></ion-label>
+  </ion-toolbar></ion-header
+>
 
 <ion-router-outlet id="menu"></ion-router-outlet>
 <ion-content>
@@ -35,7 +40,7 @@
             <ion-button
               [color]="parkD1.Color"
               fill="clear"
-              (click)="presentAlertConfirmDisability(parkD1)"
+              (click)="presentAlertConfirmDisabilityLeft(parkD1)"
               ><img src="assets/chair1.png" class="img" /><b
                 >{{parkD1.ParkName}}</b
               ></ion-button
@@ -46,7 +51,7 @@
             <ion-button
               [color]=" parkD2.Color"
               fill="clear"
-              (click)="presentAlertConfirmDisability(parkD2)"
+              (click)="presentAlertConfirmDisabilityRight(parkD2)"
               ><img src="assets/chair1.png" class="img" /><b
                 >{{parkD2.ParkName}}</b
               ></ion-button
@@ -62,7 +67,7 @@
             <ion-button
               [color]="parkL.Color"
               fill="clear"
-              (click)="presentAlertConfirm(parkL)"
+              (click)="presentAlertConfirmLeft(parkL)"
               ><b>{{parkL.ParkName}}</b></ion-button
             >
           </ion-col>
@@ -71,7 +76,7 @@
             <ion-button
               [color]="parkR.Color"
               fill="clear"
-              (click)="presentAlertConfirm(parkR)"
+              (click)="presentAlertConfirmRight(parkR)"
               ><b>{{parkR.ParkName}}</b></ion-button
             >
           </ion-col>
@@ -80,7 +85,7 @@
     </div>
   </ion-grid>
 
-  <ion-button color="medium " class="forward"
+  <ion-button color="warning" class="forward"
     >Park B
     <ion-icon name="caret-forward-circle-outline"></ion-icon>
   </ion-button>

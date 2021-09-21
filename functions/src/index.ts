@@ -1,10 +1,9 @@
-import * as functions from 'firebase-functions';
-
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
-functions.pubsub.schedule;
+/*import * as functions from 'firebase-functions';
+exports.checkPrivate = functions.firestore
+  .document('OferPark/Left/LeftPark/A1')
+  .onUpdate((change) => {
+    functions.pubsub.schedule('* * * * *').onRun((context) => {
+      console.log('This will be run every 1 minute!');
+      return null;
+    });
+  });*/

@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { FirebaseService } from '../services/firebase.service';
 import { AlertController, ToastController } from '@ionic/angular';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-locations',
@@ -11,15 +12,19 @@ import { AlertController, ToastController } from '@ionic/angular';
   styleUrls: ['./locations.page.scss'],
 })
 export class LocationsPage implements OnInit {
+  public LeftData: Observable<any>;
+  public RightData: Observable<any>;
+  countOfer = 0;
+  countYes = 0;
+  countYesB = 0;
   constructor(
     private router: Router,
     public firebaseAuth: AngularFireAuth,
-    public fireservices: AngularFirestore,
+    public fireStore: AngularFirestore,
     public firebaseService: FirebaseService,
     public toaster: ToastController,
     public alertController: AlertController
   ) {}
-
   first() {
     //Routing to a parking lot
     this.router.navigate(['/first']);
@@ -28,7 +33,86 @@ export class LocationsPage implements OnInit {
     //Routing to a parking lot
     this.router.navigate(['/second']);
   }
-  ngOnInit() {}
+  secondB() {
+    //Routing to a parking lot
+    this.router.navigate(['/second-b']);
+  }
+  ngOnInit() {
+    this.fireStore
+      .collection('OferPark')
+      .doc('Left')
+      .collection('LeftPark')
+      .valueChanges()
+      .subscribe((data) => {
+        this.countOfer = 0;
+        data.forEach((value) => {
+          if (value.Status === 'Available') {
+            this.countOfer++;
+          }
+        });
+      });
+    this.fireStore
+      .collection('OferPark')
+      .doc('Right')
+      .collection('RightPark')
+      .valueChanges()
+      .subscribe((data) => {
+        data.forEach((value) => {
+          if (value.Status === 'Available') {
+            this.countOfer++;
+          }
+        });
+      });
+    this.fireStore
+      .collection('YesPark')
+      .doc('Left')
+      .collection('LeftPark')
+      .valueChanges()
+      .subscribe((data) => {
+        this.countYes = 0;
+        data.forEach((value) => {
+          if (value.Status === 'Available') {
+            this.countYes++;
+          }
+        });
+      });
+    this.fireStore
+      .collection('YesPark')
+      .doc('Right')
+      .collection('RightPark')
+      .valueChanges()
+      .subscribe((data) => {
+        data.forEach((value) => {
+          if (value.Status === 'Available') {
+            this.countYes++;
+          }
+        });
+      });
+    this.fireStore
+      .collection('YesParkB')
+      .doc('Left')
+      .collection('LeftPark')
+      .valueChanges()
+      .subscribe((data) => {
+        data.forEach((value) => {
+          if (value.Status === 'Available') {
+            this.countYesB++;
+          }
+        });
+      });
+    this.fireStore
+      .collection('YesParkB')
+      .doc('Right')
+      .collection('RightPark')
+      .valueChanges()
+      .subscribe((data) => {
+        data.forEach((value) => {
+          if (value.Status === 'Available') {
+            this.countYesB++;
+          }
+        });
+      });
+  }
   async logout() {
     //A function that been called when the user wants to logout from the application
     const alert = await this.alertController.create({

@@ -54,18 +54,21 @@ export class RegisterPage implements OnInit {
       this.firebaseAuth
         .createUserWithEmailAndPassword(this.email, this.password)
         .then((data) => {
-          this.fireservices.collection('users').doc(data.user.email).set({
-            userId: data.user.uid,
-            Name: this.name,
-            Email: this.email,
-            Password: this.password,
-            'Date Of Birth': this.dateOfBirth,
-            'Phone Number': this.phoneNumber,
-            'Car Number': this.carNumber,
-            DisabilityCard: this.disabilityCard,
-            isParked: false,
-            createdAt: Date.now(),
-          });
+          this.fireservices
+            .collection('users')
+            .doc(data.user.email)
+            .set({
+              userId: data.user.uid,
+              Name: this.name,
+              Email: this.email,
+              Password: this.password,
+              DateOfBirth: this.dateOfBirth.split('T')[0],
+              PhoneNumber: this.phoneNumber,
+              CarNumber: this.carNumber,
+              DisabilityCard: this.disabilityCard,
+              isParked: false,
+              createdAt: Date.now(),
+            });
           localStorage.setItem(
             'currentUser',
             JSON.stringify({ name: this.name })

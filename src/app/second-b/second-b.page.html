@@ -4,9 +4,7 @@
       ><img
         src="https://www.yesplanet.co.il/xmedia/img/10100/logo.svg"
         width="140px"
-      />
-    </ion-title>
-
+    /></ion-title>
     <ion-buttons slot="start">
       <ion-back-button
         defaultHref="locations"
@@ -28,10 +26,9 @@
 </ion-header>
 <ion-header
   ><ion-toolbar
-    ><ion-label class="header" color="tertiary"><b>- Park A -</b></ion-label>
+    ><ion-label class="header" color="tertiary"><b>- Park B -</b></ion-label>
   </ion-toolbar></ion-header
 >
-
 <ion-router-outlet id="menu"></ion-router-outlet>
 <ion-content>
   <ion-grid>
@@ -87,8 +84,8 @@
     </div>
   </ion-grid>
 
-  <ion-button color="warning" class="forward" (click)="parkB()"
-    >Park B
-    <ion-icon name="caret-forward-circle-outline"></ion-icon>
+  <ion-button color="warning" (click)="parkA()">
+    <ion-icon name="caret-back-circle-outline"></ion-icon>
+    Park A
   </ion-button>
 </ion-content>

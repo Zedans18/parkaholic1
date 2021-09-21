@@ -29,9 +29,19 @@ export class MyaccountPage implements OnInit {
   ) {}
   public LeftData: Observable<any>;
   public RightData: Observable<any>;
-  public cancelLeft: any;
-  public cancelRight: any;
-  public UserData: Observable<any>;
+  public cancelLeftOfer: any;
+  public cancelRightOfer: any;
+  public cancelLeftYes: any;
+  public cancelRightYes: any;
+
+  //Variables for personal card
+  public UserName: any;
+  public Email: any;
+  public DateOfBirth: any;
+  public PhoneNumber: any;
+  public CarNumber: any;
+  public DisabilityCard: any;
+  public toggleCancel: any;
 
   ngOnInit() {
     //A function that works once whenever the user opens the page
@@ -49,18 +59,34 @@ export class MyaccountPage implements OnInit {
     this.firebaseAuth.user.subscribe((user) => {
       currentUserEmail = user.email;
       console.log(currentUserEmail);
+      this.fireStore
+        .collection('users')
+        .doc(currentUserEmail)
+        .get()
+        .subscribe((data) => {
+          console.log(data.data());
+          this.UserName = data.data();
+          this.UserName = this.UserName.Name;
+          this.Email = currentUserEmail;
+          this.DateOfBirth = data.data();
+          this.DateOfBirth = this.DateOfBirth.DateOfBirth;
+          this.PhoneNumber = data.data();
+          this.PhoneNumber = this.PhoneNumber.PhoneNumber;
+          this.CarNumber = data.data();
+          this.CarNumber = this.CarNumber.CarNumber;
+          this.DisabilityCard = data.data();
+          this.DisabilityCard = this.DisabilityCard.DisabilityCard;
+          this.toggleCancel = data.data();
+          this.toggleCancel = this.toggleCancel.isParked;
+        });
     });
-    this.UserData = this.fireStore
-      .collection('users')
-      .doc(currentUserEmail)
-      .valueChanges();
   }
   async cancelReservation() {
     //A function is called when the user wants to cancel his reservation. It updates all the info about the specific park that he canceled.
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Park Cancelation',
-      message: 'Cancel Your Reservation',
+      message: 'Are you sure you want to cancel your reservation ?',
       buttons: [
         {
           text: 'Cancel',
@@ -72,7 +98,7 @@ export class MyaccountPage implements OnInit {
           },
         },
         {
-          text: 'Confirm',
+          text: 'Yes',
           role: 'confirm',
           cssClass: 'primary',
           handler: () => {
@@ -80,7 +106,7 @@ export class MyaccountPage implements OnInit {
             this.firebaseAuth.user.subscribe((user) => {
               currentUserEmail = user.email;
               console.log(currentUserEmail);
-              this.cancelLeft = this.fireStore
+              this.cancelLeftOfer = this.fireStore
                 .collection('OferPark')
                 .doc('Left')
                 .collection('LeftPark')
@@ -113,7 +139,7 @@ export class MyaccountPage implements OnInit {
                   });
                   return;
                 });
-              this.cancelRight = this.fireStore
+              this.cancelRightOfer = this.fireStore
                 .collection('OferPark')
                 .doc('Right')
                 .collection('RightPark')
@@ -124,6 +150,70 @@ export class MyaccountPage implements OnInit {
                     if (value.Email === currentUserEmail) {
                       this.fireStore
                         .collection('OferPark')
+                        .doc('Right')
+                        .collection('RightPark')
+                        .doc(value.ParkName)
+                        .update({
+                          Status: 'Available',
+                          Color: 'success',
+                          Email: '',
+                          Time: '',
+                        });
+                      this.fireStore
+                        .collection('users')
+                        .doc(currentUserEmail)
+                        .update({
+                          isParked: false,
+                          ParkName: '',
+                          Side: '',
+                        });
+                    }
+                  });
+                  return;
+                });
+              this.cancelLeftYes = this.fireStore
+                .collection('YesParkB')
+                .doc('Left')
+                .collection('LeftPark')
+                .valueChanges()
+                .subscribe((data) => {
+                  data.forEach((value) => {
+                    console.log(value.Status);
+                    if (value.Email === currentUserEmail) {
+                      this.fireStore
+                        .collection('YesParkB')
+                        .doc('Left')
+                        .collection('LeftPark')
+                        .doc(value.ParkName)
+                        .update({
+                          Status: 'Available',
+                          Color: 'success',
+                          Email: '',
+                          Time: '',
+                        });
+                      this.fireStore
+                        .collection('users')
+                        .doc(currentUserEmail)
+                        .update({
+                          isParked: false,
+                          ParkName: '',
+                          Side: '',
+                        });
+                    }
+                  });
+                  return;
+                });
+              this.cancelRightYes = this.fireStore
+                .collection('YesParkB')
+                .doc('Right')
+                .collection('RightPark')
+                .valueChanges()
+                .subscribe((data) => {
+                  data.forEach((value) => {
+                    console.log(value.Status);
+                    if (value.Email === currentUserEmail) {
+                      this.fireStore
+                        .collection('YesParkB')
                         .doc('Right')
                         .collection('RightPark')
                         .doc(value.ParkName)

@@ -54,6 +54,11 @@ const routes: Routes = [
       import('./second/second.module').then((m) => m.SecondPageModule),
   },
   {
+    path: 'second-b',
+    loadChildren: () =>
+      import('./second-b/second-b.module').then((m) => m.SecondBPageModule),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./home/home.module').then((m) => m.HomePageModule),

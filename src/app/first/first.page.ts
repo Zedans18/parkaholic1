@@ -37,6 +37,8 @@ export class FirstPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    const Collection = this.fireStore.collection('OferPark');
+    this.parkService.fullPark(Collection);
     this.LeftData = this.fireStore
       .collection('OferPark')
       .doc('Left')
@@ -64,7 +66,7 @@ export class FirstPage implements OnInit {
           data.forEach((value) => {
             if (
               value.Status === 'Pending' &&
-              value.Time == this.TimeNow.getMinutes() - 1
+              value.Time == this.TimeNow.getMinutes() - 5
             ) {
               this.fireStore
                 .collection('OferPark')
@@ -88,11 +90,41 @@ export class FirstPage implements OnInit {
     });
     this.parkService.checkPark();
   }
-  async presentAlertConfirmDisability(park) {
-    this.parkService.OferParkDisabilityReservation(park);
+  async presentAlertConfirmDisabilityLeft(park) {
+    this.parkService.DisabilityParkReservation(
+      this.fireStore
+        .collection('OferPark')
+        .doc('Left')
+        .collection('LeftPark')
+        .doc(park.ParkName)
+    );
   }
-  async presentAlertConfirm(park) {
-    this.parkService.OferParkReservation(park);
+  async presentAlertConfirmDisabilityRight(park) {
+    this.parkService.DisabilityParkReservation(
+      this.fireStore
+        .collection('OferPark')
+        .doc('Right')
+        .collection('RightPark')
+        .doc(park.ParkName)
+    );
+  }
+  async presentAlertConfirmLeft(park) {
+    this.parkService.ParkReservation(
+      this.fireStore
+        .collection('OferPark')
+        .doc('Left')
+        .collection('LeftPark')
+        .doc(park.ParkName)
+    );
+  }
+  async presentAlertConfirmRight(park) {
+    this.parkService.ParkReservation(
+      this.fireStore
+        .collection('OferPark')
+        .doc('Right')
+        .collection('RightPark')
+        .doc(park.ParkName)
+    );
   }
 
   async logout() {
