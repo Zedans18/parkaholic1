@@ -59,6 +59,11 @@ const routes: Routes = [
       import('./second-b/second-b.module').then((m) => m.SecondBPageModule),
   },
   {
+    path: 'first-b',
+    loadChildren: () =>
+      import('./first-b/first-b.module').then((m) => m.FirstBPageModule),
+  },
+  {
     path: 'settings',
     loadChildren: () =>
       import('./settings/settings.module').then((m) => m.SettingsPageModule),

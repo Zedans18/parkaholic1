@@ -15,6 +15,7 @@ export class LocationsPage implements OnInit {
   public LeftData: Observable<any>;
   public RightData: Observable<any>;
   countOfer = 0;
+  countOferB = 0;
   countYes = 0;
   countYesB = 0;
   color = 'success';
@@ -31,6 +32,10 @@ export class LocationsPage implements OnInit {
     //Routing to a parking lot
     this.router.navigate(['/first']);
   }
+  firstB() {
+    //Routing to a parking lot
+    this.router.navigate(['/first-b']);
+  }
   second() {
     //Routing to a parking lot
     this.router.navigate(['/second']);
@@ -41,9 +46,11 @@ export class LocationsPage implements OnInit {
   }
   async ngOnInit() {
     this.countOfer = 0;
+    this.countOferB = 0;
     this.countYes = 0;
     this.countYesB = 0;
     this.color = 'success';
+    //Ofer Park A counter
     this.fireStore
       .collection('OferPark')
       .doc('Left')
@@ -69,6 +76,33 @@ export class LocationsPage implements OnInit {
           }
         });
       });
+    //Ofer Park B counter
+    this.fireStore
+      .collection('OferPark')
+      .doc('Left')
+      .collection('LeftPark')
+      .valueChanges()
+      .subscribe((data) => {
+        this.countOferB = 0;
+        data.forEach((value) => {
+          if (value.Status === 'Available') {
+            this.countOferB++;
+          }
+        });
+      });
+    this.fireStore
+      .collection('OferPark')
+      .doc('Right')
+      .collection('RightPark')
+      .valueChanges()
+      .subscribe((data) => {
+        data.forEach((value) => {
+          if (value.Status === 'Available') {
+            this.countOferB++;
+          }
+        });
+      });
+    //Yes Park A counter
     this.fireStore
       .collection('YesPark')
       .doc('Left')
@@ -104,6 +138,7 @@ export class LocationsPage implements OnInit {
           }
         });
       });
+    //Yes Park B counter
     this.fireStore
       .collection('YesParkB')
       .doc('Left')
