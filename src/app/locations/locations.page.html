@@ -31,7 +31,7 @@
 
     <ion-item>
       <ion-label>
-        <ion-button color="secondary" (click)="first()">
+        <ion-button color="light" (click)="first()">
           <b>Ofer Mall - Park A</b>
         </ion-button>
       </ion-label>
@@ -43,15 +43,15 @@
     >
     <ion-item>
       <ion-label>
-        <ion-button color="secondary" (click)="second()"
+        <ion-button color="light" (click)="second()"
           ><b>Yes Planet - Park A</b>
         </ion-button>
       </ion-label>
-      <ion-badge color="success">{{countYes}} - Available Parks</ion-badge>
+      <ion-badge color="{{color}}">{{countYes}} - Available Parks</ion-badge>
     </ion-item>
     <ion-item>
       <ion-label>
-        <ion-button color="secondary" (click)="secondB()"
+        <ion-button color="light" (click)="secondB()"
           ><b>Yes Planet - Park B</b>
         </ion-button>
       </ion-label>
@@ -62,7 +62,7 @@
     >
     <ion-item>
       <ion-label>
-        <ion-button color="secondary">
+        <ion-button color="light">
           <b>Grand Mall </b>
         </ion-button>
       </ion-label>
@@ -73,14 +73,13 @@
     >
     <ion-item>
       <ion-label>
-        <ion-button color="secondary">
+        <ion-button color="light">
           <b>Big Kiryat Ata </b>
         </ion-button>
       </ion-label>
       <ion-badge color="success">80 - Available Parks</ion-badge>
     </ion-item>
   </div>
-
   <ion-tabs>
     <ion-tab-bar slot="bottom" color="light" class="tabs">
       <ion-tab-button routerLink="/home">
@@ -96,6 +95,10 @@
       <ion-tab-button routerLink="/myaccount">
         <ion-icon name="person-circle-outline" color="medium"></ion-icon>
         <ion-label color="medium"><strong>My Account</strong></ion-label>
+      </ion-tab-button>
+      <ion-tab-button routerLink="/settings">
+        <ion-icon name="settings-outline" color="medium"></ion-icon>
+        <ion-label color="medium"><strong>Settings</strong></ion-label>
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>

@@ -26,9 +26,28 @@
     </ion-button>
   </ion-toolbar>
 </ion-header>
-<ion-header
-  ><ion-toolbar
-    ><ion-label class="header" color="tertiary"><b>- Park A -</b></ion-label>
+<ion-header style="text-align: center">
+  <ion-toolbar>
+    <ion-button color="success" [disabled]="!UserStatus" (click)="onMyWay()"
+      >Arrived at the spot &nbsp;<ion-icon name="ticket-outline"></ion-icon
+    ></ion-button>
+    <br />
+    <ion-label class="ion-text-wrap" color="success">
+      <b>Confirm your arrival</b>
+    </ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header style="text-align: center"
+  ><ion-toolbar>
+    <ion-button (click)="refresh()"
+      ><ion-icon name="refresh-circle-outline"></ion-icon
+      ><ion-label>Refresh The Park</ion-label>
+    </ion-button>
+    <br />
+    <ion-label class="ion-text-wrap" color="secondary">
+      <b> Refresh the page to update the park info</b>
+    </ion-label>
   </ion-toolbar></ion-header
 >
 
@@ -87,8 +106,38 @@
     </div>
   </ion-grid>
 
-  <ion-button color="warning" class="forward" (click)="parkB()"
-    >Park B
-    <ion-icon name="caret-forward-circle-outline"></ion-icon>
-  </ion-button>
+  <ion-toolbar>
+    <ion-button class="header" color="warning" disabled
+      ><b>You are in Park A</b></ion-button
+    >
+    <ion-button color="warning" class="forward" (click)="parkB()"
+      ><b>Go To Park B</b>
+      <ion-icon name="caret-forward-circle-outline"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+
+  <ion-footer>
+    <ion-tabs class="tabs">
+      <ion-tab-bar slot="bottom" color="light" class="tabs">
+        <ion-tab-button routerLink="/home">
+          <ion-icon name="home-outline" color="medium"></ion-icon>
+          <ion-label color="medium"><strong>Home Page</strong></ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button routerLink="/locations">
+          <ion-icon name="pin-outline" color="medium"></ion-icon>
+          <ion-label color="medium"><strong>Locations</strong></ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button routerLink="/myaccount">
+          <ion-icon name="person-circle-outline" color="medium"></ion-icon>
+          <ion-label color="medium"><strong>My Account</strong></ion-label>
+        </ion-tab-button>
+        <ion-tab-button routerLink="/settings">
+          <ion-icon name="settings-outline" color="medium"></ion-icon>
+          <ion-label color="medium"><strong>Settings</strong></ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-footer>
 </ion-content>

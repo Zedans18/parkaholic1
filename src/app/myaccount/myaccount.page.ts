@@ -84,7 +84,7 @@ export class MyaccountPage implements OnInit {
   async cancelReservation() {
     //A function is called when the user wants to cancel his reservation. It updates all the info about the specific park that he canceled.
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
+      cssClass: 'danger-class',
       header: 'Park Cancelation',
       message: 'Are you sure you want to cancel your reservation ?',
       buttons: [

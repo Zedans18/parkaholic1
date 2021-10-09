@@ -16,6 +16,8 @@ import { ParkService } from '../services/park.service';
 export class SecondPage implements OnInit {
   public LeftData: Observable<any>;
   public RightData: Observable<any>;
+  public UserStatus: any;
+
   constructor(
     public alertController: AlertController,
     public firebaseAuth: AngularFireAuth,
@@ -42,6 +44,20 @@ export class SecondPage implements OnInit {
       .valueChanges(); //Right Park Data
     const Collection = this.fireStore.collection('YesPark');
     this.parkService.fullPark(Collection);
+    let currentUser;
+    this.firebaseAuth.user.subscribe((user) => {
+      currentUser = user.email;
+      console.log(currentUser);
+      this.fireStore
+        .collection('users')
+        .doc(currentUser)
+        .get()
+        .subscribe((data) => {
+          console.log(data.data());
+          this.UserStatus = data.data();
+          this.UserStatus = this.UserStatus.isParked;
+        });
+    });
   }
   async presentAlertConfirmDisabilityLeft(park) {
     this.parkService.DisabilityParkReservation(
@@ -117,5 +133,8 @@ export class SecondPage implements OnInit {
   }
   parkB() {
     this.router.navigate(['/second-b']);
+  }
+  async refresh() {
+    this.parkService.refresh();
   }
 }

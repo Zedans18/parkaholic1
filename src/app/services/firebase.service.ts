@@ -15,7 +15,6 @@ export class FirebaseService {
   constructor(
     public firebaseAuth: AngularFireAuth,
     public fireservices: AngularFirestore,
-
     private toaster: ToastController,
     public router: Router
   ) {
@@ -53,6 +52,7 @@ export class FirebaseService {
       this.router.navigateByUrl('login');
     });
   }
+
   async toast(msg, status) {
     //Calling this function when we need to show a user a message.
     const toast = await this.toaster.create({

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -17,13 +17,15 @@ export class LocationsPage implements OnInit {
   countOfer = 0;
   countYes = 0;
   countYesB = 0;
+  color = 'success';
   constructor(
     private router: Router,
     public firebaseAuth: AngularFireAuth,
     public fireStore: AngularFirestore,
     public firebaseService: FirebaseService,
     public toaster: ToastController,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private zone: NgZone
   ) {}
   first() {
     //Routing to a parking lot
@@ -37,7 +39,11 @@ export class LocationsPage implements OnInit {
     //Routing to a parking lot
     this.router.navigate(['/second-b']);
   }
-  ngOnInit() {
+  async ngOnInit() {
+    this.countOfer = 0;
+    this.countYes = 0;
+    this.countYesB = 0;
+    this.color = 'success';
     this.fireStore
       .collection('OferPark')
       .doc('Left')
@@ -74,6 +80,11 @@ export class LocationsPage implements OnInit {
           if (value.Status === 'Available') {
             this.countYes++;
           }
+          if (this.countYes == 0) {
+            this.color = 'danger';
+          } else {
+            this.color = 'success';
+          }
         });
       });
     this.fireStore
@@ -85,6 +96,11 @@ export class LocationsPage implements OnInit {
         data.forEach((value) => {
           if (value.Status === 'Available') {
             this.countYes++;
+          }
+          if (this.countYes == 0) {
+            this.color = 'danger';
+          } else {
+            this.color = 'success';
           }
         });
       });
@@ -112,6 +128,32 @@ export class LocationsPage implements OnInit {
           }
         });
       });
+    const alert = this.alertController.create({
+      cssClass: 'location-class',
+      header: 'Be Careful & Drive Safe',
+      message: 'DO NOT use your phone while driving',
+      buttons: [
+        {
+          text: 'I am not driving',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            return;
+          },
+        },
+        {
+          text: 'Ok, I will be back',
+          role: 'confirm',
+          cssClass: 'my-custom-class',
+          handler: () => {
+            this.zone.run(() => {
+              this.router.navigate(['/home']);
+            });
+          },
+        },
+      ],
+    });
+    (await alert).present();
   }
   async logout() {
     //A function that been called when the user wants to logout from the application

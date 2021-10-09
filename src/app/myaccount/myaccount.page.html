@@ -22,10 +22,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div>
-    <ion-card></ion-card>
-  </div>
+<ion-content fullscreen>
   <ion-tabs>
     <ion-tab-bar slot="bottom" color="light" class="tabs">
       <ion-tab-button routerLink="/home">
@@ -42,42 +39,50 @@
         <ion-icon name="person-circle-outline" color="medium"></ion-icon>
         <ion-label color="medium"><strong>My Account</strong></ion-label>
       </ion-tab-button>
+      <ion-tab-button routerLink="/settings">
+        <ion-icon name="settings-outline" color="medium"></ion-icon>
+        <ion-label color="medium"><strong>Settings</strong></ion-label>
+      </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs>
-  <ion-item>
-    <ion-icon name="person-circle-outline" style="font-size: 100px"></ion-icon>
-    <ion-label style="font-size: 24px">{{UserName}}</ion-label>
-  </ion-item>
 
-  <ion-card>
+  <ion-card class="card">
     <ion-item>
-      <ion-label color="tertiary"><b>Email:</b> {{Email}}</ion-label>
+      <ion-icon name="person-circle-sharp" style="font-size: 100px"></ion-icon>
+      <ion-label style="font-size: 24px"><i>{{UserName}}</i></ion-label>
     </ion-item>
     <ion-item>
-      <ion-label color="tertiary"
-        ><b>Date Of Birth:</b> {{DateOfBirth}}</ion-label
-      >
+      <ion-label color="tertiary">
+        <h2><b>Email:</b></h2>
+        <h3>{{Email}}</h3>
+      </ion-label>
     </ion-item>
     <ion-item>
-      <ion-label color="tertiary"
-        ><b>Phone Number:</b> {{PhoneNumber}}</ion-label
-      >
+      <ion-label color="tertiary">
+        <h2><b>Date of birth:</b></h2>
+        <h3>{{DateOfBirth}}</h3>
+      </ion-label>
     </ion-item>
     <ion-item>
-      <ion-label color="tertiary"><b>Car Number:</b> {{CarNumber}}</ion-label>
+      <ion-label color="tertiary">
+        <h2><b>Phone Number:</b></h2>
+        <h3>{{PhoneNumber}}</h3>
+      </ion-label>
     </ion-item>
     <ion-item>
-      <ion-label color="tertiary"
-        ><b>Disability Card Number:</b> {{DisabilityCard}}</ion-label
-      >
+      <ion-label color="tertiary">
+        <h2><b>Car Number:</b></h2>
+        <h3>{{CarNumber}}</h3>
+      </ion-label>
     </ion-item>
-    <br />
-    <div>
-      &nbsp; &nbsp;&nbsp;
-      <ion-label class="cancel" color="danger"
-        ><b>Cancel My Reservation:</b></ion-label
-      >
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <ion-item>
+      <ion-label color="tertiary">
+        <h2><b>Disability Card Number:</b></h2>
+        <h3>{{DisabilityCard}}</h3>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label color="danger"><b>Cancel My Reservation:</b></ion-label>
       <ion-button
         size="small"
         [disabled]="!toggleCancel"
@@ -86,6 +91,6 @@
       >
         Cancel
       </ion-button>
-    </div>
+    </ion-item>
   </ion-card>
 </ion-content>

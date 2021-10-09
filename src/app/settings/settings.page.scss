@@ -1,17 +1,10 @@
-.img {
-  margin-left: 120px;
+.tabs {
+  position: absolute;
+  left: -2px;
+  bottom: -5px;
+  width: 100%;
+  height: 3rem;
 }
-.center {
-  text-align: center;
-}
-.card {
-  box-shadow: 0 50px 30px 0 rgba(0, 0, 0, 0.2);
-  transition: 1s;
-}
-.cardText {
-  text-align: center;
-}
-
 ion-tab-bar,
 ion-tab-bar:hover {
   border-top: black;
@@ -21,4 +14,5 @@ ion-tab-bar:hover {
   border-style: solid;
   border-width: 2px;
   --ion-tabbar-text-color-active: yellow;
+  overflow: auto;
 }
