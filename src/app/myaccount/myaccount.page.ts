@@ -31,6 +31,8 @@ export class MyaccountPage implements OnInit {
   public RightData: Observable<any>;
   public cancelLeftOfer: any;
   public cancelRightOfer: any;
+  public cancelLeftOferB: any;
+  public cancelRightOferB: any;
   public cancelLeftYes: any;
   public cancelRightYes: any;
 
@@ -150,6 +152,71 @@ export class MyaccountPage implements OnInit {
                     if (value.Email === currentUserEmail) {
                       this.fireStore
                         .collection('OferPark')
+                        .doc('Right')
+                        .collection('RightPark')
+                        .doc(value.ParkName)
+                        .update({
+                          Status: 'Available',
+                          Color: 'success',
+                          Email: '',
+                          Time: '',
+                        });
+                      this.fireStore
+                        .collection('users')
+                        .doc(currentUserEmail)
+                        .update({
+                          isParked: false,
+                          ParkName: '',
+                          Side: '',
+                        });
+                    }
+                  });
+                  return;
+                });
+              this.cancelLeftOferB = this.fireStore
+                .collection('OferParkB')
+                .doc('Left')
+                .collection('LeftPark')
+                .valueChanges()
+                .subscribe((data) => {
+                  data.forEach((value) => {
+                    console.log(value.Status);
+                    if (value.Email === currentUserEmail) {
+                      this.fireStore
+                        .collection('OferParkB')
+                        .doc('Left')
+                        .collection('LeftPark')
+                        .doc(value.ParkName)
+                        .update({
+                          Status: 'Available',
+                          Color: 'success',
+                          Email: '',
+                          Time: '',
+                        });
+
+                      this.fireStore
+                        .collection('users')
+                        .doc(currentUserEmail)
+                        .update({
+                          isParked: false,
+                          ParkName: '',
+                          Side: '',
+                        });
+                    }
+                  });
+                  return;
+                });
+              this.cancelRightOferB = this.fireStore
+                .collection('OferParkB')
+                .doc('Right')
+                .collection('RightPark')
+                .valueChanges()
+                .subscribe((data) => {
+                  data.forEach((value) => {
+                    console.log(value.Status);
+                    if (value.Email === currentUserEmail) {
+                      this.fireStore
+                        .collection('OferParkB')
                         .doc('Right')
                         .collection('RightPark')
                         .doc(value.ParkName)

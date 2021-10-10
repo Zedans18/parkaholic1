@@ -47,13 +47,11 @@ export class SecondPage implements OnInit {
     let currentUser;
     this.firebaseAuth.user.subscribe((user) => {
       currentUser = user.email;
-      console.log(currentUser);
       this.fireStore
         .collection('users')
         .doc(currentUser)
         .get()
         .subscribe((data) => {
-          console.log(data.data());
           this.UserStatus = data.data();
           this.UserStatus = this.UserStatus.isParked;
         });

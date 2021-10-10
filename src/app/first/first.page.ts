@@ -300,6 +300,9 @@ export class FirstPage implements OnInit {
     await alertPending.present();
     return;
   }
+  parkB() {
+    this.router.navigate(['/first-b']);
+  }
 
   async logout() {
     //A function that been called when the user wants to logout from the application

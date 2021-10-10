@@ -51,13 +51,11 @@ export class FirstBPage implements OnInit {
       .collection('RightPark')
       .valueChanges(); //Right Park Data
     this.TimeNow.getMinutes();
-    console.log(this.TimeNow.getMinutes());
     let currentUserEmail;
     this.firebaseAuth.user.subscribe((user) => {
       //A function that checks if there is a park that has been reserved for more than 10 minutes.
       //Then that parking spot is getting canceled automatically
       currentUserEmail = user.email;
-      console.log(currentUserEmail);
       this.fireStore
         .collection('OferParkB')
         .doc('Left')
@@ -174,13 +172,11 @@ export class FirstBPage implements OnInit {
     let currentUser;
     this.firebaseAuth.user.subscribe((user) => {
       currentUser = user.email;
-      console.log(currentUser);
       this.fireStore
         .collection('users')
         .doc(currentUser)
         .get()
         .subscribe((data) => {
-          console.log(data.data());
           this.UserStatus = data.data();
           this.UserStatus = this.UserStatus.isParked;
         });
