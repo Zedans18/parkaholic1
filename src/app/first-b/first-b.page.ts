@@ -67,7 +67,7 @@ export class FirstBPage implements OnInit {
               value.Status === 'Pending' &&
               value.Time == this.TimeNow.getMinutes() - 5
             ) {
-              let answer = value.Time - this.TimeNow.getMinutes();
+              let answer = this.TimeNow.getMinutes() - value.Time;
               if (answer < 0) {
                 answer += 60;
                 if (answer > 5) {
@@ -122,7 +122,7 @@ export class FirstBPage implements OnInit {
               value.Status === 'Pending' &&
               value.Time == this.TimeNow.getMinutes() - 5
             ) {
-              let answer = value.Time - this.TimeNow.getMinutes();
+              let answer = this.TimeNow.getMinutes() - value.Time;
               if (answer < 0) {
                 answer += 60;
                 if (answer > 5) {
