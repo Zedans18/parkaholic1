@@ -67,31 +67,6 @@ export class FirstBPage implements OnInit {
               value.Status === 'Pending' &&
               value.Time == this.TimeNow.getMinutes() - 5
             ) {
-              let answer = this.TimeNow.getMinutes() - value.Time;
-              if (answer < 0) {
-                answer += 60;
-                if (answer > 5) {
-                  this.fireStore
-                    .collection('OferParkB')
-                    .doc('Left')
-                    .collection('LeftPark')
-                    .doc(value.ParkName)
-                    .update({
-                      Status: 'Available',
-                      Color: 'success',
-                      Email: '',
-                      Time: '',
-                    });
-                  this.fireStore
-                    .collection('users')
-                    .doc(currentUserEmail)
-                    .update({
-                      isParked: false,
-                      ParkName: '',
-                      Side: '',
-                    });
-                }
-              }
               this.fireStore
                 .collection('OferParkB')
                 .doc('Left')
@@ -109,6 +84,31 @@ export class FirstBPage implements OnInit {
                 Side: '',
               });
             }
+            let answer = this.TimeNow.getMinutes() - value.Time;
+            if (answer < 0) {
+              answer += 60;
+              if (answer > 5) {
+                this.fireStore
+                  .collection('OferParkB')
+                  .doc('Left')
+                  .collection('LeftPark')
+                  .doc(value.ParkName)
+                  .update({
+                    Status: 'Available',
+                    Color: 'success',
+                    Email: '',
+                    Time: '',
+                  });
+                this.fireStore
+                  .collection('users')
+                  .doc(currentUserEmail)
+                  .update({
+                    isParked: false,
+                    ParkName: '',
+                    Side: '',
+                  });
+              }
+            }
           });
         });
       this.fireStore
@@ -122,31 +122,6 @@ export class FirstBPage implements OnInit {
               value.Status === 'Pending' &&
               value.Time == this.TimeNow.getMinutes() - 5
             ) {
-              let answer = this.TimeNow.getMinutes() - value.Time;
-              if (answer < 0) {
-                answer += 60;
-                if (answer > 5) {
-                  this.fireStore
-                    .collection('OferParkB')
-                    .doc('Right')
-                    .collection('RightPark')
-                    .doc(value.ParkName)
-                    .update({
-                      Status: 'Available',
-                      Color: 'success',
-                      Email: '',
-                      Time: '',
-                    });
-                  this.fireStore
-                    .collection('users')
-                    .doc(currentUserEmail)
-                    .update({
-                      isParked: false,
-                      ParkName: '',
-                      Side: '',
-                    });
-                }
-              }
               this.fireStore
                 .collection('OferParkB')
                 .doc('Right')
@@ -163,6 +138,31 @@ export class FirstBPage implements OnInit {
                 ParkName: '',
                 Side: '',
               });
+            }
+            let answer = this.TimeNow.getMinutes() - value.Time;
+            if (answer < 0) {
+              answer += 60;
+              if (answer > 5) {
+                this.fireStore
+                  .collection('OferParkB')
+                  .doc('Right')
+                  .collection('RightPark')
+                  .doc(value.ParkName)
+                  .update({
+                    Status: 'Available',
+                    Color: 'success',
+                    Email: '',
+                    Time: '',
+                  });
+                this.fireStore
+                  .collection('users')
+                  .doc(currentUserEmail)
+                  .update({
+                    isParked: false,
+                    ParkName: '',
+                    Side: '',
+                  });
+              }
             }
           });
         });
