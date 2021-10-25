@@ -1,16 +1,28 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Settings</ion-title>
+    <ion-title>Contact Us</ion-title>
+    <ion-button
+      slot="end"
+      color="danger"
+      class="logout"
+      (click)="logout()"
+      fill="clear"
+    >
+      <ion-icon name="power"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item>
-    <ion-label><strong>Light/Dark Mode</strong></ion-label>
+  <ion-card class="card">
+    <img src="assets/logoo.png" class="img" style="width: 100px" />
 
-    <ion-toggle (ionChange)="toggleTheme($event)" slot="end"> </ion-toggle>
-  </ion-item>
-
+    <ion-card-content class="cardText">
+      If you want to update or add any info about yourself please contact us via
+      this E-mails:<br />
+      <b> zsalama07@gmail.com ammarroseline@gmail.com</b>
+    </ion-card-content>
+  </ion-card>
   <ion-tabs>
     <ion-tab-bar slot="bottom" color="light" class="tabs">
       <ion-tab-button routerLink="/home">
@@ -36,5 +48,5 @@
         <ion-label color="medium"><strong>Contact Us</strong></ion-label>
       </ion-tab-button>
     </ion-tab-bar>
-  </ion-tabs></ion-content
->
+  </ion-tabs>
+</ion-content>

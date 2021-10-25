@@ -69,6 +69,11 @@ const routes: Routes = [
       import('./settings/settings.module').then((m) => m.SettingsPageModule),
   },
   {
+    path: 'contactus',
+    loadChildren: () =>
+      import('./contactus/contactus.module').then((m) => m.ContactusPageModule),
+  },
+  {
     path: '**',
     loadChildren: () =>
       import('./home/home.module').then((m) => m.HomePageModule),

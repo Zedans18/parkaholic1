@@ -65,7 +65,7 @@ export class FirstBPage implements OnInit {
           data.forEach((value) => {
             if (
               value.Status === 'Pending' &&
-              value.Time == this.TimeNow.getMinutes() - 5
+              value.Time == this.TimeNow.getMinutes() - 1
             ) {
               this.fireStore
                 .collection('OferParkB')

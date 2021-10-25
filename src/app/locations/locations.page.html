@@ -21,6 +21,18 @@
     </ion-button>
   </ion-toolbar>
 </ion-header>
+<ion-header style="text-align: center"
+  ><ion-toolbar>
+    <ion-button (click)="refresh()"
+      ><ion-label>Refresh &nbsp;</ion-label
+      ><ion-icon name="refresh-circle-outline"></ion-icon>
+    </ion-button>
+    <br />
+    <ion-label class="ion-text-wrap" color="secondary">
+      <b>Refresh is recommended for getting updated info</b>
+    </ion-label>
+  </ion-toolbar></ion-header
+>
 
 <ion-content>
   <div class="card">
@@ -45,7 +57,7 @@
         </ion-button>
       </ion-label>
 
-      <ion-badge color="success">{{countOfer}} - Available Parks</ion-badge>
+      <ion-badge color="success">{{countOferB}} - Available Parks</ion-badge>
     </ion-item>
     <ion-button expand="block" color="medium"
       ><b><i>Y e s&nbsp; P l a n e t - P a r k s</i></b></ion-button
@@ -89,26 +101,32 @@
       <ion-badge color="success">80 - Available Parks</ion-badge>
     </ion-item>
   </div>
-  <ion-tabs>
-    <ion-tab-bar slot="bottom" color="light" class="tabs">
-      <ion-tab-button routerLink="/home">
-        <ion-icon name="home-outline" color="medium"></ion-icon>
-        <ion-label color="medium"><strong>Home Page</strong></ion-label>
-      </ion-tab-button>
+  <ion-footer>
+    <ion-tabs class="tabs">
+      <ion-tab-bar slot="bottom" color="light" class="tabs">
+        <ion-tab-button routerLink="/home">
+          <ion-icon name="home-outline" color="medium"></ion-icon>
+          <ion-label color="medium"><strong>Home Page</strong></ion-label>
+        </ion-tab-button>
 
-      <ion-tab-button routerLink="/locations">
-        <ion-icon name="pin-outline" color="medium"></ion-icon>
-        <ion-label color="medium"><strong>Locations</strong></ion-label>
-      </ion-tab-button>
+        <ion-tab-button routerLink="/locations">
+          <ion-icon name="pin-outline" color="medium"></ion-icon>
+          <ion-label color="medium"><strong>Locations</strong></ion-label>
+        </ion-tab-button>
 
-      <ion-tab-button routerLink="/myaccount">
-        <ion-icon name="person-circle-outline" color="medium"></ion-icon>
-        <ion-label color="medium"><strong>My Account</strong></ion-label>
-      </ion-tab-button>
-      <ion-tab-button routerLink="/settings">
-        <ion-icon name="settings-outline" color="medium"></ion-icon>
-        <ion-label color="medium"><strong>Settings</strong></ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
+        <ion-tab-button routerLink="/myaccount">
+          <ion-icon name="person-circle-outline" color="medium"></ion-icon>
+          <ion-label color="medium"><strong>My Account</strong></ion-label>
+        </ion-tab-button>
+        <ion-tab-button routerLink="/settings">
+          <ion-icon name="settings-outline" color="medium"></ion-icon>
+          <ion-label color="medium"><strong>Settings</strong></ion-label>
+        </ion-tab-button>
+        <ion-tab-button routerLink="/contactus">
+          <ion-icon name="call-outline" color="medium"></ion-icon>
+          <ion-label color="medium"><strong>Contact Us</strong></ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-footer>
 </ion-content>

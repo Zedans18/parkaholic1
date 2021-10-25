@@ -42,6 +42,7 @@ export class MyaccountPage implements OnInit {
   public DateOfBirth: any;
   public PhoneNumber: any;
   public CarNumber: any;
+  public ParkName: any;
   public DisabilityCard: any;
   public toggleCancel: any;
 
@@ -60,13 +61,11 @@ export class MyaccountPage implements OnInit {
     let currentUserEmail;
     this.firebaseAuth.user.subscribe((user) => {
       currentUserEmail = user.email;
-      console.log(currentUserEmail);
       this.fireStore
         .collection('users')
         .doc(currentUserEmail)
         .get()
         .subscribe((data) => {
-          console.log(data.data());
           this.UserName = data.data();
           this.UserName = this.UserName.Name;
           this.Email = currentUserEmail;
@@ -76,6 +75,8 @@ export class MyaccountPage implements OnInit {
           this.PhoneNumber = this.PhoneNumber.PhoneNumber;
           this.CarNumber = data.data();
           this.CarNumber = this.CarNumber.CarNumber;
+          this.ParkName = data.data();
+          this.ParkName = this.ParkName.ParkName;
           this.DisabilityCard = data.data();
           this.DisabilityCard = this.DisabilityCard.DisabilityCard;
           this.toggleCancel = data.data();
@@ -277,7 +278,6 @@ export class MyaccountPage implements OnInit {
                 .valueChanges()
                 .subscribe((data) => {
                   data.forEach((value) => {
-                    console.log(value.Status);
                     if (value.Email === currentUserEmail) {
                       this.fireStore
                         .collection('YesParkB')

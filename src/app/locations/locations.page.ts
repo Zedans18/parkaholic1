@@ -5,6 +5,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { FirebaseService } from '../services/firebase.service';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Observable } from 'rxjs';
+import { ParkService } from '../services/park.service';
 
 @Component({
   selector: 'app-locations',
@@ -26,7 +27,8 @@ export class LocationsPage implements OnInit {
     public firebaseService: FirebaseService,
     public toaster: ToastController,
     public alertController: AlertController,
-    private zone: NgZone
+    private zone: NgZone,
+    public parkService: ParkService
   ) {}
   first() {
     //Routing to a parking lot
@@ -43,6 +45,9 @@ export class LocationsPage implements OnInit {
   secondB() {
     //Routing to a parking lot
     this.router.navigate(['/second-b']);
+  }
+  async refresh() {
+    this.parkService.refresh();
   }
   async ngOnInit() {
     this.countOfer = 0;
@@ -78,7 +83,7 @@ export class LocationsPage implements OnInit {
       });
     //Ofer Park B counter
     this.fireStore
-      .collection('OferPark')
+      .collection('OferParkB')
       .doc('Left')
       .collection('LeftPark')
       .valueChanges()
@@ -91,7 +96,7 @@ export class LocationsPage implements OnInit {
         });
       });
     this.fireStore
-      .collection('OferPark')
+      .collection('OferParkB')
       .doc('Right')
       .collection('RightPark')
       .valueChanges()

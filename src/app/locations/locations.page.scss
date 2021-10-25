@@ -1,11 +1,3 @@
-ion-tab-bar {
-  border-top: black;
-  border-left: white;
-  border-bottom: white;
-  border-right: white;
-  border-style: solid;
-  border-width: 2px;
-}
 ion-text-center {
   text-align: center;
 }
@@ -22,4 +14,25 @@ ion-button {
   width: auto;
   margin: auto;
   display: block;
+}
+ion-tab-bar,
+ion-tab-bar:hover {
+  border-top: black;
+  border-left: white;
+  border-bottom: white;
+  border-right: white;
+  border-style: solid;
+  border-width: 2px;
+  --ion-tabbar-text-color-active: yellow;
+  overflow: auto;
+}
+.my-custom-class .alert-wrapper {
+  background: red;
+}
+.tabs {
+  position: absolute;
+  left: -2px;
+  bottom: -5px;
+  width: 100%;
+  height: 3rem;
 }
